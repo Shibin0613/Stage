@@ -17,10 +17,15 @@
     {
         <p>Uploaden...</p>
     }
+    @if (loadingFinish)
+    {
+        <p>Upload klaar!</p>
+    }
 </body>
 
 @code {
     private bool isLoading;
+    private bool loadingFinish;
     private int maxAllowedFiles = 5;
 
     private async Task UploadFile(InputFileChangeEventArgs e)
@@ -48,5 +53,6 @@
         }
 
         isLoading = false;
+        loadingFinish = true;
     }
 }
