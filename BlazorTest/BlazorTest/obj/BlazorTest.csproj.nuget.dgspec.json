@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\BlazorTest.csproj": {}
+    "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\BlazorTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\BlazorTest.csproj": {
+    "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\BlazorTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\BlazorTest.csproj",
+        "projectUniqueName": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\BlazorTest.csproj",
         "projectName": "BlazorTest",
-        "projectPath": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\BlazorTest.csproj",
+        "projectPath": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\BlazorTest.csproj",
         "packagesPath": "C:\\Users\\pansh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\obj\\",
+        "outputPath": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pansh\\AppData\\Roaming\\NuGet\\NuGet.Config",

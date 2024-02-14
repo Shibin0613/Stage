@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Stage\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj": {}
+    "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Stage\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj": {
+    "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Stage\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj",
+        "projectUniqueName": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj",
         "projectName": "BlazorTestApp",
-        "projectPath": "C:\\Users\\Stage\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj",
-        "packagesPath": "C:\\Users\\Stage\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Stage\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\obj\\",
+        "projectPath": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj",
+        "packagesPath": "C:\\Users\\pansh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Stage\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pansh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -62,7 +62,6 @@ C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Debug\net8.0-window
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Debug\net8.0-windows\BlazorTestApp.deps.json
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Debug\net8.0-windows\BlazorTestApp.runtimeconfig.json
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Debug\net8.0-windows\BlazorTestApp.dll
-C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Debug\net8.0-windows\BlazorTestApp.pdb
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Debug\net8.0-windows\BlazorInputFile.dll
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Debug\net8.0-windows\Microsoft.AspNetCore.Authorization.dll
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Debug\net8.0-windows\Microsoft.AspNetCore.Components.dll
@@ -102,7 +101,6 @@ C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-window
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\BlazorTestApp.AssemblyInfoInputs.cache
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\BlazorTestApp.AssemblyInfo.cs
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\BlazorTestApp.csproj.CoreCompileInputs.cache
-C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\BlazorTestApp.sourcelink.json
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\staticwebassets.build.json
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\staticwebassets.development.json
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\staticwebassets\msbuild.BlazorTestApp.Microsoft.AspNetCore.StaticWebAssets.props
@@ -114,6 +112,7 @@ C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-window
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\BlazorTestApp.csproj.CopyComplete
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\BlazorTestApp.dll
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\refint\BlazorTestApp.dll
-C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\BlazorTestApp.pdb
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\BlazorTestApp.genruntimeconfig.cache
 C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Debug\net8.0-windows\ref\BlazorTestApp.dll
+C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Debug\net8.0-windows\App.config
+C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Debug\net8.0-windows\BlazorTestApp.dll.config

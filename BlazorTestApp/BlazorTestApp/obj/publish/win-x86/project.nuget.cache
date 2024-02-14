@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tafh17fuDTksJk1yzKOqQvcjDMPFrAIY7kTGt33PhqSxNHTBncqWRlUYz4P+K9ARPc4LPHWsN2opzosHkMuw8g==",
+  "dgSpecHash": "uPTjgw4aOdO41fOLGDW9lbxgW2qO7ICn9c1OvI3PA4plR/nSfrU4HxpibF+0gpm17crlrFtP/vTnZPrpOVfNGQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj",
   "expectedPackageFiles": [
@@ -37,7 +37,8 @@
     "C:\\Users\\pansh\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
     "C:\\Users\\pansh\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\8.0.1\\microsoft.netcore.app.runtime.win-x86.8.0.1.nupkg.sha512",
     "C:\\Users\\pansh\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\8.0.1\\microsoft.windowsdesktop.app.runtime.win-x86.8.0.1.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\8.0.1\\microsoft.aspnetcore.app.runtime.win-x86.8.0.1.nupkg.sha512"
+    "C:\\Users\\pansh\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\8.0.1\\microsoft.aspnetcore.app.runtime.win-x86.8.0.1.nupkg.sha512",
+    "C:\\Users\\pansh\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\8.0.1\\microsoft.netcore.app.crossgen2.win-x64.8.0.1.nupkg.sha512"
   ],
   "logs": []
 }

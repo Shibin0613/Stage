@@ -1,6 +1,9 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.Components.Forms
-
+@using System.IO
+@using System.Configuration
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
 
 <body>
     <h1>Upload jouw bestand hieronder</h1>
@@ -9,9 +12,15 @@
     <div class="uploadfile">
         <label>
             <img src="images/uploadImage.png" class="img" />
+            <div>
+                <label for="customPath">Vul een pad in:</label>
+                <input type="text" id="customPath" @bind="customFilePath" />
+                <button @onclick="SetCustomPath">Bevestigen</button>
+            </div>
+
             <InputFile OnChange="UploadFile" multiple /><p>(Sleep je bestanden naar knop)</p>
         </label>
-    </div>    
+    </div>
 
     @if (isLoading)
     {
@@ -27,32 +36,39 @@
     private bool isLoading;
     private bool loadingFinish;
     private int maxAllowedFiles = 5;
+    private string customFilePath = "";
 
     private async Task UploadFile(InputFileChangeEventArgs e)
     {
         isLoading = true;
+        await Task.Delay(400);
+
+        string filePath = customFilePath;
 
         foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
         {
             string fileName = Path.GetFileName(file.Name);
-            string destinationPath = Path.Combine(@"C:\\BlazorTest", fileName);
+            string destinationPath = Path.Combine(filePath, fileName);
 
             try
             {
                 await using FileStream fs = new(destinationPath, FileMode.Create);
                 await file.OpenReadStream().CopyToAsync(fs);
 
-                Console.WriteLine($"Bestand '{file.Name}' geupload");
+                Console.WriteLine($"Bestand '{file.Name}' geupload naar '{destinationPath}'");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error met het uploaden van de bestand '{file.Name}': {ex.Message}");
             }
-
-            Console.WriteLine(file.Name);
         }
 
         isLoading = false;
         loadingFinish = true;
+    }
+
+    private void SetCustomPath()
+    {
+        
     }
 }

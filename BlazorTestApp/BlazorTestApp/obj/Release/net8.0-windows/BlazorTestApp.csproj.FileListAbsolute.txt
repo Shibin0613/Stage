@@ -112,3 +112,5 @@ C:\Users\Stage\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Release\net8.0-wind
 C:\Users\Stage\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Release\net8.0-windows\refint\BlazorTestApp.dll
 C:\Users\Stage\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Release\net8.0-windows\BlazorTestApp.genruntimeconfig.cache
 C:\Users\Stage\Desktop\Stage\BlazorTestApp\BlazorTestApp\obj\Release\net8.0-windows\ref\BlazorTestApp.dll
+C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Release\net8.0-windows\App.config
+C:\Users\pansh\Desktop\Stage\BlazorTestApp\BlazorTestApp\bin\Release\net8.0-windows\BlazorTestApp.dll.config
