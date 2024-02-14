@@ -1,0 +1,23 @@
+﻿body {
+    background-color: lightgrey
+}
+
+.uploadfile {
+    display: flex;
+    width: 350px;
+    height: 315px;
+    margin: auto;
+    border: 5px solid black;
+    border-radius: 2px;
+}
+
+.img {
+    position: relative;
+    left: 20px;
+    width: 300px;
+    height: 250px
+}
+
+p {
+    font-size: 15px;
+}

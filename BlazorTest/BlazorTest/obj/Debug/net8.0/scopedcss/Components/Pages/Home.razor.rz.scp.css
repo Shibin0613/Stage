@@ -1,0 +1,21 @@
+body[b-0ebqbcw3j6] {
+    background-color: lightgrey
+}
+
+.uploadfile[b-0ebqbcw3j6] {
+    display: flex;
+    width: 350px;
+    height: 315px;
+    margin: auto;
+    border: 5px solid black;
+    border-radius: 2px;
+}
+.img[b-0ebqbcw3j6] {
+    position: relative;
+    left: 20px;
+    width: 300px;
+    height: 250px
+}
+p[b-0ebqbcw3j6] {
+font-size:15px;
+}
