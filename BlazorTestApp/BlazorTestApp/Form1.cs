@@ -10,6 +10,8 @@ namespace BlazorTestApp
         {
             InitializeComponent();
 
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             var services = new ServiceCollection();
             services.AddWindowsFormsBlazorWebView();
             blazorWebView1.HostPage = "wwwroot\\index.html";

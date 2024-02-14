@@ -1544,11 +1544,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pansh\\source\\repos\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj",
+      "projectUniqueName": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj",
       "projectName": "BlazorTestApp",
-      "projectPath": "C:\\Users\\pansh\\source\\repos\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj",
+      "projectPath": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\BlazorTestApp.csproj",
       "packagesPath": "C:\\Users\\pansh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pansh\\source\\repos\\BlazorTestApp\\BlazorTestApp\\obj\\",
+      "outputPath": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTestApp\\BlazorTestApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pansh\\AppData\\Roaming\\NuGet\\NuGet.Config",
