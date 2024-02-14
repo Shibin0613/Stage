@@ -38,6 +38,12 @@
     private int maxAllowedFiles = 5;
     private string customFilePath = "";
 
+    private void SetCustomPath()
+    {
+
+    }
+
+
     private async Task UploadFile(InputFileChangeEventArgs e)
     {
         isLoading = true;
@@ -65,10 +71,5 @@
 
         isLoading = false;
         loadingFinish = true;
-    }
-
-    private void SetCustomPath()
-    {
-        
     }
 }
