@@ -1,27 +1,27 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorTest.bundle.scp.css",
+      "Id": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorTest.bundle.scp.css",
       "PackagePath": "staticwebassets\\BlazorTest.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\app.css",
+      "Id": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\images\\uploadImage.png",
+      "Id": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\images\\uploadImage.png",
       "PackagePath": "staticwebassets\\images\\uploadImage.png"
     },
     {

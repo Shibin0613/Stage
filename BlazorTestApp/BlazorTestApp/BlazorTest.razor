@@ -1,8 +1,4 @@
 ﻿@page "/"
-@using Microsoft.AspNetCore.Components.Forms
-@using System.IO
-@using System.Configuration
-@using Microsoft.JSInterop
 @inject IJSRuntime JSRuntime
 
 <body>
@@ -15,7 +11,7 @@
             <div>
                 <label for="customPath">Vul een pad in:</label>
                 <input type="text" id="customPath" @bind="customFilePath" />
-                <button @onclick="SetCustomPath">Bevestigen</button>
+                <button @onclick="OpenDirectoryDialog">Selecteer map</button>
             </div>
 
             <InputFile OnChange="UploadFile" multiple /><p>(Sleep je bestanden naar knop)</p>
@@ -35,21 +31,26 @@
 @code {
     private bool isLoading;
     private bool loadingFinish;
-    private int maxAllowedFiles = 5;
-    private string customFilePath = "";
+    private int maxAllowedFiles = 10;
+    private string customFilePath = MyConfig.FilePath;
 
-    private void SetCustomPath()
+    private async Task OpenDirectoryDialog()
     {
+        string? directoryPath = MyConfig.GetDirectory(customFilePath);
 
+        if (!string.IsNullOrEmpty(directoryPath))
+        {
+            customFilePath = directoryPath;
+            MyConfig.FilePath = directoryPath;
+        }
     }
-
 
     private async Task UploadFile(InputFileChangeEventArgs e)
     {
         isLoading = true;
         await Task.Delay(400);
 
-        string filePath = customFilePath;
+        string filePath = MyConfig.FilePath;
 
         foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
         {

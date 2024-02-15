@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/tpwC3MNnAfDp1ImZjGLMQRQ7zjt3nHLSW37EbrUVYA=",
+  "Hash": "YbrwN9RWek1uqgd9SHX+k0k2VMTBvVFyVd3mV46eol0=",
   "Source": "BlazorTest",
   "BasePath": "_content/BlazorTest",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "BlazorTest\\wwwroot",
       "Source": "BlazorTest",
-      "ContentRoot": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\",
       "BasePath": "_content/BlazorTest",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\BlazorTest.styles.css",
+      "Identity": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\BlazorTest.styles.css",
       "SourceId": "BlazorTest",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/BlazorTest",
       "RelativePath": "BlazorTest.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\BlazorTest.styles.css"
+      "OriginalItemSpec": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\bundle\\BlazorTest.styles.css"
     },
     {
-      "Identity": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorTest.bundle.scp.css",
+      "Identity": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorTest.bundle.scp.css",
       "SourceId": "BlazorTest",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/BlazorTest",
       "RelativePath": "BlazorTest.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorTest.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorTest.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\app.css",
       "SourceId": "BlazorTest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\",
       "BasePath": "_content/BlazorTest",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "BlazorTest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\",
       "BasePath": "_content/BlazorTest",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "BlazorTest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\",
       "BasePath": "_content/BlazorTest",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\favicon.png",
       "SourceId": "BlazorTest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\",
       "BasePath": "_content/BlazorTest",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
-      "Identity": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\images\\uploadImage.png",
+      "Identity": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\images\\uploadImage.png",
       "SourceId": "BlazorTest",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\pansh\\source\\repos\\BlazorTest\\BlazorTest\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\BlazorTest\\BlazorTest\\wwwroot\\",
       "BasePath": "_content/BlazorTest",
       "RelativePath": "images/uploadImage.png",
       "AssetKind": "All",

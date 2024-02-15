@@ -9,7 +9,9 @@
       "BlazorTestApp/1.0.0": {
         "dependencies": {
           "BlazorInputFile": "0.2.0",
-          "Microsoft.AspNetCore.Components.WebView.WindowsForms": "8.0.6"
+          "Microsoft.AspNetCore.Components.WebView.WindowsForms": "8.0.6",
+          "Microsoft.Extensions.Configuration": "8.0.0",
+          "Microsoft.Extensions.Configuration.Json": "8.0.0"
         },
         "runtime": {
           "BlazorTestApp.dll": {}

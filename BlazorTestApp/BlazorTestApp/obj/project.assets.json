@@ -1535,7 +1535,9 @@
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
       "BlazorInputFile >= 0.2.0",
-      "Microsoft.AspNetCore.Components.WebView.WindowsForms >= 8.0.6"
+      "Microsoft.AspNetCore.Components.WebView.WindowsForms >= 8.0.6",
+      "Microsoft.Extensions.Configuration >= 8.0.0",
+      "Microsoft.Extensions.Configuration.Json >= 8.0.0"
     ]
   },
   "packageFolders": {
@@ -1584,6 +1586,14 @@
           "Microsoft.AspNetCore.Components.WebView.WindowsForms": {
             "target": "Package",
             "version": "[8.0.6, )"
+          },
+          "Microsoft.Extensions.Configuration": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.Extensions.Configuration.Json": {
+            "target": "Package",
+            "version": "[8.0.0, )"
           }
         },
         "imports": [
