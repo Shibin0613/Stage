@@ -20,7 +20,22 @@ namespace BlazorTestApp
         }
 
         public static string FilePath 
-        { 
+        {
+            set
+            {
+                var json = JsonSerializer.Serialize(new { FileStorage = value });
+                try
+                {
+                    File.WriteAllText("../../../appsettings.json", json);
+                    // Update configuration after writing to appsettings.json
+                    InitConfig(); // Reset configuration after updating appsettings.json
+                }
+                catch (Exception ex)
+                {
+                    // Foutafhandeling - log de uitzondering of neem andere maatregelen
+                    Console.WriteLine($"Er is een fout opgetreden bij het bijwerken van appsettings.json: {ex.Message}");
+                }
+            }
             get
             {
                 var path = _configuration?.GetValue<string>("FileStorage");
@@ -30,24 +45,7 @@ namespace BlazorTestApp
                 }
                 return path;
             }
-            set
-            {
-                _configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
-                .Build();
-
-                var json = JsonSerializer.Serialize(new { FileStorage = value });
-                try
-                {
-                    File.WriteAllText("appsettings.json", json);
-                    InitConfig();
-                }
-                catch (Exception ex)
-                {
-                    // Foutafhandeling - log de uitzondering of neem andere maatregelen
-                    Console.WriteLine($"Er is een fout opgetreden bij het bijwerken van appsettings.json: {ex.Message}");
-                }
-            }
+            
         }
 
         public static string? GetDirectory(string startDir)

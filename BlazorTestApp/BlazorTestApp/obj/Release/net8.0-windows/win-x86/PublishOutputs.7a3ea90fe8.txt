@@ -1,0 +1,4 @@
+C:\Users\pansh\Desktop\appsettings.Development.json
+C:\Users\pansh\Desktop\BlazorTestApp.pdb
+C:\Users\pansh\Desktop\appsettings.json
+C:\Users\pansh\Desktop\BlazorTestApp.exe
