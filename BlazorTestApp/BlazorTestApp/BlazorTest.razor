@@ -48,9 +48,9 @@
     private async Task UploadFile(InputFileChangeEventArgs e)
     {
         isLoading = true;
-        await Task.Delay(400);
+        await Task.Delay(600);
 
-        string filePath = MyConfig.FilePath;
+        string filePath = customFilePath;
 
         foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
         {

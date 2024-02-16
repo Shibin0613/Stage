@@ -21,6 +21,15 @@ namespace BlazorTestApp
 
         public static string FilePath 
         {
+            get
+            {
+                var path = _configuration?.GetValue<string>("FileStorage");
+                if (string.IsNullOrWhiteSpace(path))
+                {
+                    path = "c:\\temp";
+                }
+                return path;
+            }
             set
             {
                 var json = JsonSerializer.Serialize(new { FileStorage = value });
@@ -36,16 +45,6 @@ namespace BlazorTestApp
                     Console.WriteLine($"Er is een fout opgetreden bij het bijwerken van appsettings.json: {ex.Message}");
                 }
             }
-            get
-            {
-                var path = _configuration?.GetValue<string>("FileStorage");
-                if (string.IsNullOrWhiteSpace(path))
-                {
-                    path = "c:\\temp";
-                }
-                return path;
-            }
-            
         }
 
         public static string? GetDirectory(string startDir)
