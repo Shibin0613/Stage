@@ -1,0 +1,78 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+
+<body>
+    <h1>Upload jouw bestand hieronder</h1>
+    <br />
+
+    <div class="uploadfile">
+        <label>
+            <img src="images/uploadImage.png" class="img" />
+            <div>
+                <label for="customPath">Vul een pad in:</label>
+                <input type="text" id="customPath" @bind="customFilePath" />
+                <input type="text" @bind="text"/>
+                <button @onclick="OpenDirectoryDialog">Selecteer map</button>
+            </div>
+
+            <InputFile OnChange="UploadFile" multiple /><p>(Sleep je bestanden naar knop)</p>
+        </label>
+    </div>
+
+    @if (isLoading)
+    {
+        <p>Uploaden...</p>
+    }
+    @if (loadingFinish)
+    {
+        <p>Upload klaar!</p>
+    }
+</body>
+
+@code {
+    private bool isLoading;
+    private bool loadingFinish;
+    private int maxAllowedFiles = 10;
+    private string customFilePath = MyConfig.FilePath;
+    private string text = MyConfig.GetTextFromPDF;
+
+    private async Task OpenDirectoryDialog()
+    {
+        string? directoryPath = MyConfig.GetDirectory(customFilePath);
+
+        if (!string.IsNullOrEmpty(directoryPath))
+        {
+            customFilePath = directoryPath;
+            MyConfig.FilePath = directoryPath;
+        }
+    }
+
+    private async Task UploadFile(InputFileChangeEventArgs e)
+    {
+        isLoading = true;
+        await Task.Delay(600);
+
+        string filePath = customFilePath;
+
+        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+        {
+            string fileName = System.IO.Path.GetFileName(file.Name);
+            string destinationPath = System.IO.Path.Combine(filePath, fileName);
+
+            try
+            {
+                await using FileStream fs = new(destinationPath, FileMode.Create);
+                await file.OpenReadStream().CopyToAsync(fs);
+
+                Console.WriteLine($"Bestand '{file.Name}' geupload naar '{destinationPath}'");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error met het uploaden van de bestand '{file.Name}': {ex.Message}");
+            }
+        }
+
+        isLoading = false;
+        loadingFinish = true;
+    }
+}
