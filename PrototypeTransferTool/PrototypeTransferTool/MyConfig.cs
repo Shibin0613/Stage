@@ -60,14 +60,11 @@ namespace PrototypeTransferTool
                     for (int i = 1; i <= reader.NumberOfPages; i++)
                     {
                         ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
-                        string currentText = PdfTextExtractor.GetTextFromPage(reader, i, strategy).Replace("\n", string.Empty);
-                        int orderNumberFrom = currentText.IndexOf("INKOOP ORDER NUMMER ") + "INKOOP ORDER NUMMER ".Length;
-                        int orderNumberTo = currentText.LastIndexOf("INKOOP ORDER DATUM");
-                        string orderNumber = currentText.Substring(orderNumberFrom, orderNumberTo - orderNumberFrom);
 
-                        int afleveradresFrom = currentText.IndexOf("AFLEVERADRES") + "AFLEVERADRES".Length;
-                        int afleveradresTo = currentText.LastIndexOf("RUBEN VAN WIJK");
-                        string aanvrager = currentText.Substring(afleveradresFrom, afleveradresTo - afleveradresFrom);
+                        string currentText = PdfTextExtractor.GetTextFromPage(reader, i, strategy).Replace("\n", string.Empty);
+                        int orderFrom = currentText.IndexOf("AANTAL PRIJS EENHEID TOTAAL") + "AANTAL PRIJS EENHEID TOTAAL".Length;
+                        int orderTo = currentText.LastIndexOf("TOTAAL"[1]);
+                        string Order = currentText.Substring(orderFrom, orderTo - orderFrom);
 
                         text.Append(currentText); // Voeg de geëxtraheerde tekst toe aan de StringBuilder
                     }
