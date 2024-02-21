@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PrototypeTransferTool")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a61cf83ad62f6c14577c5f208c10259c3e96a6b9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a0ad33ee2a1073d6eeba8ee564a3cd7a7a75414")]
 [assembly: System.Reflection.AssemblyProductAttribute("PrototypeTransferTool")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PrototypeTransferTool")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

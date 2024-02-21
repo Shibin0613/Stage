@@ -55,17 +55,25 @@ namespace PrototypeTransferTool
             get
             {
                 StringBuilder text = new StringBuilder();
-                using (PdfReader reader = new PdfReader(@"C:\Users\pansh\Desktop\test1.pdf"))
+                using (PdfReader reader = new PdfReader(@"C:\Users\pansh\Desktop\test.pdf"))
                 {
                     for (int i = 1; i <= reader.NumberOfPages; i++)
                     {
                         ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
-                        string currentText = PdfTextExtractor.GetTextFromPage(reader, i, strategy);
+                        string currentText = PdfTextExtractor.GetTextFromPage(reader, i, strategy).Replace("\n", string.Empty);
+                        int orderNumberFrom = currentText.IndexOf("INKOOP ORDER NUMMER ") + "INKOOP ORDER NUMMER ".Length;
+                        int orderNumberTo = currentText.LastIndexOf("INKOOP ORDER DATUM");
+                        string orderNumber = currentText.Substring(orderNumberFrom, orderNumberTo - orderNumberFrom);
+
+                        int afleveradresFrom = currentText.IndexOf("AFLEVERADRES") + "AFLEVERADRES".Length;
+                        int afleveradresTo = currentText.LastIndexOf("RUBEN VAN WIJK");
+                        string aanvrager = currentText.Substring(afleveradresFrom, afleveradresTo - afleveradresFrom);
+
                         text.Append(currentText); // Voeg de geëxtraheerde tekst toe aan de StringBuilder
                     }
                 }
 
-                string xmlFilePath = @"C:\Users\pansh\Desktop\output1.xml"; // Het pad naar het XML-bestand
+                string xmlFilePath = @"C:\Users\pansh\Desktop\output.xml"; // Het pad naar het XML-bestand
 
                 // Schrijf de geëxtraheerde tekst naar een XML-bestand
                 using (XmlWriter writer = XmlWriter.Create(xmlFilePath))
