@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using Org.BouncyCastle.Asn1.X509;
+using System.Diagnostics;
 
 namespace PrototypeTransferTool
 {
@@ -56,7 +57,13 @@ namespace PrototypeTransferTool
             get
             { 
                 StringBuilder text = new StringBuilder();
+                StringBuilder ordernummer= new StringBuilder();
                 StringBuilder order = new StringBuilder();
+                StringBuilder Hotelname = new StringBuilder();
+                StringBuilder aanvrager = new StringBuilder();
+                StringBuilder OrderDatum= new StringBuilder();
+
+
                 using (PdfReader reader = new PdfReader(@"C:\Users\pansh\Desktop\Stage\TransferTool\test1.pdf"))
                 {
                     for (int i = 1; i <= reader.NumberOfPages; i++)
@@ -80,10 +87,14 @@ namespace PrototypeTransferTool
                             int ordernumberTo = currentText.LastIndexOf("INKOOP ORDER DATUM EXCLUSIEF");
                             string orderNumber = currentText.Substring(ordernumberFrom, ordernumberTo - ordernumberFrom).Replace("\n", "");
 
+                            ordernummer.Append(orderNumber);
+
                             //Inkoopdatum
                             int inkoopDatumFrom = currentText.IndexOf("el servicio.") + "el servicio.".Length;
                             int inkoopDatumTo = currentText.IndexOf("INKOOP ORDER NUMMER ");
                             string inkoopDatum = currentText.Substring(inkoopDatumFrom, inkoopDatumTo - inkoopDatumFrom).Replace("\n", "");
+
+                            OrderDatum.Append(inkoopDatum);
 
                             //Hotelnaam op position
                             System.util.RectangleJ rectHotelnaam = new System.util.RectangleJ(524.16f, 538.68f, 254.88f, 6.84f);
@@ -92,6 +103,8 @@ namespace PrototypeTransferTool
                                 new LocationTextExtractionStrategy(), filterHotelnaam);
                             string hotelNaam = PdfTextExtractor.GetTextFromPage(reader, i, strategyHotelnaam);
 
+                            Hotelname.Append(hotelNaam);
+
                             //Aanvrager
                             System.util.RectangleJ rectAanvrager = new System.util.RectangleJ(255f, 438f, 152f, 78f);
                             RenderFilter[] filterAanvrager = { new RegionTextRenderFilter(rectAanvrager) };
@@ -99,7 +112,8 @@ namespace PrototypeTransferTool
                                 new LocationTextExtractionStrategy(), filterAanvrager);
                             string Aanvrager = PdfTextExtractor.GetTextFromPage(reader, i, strategyAanvrager);
 
-                            
+                            aanvrager.Append(Aanvrager);
+
                             //afleveradres
                             int afleverAdresFrom = currentText.IndexOf("OPMERKING :  ") + "OPMERKING :  ".Length;
                             int afleverAdresTo = currentText.LastIndexOf("LIJN I REFERENTIE");
@@ -173,7 +187,11 @@ namespace PrototypeTransferTool
                 {
                     writer.WriteStartDocument();
                     writer.WriteStartElement("PDFText"); // Element dat de PDF-tekst bevat
-                    writer.WriteString(text.ToString()); // Schrijf de geëxtraheerde tekst
+                    writer.WriteStartElement("Orderinfo");
+                    writer.WriteString(ordernummer.ToString());
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("Order");
+                    writer.WriteString(order.ToString()); // Schrijf de geëxtraheerde tekst
                     writer.WriteEndElement();
                     writer.WriteEndDocument();
                 }
