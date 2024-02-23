@@ -57,14 +57,21 @@ namespace PrototypeTransferTool
             get
             { 
                 StringBuilder text = new StringBuilder();
-                StringBuilder ordernummer= new StringBuilder();
-                StringBuilder order = new StringBuilder();
-                StringBuilder Hotelname = new StringBuilder();
+                StringBuilder ordernummer = new StringBuilder();
+                StringBuilder hotelnaam = new StringBuilder();
                 StringBuilder aanvrager = new StringBuilder();
-                StringBuilder OrderDatum= new StringBuilder();
+                StringBuilder afleveradres = new StringBuilder();
+                StringBuilder orderdatum= new StringBuilder();
+                StringBuilder order = new StringBuilder();
+                StringBuilder opmerking = new StringBuilder();
+                StringBuilder totaal = new StringBuilder();
+                
+                StringBuilder betaalcondities = new StringBuilder();
+                StringBuilder factuuradres = new StringBuilder();
+                StringBuilder stuurfactuuraan = new StringBuilder();
+                StringBuilder levering = new StringBuilder();
 
-
-                using (PdfReader reader = new PdfReader(@"C:\Users\pansh\Desktop\Stage\TransferTool\test1.pdf"))
+                using (PdfReader reader = new PdfReader(@"C:\Users\pansh\Desktop\Stage\TransferTool\test4.pdf"))
                 {
                     for (int i = 1; i <= reader.NumberOfPages; i++)
                     {
@@ -80,30 +87,25 @@ namespace PrototypeTransferTool
 
                         string currentText = PdfTextExtractor.GetTextFromPage(reader, i, strategy);
 
+                        text.Append(currentText);
+
                         if (currentText.Contains("INKOOP ORDER NUMMER "))
                         {
                             //Ordernumber
-                            int ordernumberFrom = currentText.IndexOf("INKOOP ORDER NUMMER ") + "INKOOP ORDER NUMMER ".Length;
-                            int ordernumberTo = currentText.LastIndexOf("INKOOP ORDER DATUM EXCLUSIEF");
-                            string orderNumber = currentText.Substring(ordernumberFrom, ordernumberTo - ordernumberFrom).Replace("\n", "");
+                            int ordernummerFrom = currentText.IndexOf("INKOOP ORDER NUMMER ") + "INKOOP ORDER NUMMER ".Length;
+                            int ordernummerTo = currentText.LastIndexOf("INKOOP ORDER DATUM EXCLUSIEF");
+                            string orderNumber = currentText.Substring(ordernummerFrom, ordernummerTo - ordernummerFrom).Replace("\n", "");
 
                             ordernummer.Append(orderNumber);
-
-                            //Inkoopdatum
-                            int inkoopDatumFrom = currentText.IndexOf("el servicio.") + "el servicio.".Length;
-                            int inkoopDatumTo = currentText.IndexOf("INKOOP ORDER NUMMER ");
-                            string inkoopDatum = currentText.Substring(inkoopDatumFrom, inkoopDatumTo - inkoopDatumFrom).Replace("\n", "");
-
-                            OrderDatum.Append(inkoopDatum);
 
                             //Hotelnaam op position
                             System.util.RectangleJ rectHotelnaam = new System.util.RectangleJ(524.16f, 538.68f, 254.88f, 6.84f);
                             RenderFilter[] filterHotelnaam = { new RegionTextRenderFilter(rectHotelnaam) };
                             ITextExtractionStrategy strategyHotelnaam = new FilteredTextRenderListener(
                                 new LocationTextExtractionStrategy(), filterHotelnaam);
-                            string hotelNaam = PdfTextExtractor.GetTextFromPage(reader, i, strategyHotelnaam);
+                            string hotelNaam = PdfTextExtractor.GetTextFromPage(reader, i, strategyHotelnaam).Trim();
 
-                            Hotelname.Append(hotelNaam);
+                            hotelnaam.Append(hotelNaam);
 
                             //Aanvrager
                             System.util.RectangleJ rectAanvrager = new System.util.RectangleJ(255f, 438f, 152f, 78f);
@@ -114,18 +116,29 @@ namespace PrototypeTransferTool
 
                             aanvrager.Append(Aanvrager);
 
-                            //afleveradres
-                            int afleverAdresFrom = currentText.IndexOf("OPMERKING :  ") + "OPMERKING :  ".Length;
-                            int afleverAdresTo = currentText.LastIndexOf("LIJN I REFERENTIE");
+                            //Afleveradres
+                            int afleverAdresFrom = currentText.IndexOf("NEDERLAND") + "NEDERLAND".Length;
+                            int afleverAdresTo = currentText.LastIndexOf(hotelNaam);
                             string afleverAdres = currentText.Substring(afleverAdresFrom, afleverAdresTo - afleverAdresFrom);
 
+                            afleveradres.Append(afleverAdres);
 
+                            //Inkoopdatum
+                            int inkoopDatumFrom = currentText.IndexOf("el servicio.") + "el servicio.".Length;
+                            int inkoopDatumTo = currentText.IndexOf("INKOOP ORDER NUMMER ");
+                            string inkoopDatum = currentText.Substring(inkoopDatumFrom, inkoopDatumTo - inkoopDatumFrom).Replace("\n", "");
+
+                            orderdatum.Append(inkoopDatum);
+
+                            //Opmerking
                             if (currentText.Contains("OPMERKING :  "))
                             {
-                                //Opmerking
-                                int opmerkingFrom = currentText.IndexOf("NEDERLAND") + "NEDERLAND".Length;
-                                int opmerkingTo = currentText.LastIndexOf(hotelNaam);
-                                string Opmerking = currentText.Substring(opmerkingFrom, opmerkingTo - opmerkingFrom);
+                                
+                                int opmerkingFrom = currentText.IndexOf("OPMERKING :  ") + "OPMERKING :  ".Length;
+                                int opmerkingTo = currentText.LastIndexOf("LIJN I REFERENTIE");
+                                string Opmerking = currentText.Substring(opmerkingFrom, opmerkingTo - opmerkingFrom).Replace("\n", "");
+
+                                opmerking.Append(Opmerking);
                             }
 
                             //Order
@@ -139,7 +152,7 @@ namespace PrototypeTransferTool
                             }
                             else
                             {
-                                string orderWithText = currentText.Substring(orderFrom + "AANTAL PRIJS EENHEID TOTAAL".Length);
+                                string orderWithText = currentText.Substring(orderFrom + "AANTAL PRIJS EENHEID TOTAAL".Length).Trim();
                                 if (orderWithText.Contains("TOTAAL"))
                                 {
                                     int orderTo = orderWithText.IndexOf("TOTAAL");
@@ -148,6 +161,16 @@ namespace PrototypeTransferTool
                                 }
                                 else
                                 {
+                                    //Productinfo voor elk besteld product....
+                                    int eachOrderFrom = orderWithText.IndexOf(",00 ") + ",00 ".Length;
+                                    int eachOrderTo = orderWithText.IndexOf("");
+                                    string[] ordersplit = orderWithText.Split(" ");
+                                    string lijn = ordersplit[0];
+                                    string I = " ";
+                                    string referentie = ordersplit[1] + " " + ordersplit[2];
+                                    string nhmateriaalid= ordersplit[3];
+                                    string materiaalomschrijving = ordersplit[4];
+                                    string totaalbedrag = ordersplit.Last();
                                     order.Append(orderWithText);
                                 }
                             }
@@ -155,32 +178,45 @@ namespace PrototypeTransferTool
 
                         if (currentText.Contains("BETAALCONDITIES"))
                         {
+                            //Totaalbedrag
+                            int totaalFrom = currentText.IndexOf("TOTAAL ") + "TOTAAL ".Length;
+                            int totaalTo = currentText.IndexOf(" EUR");
+                            string Totaal = currentText.Substring(totaalFrom, totaalTo - totaalFrom).Replace("\n", "");
+
+                            totaal.Append(Totaal);
+
                             //Betaalcondities
                             int betaalFrom = currentText.IndexOf("BETAALCONDITIES") + "BETAALCONDITIES".Length;
                             int betaalTo = currentText.LastIndexOf("FACTUURADRES");
-                            string betaalConditie = currentText.Substring(betaalFrom, betaalTo - betaalFrom);
+                            string betaalConditie = currentText.Substring(betaalFrom, betaalTo - betaalFrom).Replace("\n", "");
+
+                            betaalcondities.Append(betaalConditie);
 
                             //FactuurAdres
                             int factuurAdresFrom = currentText.IndexOf("FACTUURADRES") + "FACTUURADRES".Length;
                             int factuurAdresTo = currentText.LastIndexOf("STUUR FACTUUR AAN");
-                            string factuurAdres = currentText.Substring(factuurAdresFrom, factuurAdresTo - factuurAdresFrom);
+                            string factuurAdres = currentText.Substring(factuurAdresFrom, factuurAdresTo - factuurAdresFrom).Replace("\n", "");
+                            
+                            factuuradres.Append(factuurAdres);
 
                             //Stuur factuur aan
                             int stuurFactuuraanFrom = currentText.IndexOf("STUUR FACTUUR AAN") + "STUUR FACTUUR AAN".Length;
                             int stuurFactuuraanTo = currentText.LastIndexOf("LEVERING");
-                            string stuurFactuurAan = currentText.Substring(stuurFactuuraanFrom, stuurFactuuraanTo - stuurFactuuraanFrom);
+                            string stuurFactuurAan = currentText.Substring(stuurFactuuraanFrom, stuurFactuuraanTo - stuurFactuuraanFrom).Replace("\n", "");
+
+                            stuurfactuuraan.Append(stuurFactuurAan);
 
                             //Levering
                             int leveringFrom = currentText.IndexOf("LEVERING") + "LEVERING".Length;
                             int leveringTo = currentText.LastIndexOf("TOTAAL ");
-                            string Levering = currentText.Substring(leveringFrom, leveringTo - leveringFrom);
-                        }
+                            string Levering = currentText.Substring(leveringFrom, leveringTo - leveringFrom).Trim();
 
-                        text.Append(currentText);
+                            levering.Append(Levering);
+                        }
                     }
                 }
 
-                string xmlFilePath = @"C:\Users\pansh\Desktop\output1.xml"; // Het pad naar het XML-bestand
+                string xmlFilePath = @"C:\Users\pansh\Desktop\output4.xml"; // Het pad naar het XML-bestand
 
                 // Schrijf de geëxtraheerde tekst naar een XML-bestand
                 using (XmlWriter writer = XmlWriter.Create(xmlFilePath))
@@ -188,10 +224,40 @@ namespace PrototypeTransferTool
                     writer.WriteStartDocument();
                     writer.WriteStartElement("PDFText"); // Element dat de PDF-tekst bevat
                     writer.WriteStartElement("Orderinfo");
-                    writer.WriteString(ordernummer.ToString());
+                    writer.WriteStartElement("InkoopOrderNummer");
+                    writer.WriteString(text.ToString());
+                    writer.WriteString(ordernummer.ToString()); // Schrijf de geëxtraheerde tekst
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("Hotelnaam");
+                    writer.WriteString(hotelnaam.ToString());
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("InkoopOrderDatum");
+                    writer.WriteString(orderdatum.ToString());
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("Opmerking");
+                    writer.WriteString(opmerking.ToString());
+                    writer.WriteEndElement();
                     writer.WriteEndElement();
                     writer.WriteStartElement("Order");
-                    writer.WriteString(order.ToString()); // Schrijf de geëxtraheerde tekst
+                    writer.WriteString(order.ToString());
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("Totaal");
+                    writer.WriteString(totaal.ToString());
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("Orderinfo");
+                    writer.WriteStartElement("Factuur");
+                    writer.WriteStartElement("Betaalcondities");
+                    writer.WriteString(betaalcondities.ToString());
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("Factuuradres");
+                    writer.WriteString(factuuradres.ToString());
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("StuurFactuurAan");
+                    writer.WriteString(stuurfactuuraan.ToString());
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("Levering");
+                    writer.WriteString(levering.ToString());
+                    writer.WriteEndElement();
                     writer.WriteEndElement();
                     writer.WriteEndDocument();
                 }
