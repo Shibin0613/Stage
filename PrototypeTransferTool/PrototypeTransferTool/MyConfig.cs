@@ -255,8 +255,8 @@ namespace PrototypeTransferTool
                         writer.WriteString(orderLine.Trim());
                         writer.WriteEndElement();
                     }
-
                     writer.WriteEndElement();
+
                     writer.WriteStartElement("Totaal");
                     writer.WriteString(totaal.ToString());
                     writer.WriteEndElement();
