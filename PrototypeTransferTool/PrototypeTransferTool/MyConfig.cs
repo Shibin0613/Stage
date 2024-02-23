@@ -118,8 +118,8 @@ namespace PrototypeTransferTool
 
                             //Afleveradres
                             int afleverAdresFrom = currentText.IndexOf("NEDERLAND") + "NEDERLAND".Length;
-                            int afleverAdresTo = currentText.LastIndexOf(hotelNaam);
-                            string afleverAdres = currentText.Substring(afleverAdresFrom, afleverAdresTo - afleverAdresFrom);
+                            int afleverAdresTo = currentText.IndexOf(" " + hotelNaam);
+                            string afleverAdres = currentText.Substring(afleverAdresFrom, afleverAdresTo - afleverAdresFrom).Trim();
 
                             afleveradres.Append(afleverAdres);
 
@@ -160,18 +160,14 @@ namespace PrototypeTransferTool
                                     order.Append(Order);
                                 }
                                 else
-                                {
+                                { 
+                                    string[] eachOrderFrom = orderWithText.Split('\n');
                                     //Productinfo voor elk besteld product....
-                                    int eachOrderFrom = orderWithText.IndexOf(",00 ") + ",00 ".Length;
-                                    int eachOrderTo = orderWithText.IndexOf("");
-                                    string[] ordersplit = orderWithText.Split(" ");
-                                    string lijn = ordersplit[0];
-                                    string I = " ";
-                                    string referentie = ordersplit[1] + " " + ordersplit[2];
-                                    string nhmateriaalid= ordersplit[3];
-                                    string materiaalomschrijving = ordersplit[4];
-                                    string totaalbedrag = ordersplit.Last();
-                                    order.Append(orderWithText);
+                                    foreach (string orderLine in eachOrderFrom)
+                                    {
+                                        order.AppendLine("Order"); // Voeg het lijnnummer toe
+                                        order.AppendLine(orderLine); // Voeg de bestellijn toe
+                                    }
                                 }
                             }
                         }
@@ -223,13 +219,23 @@ namespace PrototypeTransferTool
                 {
                     writer.WriteStartDocument();
                     writer.WriteStartElement("PDFText"); // Element dat de PDF-tekst bevat
+                    //Huidige PDF text
+                    writer.WriteStartElement("HuidigePDFtext");
+                    writer.WriteString(text.ToString());
+                    writer.WriteEndElement();
+                    //
                     writer.WriteStartElement("Orderinfo");
                     writer.WriteStartElement("InkoopOrderNummer");
-                    writer.WriteString(text.ToString());
                     writer.WriteString(ordernummer.ToString()); // Schrijf de geëxtraheerde tekst
                     writer.WriteEndElement();
                     writer.WriteStartElement("Hotelnaam");
                     writer.WriteString(hotelnaam.ToString());
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("Aanvrager");
+                    writer.WriteString(aanvrager.ToString());
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("Afleveradres");
+                    writer.WriteString(afleveradres.ToString());
                     writer.WriteEndElement();
                     writer.WriteStartElement("InkoopOrderDatum");
                     writer.WriteString(orderdatum.ToString());
@@ -238,8 +244,18 @@ namespace PrototypeTransferTool
                     writer.WriteString(opmerking.ToString());
                     writer.WriteEndElement();
                     writer.WriteEndElement();
-                    writer.WriteStartElement("Order");
-                    writer.WriteString(order.ToString());
+                    writer.WriteStartElement("Orders");
+
+                    //In Orders elke order een nieuwe element 'Order' creeren
+                    string[] eachOrderFrom = order.ToString().Split("Order");
+                    //Productinfo voor elk besteld product....
+                    foreach (string orderLine in eachOrderFrom)
+                    {
+                        writer.WriteStartElement("Order");
+                        writer.WriteString(orderLine.Trim());
+                        writer.WriteEndElement();
+                    }
+
                     writer.WriteEndElement();
                     writer.WriteStartElement("Totaal");
                     writer.WriteString(totaal.ToString());
