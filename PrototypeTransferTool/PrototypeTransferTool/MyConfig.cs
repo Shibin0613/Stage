@@ -71,7 +71,7 @@ namespace PrototypeTransferTool
                 StringBuilder stuurfactuuraan = new StringBuilder();
                 StringBuilder levering = new StringBuilder();
 
-                using (PdfReader reader = new PdfReader(@"C:\Users\pansh\Desktop\Stage\TransferTool\test1.pdf"))
+                using (PdfReader reader = new PdfReader(@"C:\Users\pansh\Desktop\Stage\TransferTool\test2.pdf"))
                 {
                     for (int i = 1; i <= reader.NumberOfPages; i++)
                     {
@@ -216,7 +216,7 @@ namespace PrototypeTransferTool
                     }
                 }
 
-                string xmlFilePath = @"C:\Users\pansh\Desktop\output1.xml"; // Het pad naar het XML-bestand
+                string xmlFilePath = @"C:\Users\pansh\Desktop\output2.xml"; // Het pad naar het XML-bestand
 
                 // Schrijf de geëxtraheerde tekst naar een XML-bestand
                 using (XmlWriter writer = XmlWriter.Create(xmlFilePath))
@@ -248,14 +248,14 @@ namespace PrototypeTransferTool
                     writer.WriteString(opmerking.ToString());
                     writer.WriteEndElement();
                     writer.WriteEndElement();
-                    writer.WriteStartElement("Orders");
+                    writer.WriteStartElement("Artikelen");
 
                     //In Orders elke order een nieuwe element 'Order' creeren
                     string[] eachOrderFrom = order.ToString().Split("Order");
                     //Productinfo voor elk besteld product....
                     foreach (string orderLine in eachOrderFrom)
                     {
-                        writer.WriteStartElement("Order");
+                        writer.WriteStartElement("Artikel");
                         writer.WriteString(orderLine.Trim());
                         writer.WriteEndElement();
                     }
