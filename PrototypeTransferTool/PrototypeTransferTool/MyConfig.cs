@@ -71,16 +71,16 @@ namespace PrototypeTransferTool
                 StringBuilder stuurfactuuraan = new StringBuilder();
                 StringBuilder levering = new StringBuilder();
 
-                using (PdfReader reader = new PdfReader(@"C:\Users\pansh\Desktop\Stage\TransferTool\test4.pdf"))
+                using (PdfReader reader = new PdfReader(@"C:\Users\pansh\Desktop\Stage\TransferTool\test1.pdf"))
                 {
                     for (int i = 1; i <= reader.NumberOfPages; i++)
                     {
-                        //test position voor Order number
-                        System.util.RectangleJ rect = new System.util.RectangleJ(402f, 540f, 75f, 15f);
+                        //test position voor Order number(Neemt de hele string op inclusief de Inkoop order nummer .........)
+                        /*System.util.RectangleJ rect = new System.util.RectangleJ(402f, 540f, 75f, 15f);
                         RenderFilter[] filter = { new RegionTextRenderFilter(rect) };
                         ITextExtractionStrategy strategyForOrdernumber = new FilteredTextRenderListener(
                             new LocationTextExtractionStrategy(), filter);
-                        string test = PdfTextExtractor.GetTextFromPage(reader, i, strategyForOrdernumber);
+                        string test = PdfTextExtractor.GetTextFromPage(reader, i, strategyForOrdernumber);*/
 
                         //Definieren alle text van PDF
                         ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
@@ -107,7 +107,7 @@ namespace PrototypeTransferTool
 
                             hotelnaam.Append(hotelNaam);
 
-                            //Aanvrager
+                            //Aanvrager op positie
                             System.util.RectangleJ rectAanvrager = new System.util.RectangleJ(255f, 438f, 152f, 78f);
                             RenderFilter[] filterAanvrager = { new RegionTextRenderFilter(rectAanvrager) };
                             ITextExtractionStrategy strategyAanvrager = new FilteredTextRenderListener(
@@ -116,19 +116,23 @@ namespace PrototypeTransferTool
 
                             aanvrager.Append(Aanvrager);
 
-                            //Afleveradres
-                            int afleverAdresFrom = currentText.IndexOf("NEDERLAND") + "NEDERLAND".Length;
-                            int afleverAdresTo = currentText.IndexOf(" " + hotelNaam);
-                            string afleverAdres = currentText.Substring(afleverAdresFrom, afleverAdresTo - afleverAdresFrom).Trim();
+                            //Afleveradres op positie
+                            System.util.RectangleJ rectAfleveradres = new System.util.RectangleJ(454.07f, 442.34f, 156.08f, 77.25f);
+                            RenderFilter[] filterAfleveradres = { new RegionTextRenderFilter(rectAfleveradres) };
+                            ITextExtractionStrategy strategyAfleveradres = new FilteredTextRenderListener(
+                                new LocationTextExtractionStrategy(), filterAfleveradres);
+                            string Afleveradres = PdfTextExtractor.GetTextFromPage(reader, i, strategyAfleveradres);
 
-                            afleveradres.Append(afleverAdres);
+                            afleveradres.Append(Afleveradres);
 
-                            //Inkoopdatum
-                            int inkoopDatumFrom = currentText.IndexOf("el servicio.") + "el servicio.".Length;
-                            int inkoopDatumTo = currentText.IndexOf("INKOOP ORDER NUMMER ");
-                            string inkoopDatum = currentText.Substring(inkoopDatumFrom, inkoopDatumTo - inkoopDatumFrom).Replace("\n", "");
+                            //Inkoopdatum op positie
+                            System.util.RectangleJ rectInkoopdatum= new System.util.RectangleJ(232.29f, 377.24f, 85.88f, 22f);
+                            RenderFilter[] filterInkoopdatum = { new RegionTextRenderFilter(rectInkoopdatum) };
+                            ITextExtractionStrategy strategyInkoopdatum = new FilteredTextRenderListener(
+                                new LocationTextExtractionStrategy(), filterInkoopdatum);
+                            string Inkoopdatum = PdfTextExtractor.GetTextFromPage(reader, i, strategyInkoopdatum);
 
-                            orderdatum.Append(inkoopDatum);
+                            orderdatum.Append(Inkoopdatum);
 
                             //Opmerking
                             if (currentText.Contains("OPMERKING :  "))
@@ -212,7 +216,7 @@ namespace PrototypeTransferTool
                     }
                 }
 
-                string xmlFilePath = @"C:\Users\pansh\Desktop\output4.xml"; // Het pad naar het XML-bestand
+                string xmlFilePath = @"C:\Users\pansh\Desktop\output1.xml"; // Het pad naar het XML-bestand
 
                 // Schrijf de geëxtraheerde tekst naar een XML-bestand
                 using (XmlWriter writer = XmlWriter.Create(xmlFilePath))
