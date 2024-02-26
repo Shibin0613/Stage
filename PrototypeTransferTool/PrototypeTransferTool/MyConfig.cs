@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using System.Xml;
 using Org.BouncyCastle.Asn1.X509;
 using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Security.Cryptography.Xml;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace PrototypeTransferTool
 {
@@ -71,7 +75,7 @@ namespace PrototypeTransferTool
                 StringBuilder stuurfactuuraan = new StringBuilder();
                 StringBuilder levering = new StringBuilder();
 
-                using (PdfReader reader = new PdfReader(@"C:\Users\pansh\Desktop\Stage\TransferTool\test2.pdf"))
+                using (PdfReader reader = new PdfReader(@"C:\Users\pansh\Desktop\Stage\TransferTool\test4.pdf"))
                 {
                     for (int i = 1; i <= reader.NumberOfPages; i++)
                     {
@@ -216,70 +220,173 @@ namespace PrototypeTransferTool
                     }
                 }
 
-                string xmlFilePath = @"C:\Users\pansh\Desktop\output2.xml"; // Het pad naar het XML-bestand
+                string xmlFilePath = @"C:\Users\pansh\Desktop\output4.xml"; // Het pad naar het XML-bestand
 
                 // Schrijf de geëxtraheerde tekst naar een XML-bestand
                 using (XmlWriter writer = XmlWriter.Create(xmlFilePath))
                 {
                     writer.WriteStartDocument();
-                    writer.WriteStartElement("PDFText"); // Element dat de PDF-tekst bevat
+                    writer.WriteStartElement("Order");
                     //Huidige PDF text
-                    writer.WriteStartElement("HuidigePDFtext");
+                    // Element dat de ORDER bevat
+                    writer.WriteStartElement("Huidige_PDFtext");
                     writer.WriteString(text.ToString());
                     writer.WriteEndElement();
                     //
-                    writer.WriteStartElement("Orderinfo");
-                    writer.WriteStartElement("InkoopOrderNummer");
+                    writer.WriteStartElement("stamgegevens");
+
+                    writer.WriteStartElement("O_INKOOP_ORDER_NUMMER");
                     writer.WriteString(ordernummer.ToString()); // Schrijf de geëxtraheerde tekst
                     writer.WriteEndElement();
-                    writer.WriteStartElement("Hotelnaam");
+
+                    writer.WriteStartElement("O_HOTELNAAM");
                     writer.WriteString(hotelnaam.ToString());
                     writer.WriteEndElement();
-                    writer.WriteStartElement("Aanvrager");
+
+                    writer.WriteStartElement("O_AANVRAGER");
                     writer.WriteString(aanvrager.ToString());
                     writer.WriteEndElement();
-                    writer.WriteStartElement("Afleveradres");
+                    
+                    writer.WriteStartElement("O_AFLEVERADRES");
                     writer.WriteString(afleveradres.ToString());
                     writer.WriteEndElement();
-                    writer.WriteStartElement("InkoopOrderDatum");
+
+                    writer.WriteStartElement("O_INKOOP_ORDER_DATUM");
                     writer.WriteString(orderdatum.ToString());
                     writer.WriteEndElement();
-                    writer.WriteStartElement("Opmerking");
+                    
+                    writer.WriteStartElement("O_OPMERKING");
                     writer.WriteString(opmerking.ToString());
                     writer.WriteEndElement();
+
                     writer.WriteEndElement();
+                    
                     writer.WriteStartElement("Artikelen");
 
                     //In Orders elke order een nieuwe element 'Order' creeren
-                    string[] eachOrderFrom = order.ToString().Split("Order");
+                    string[] eachOrderFrom = order.ToString().Split("Order", StringSplitOptions.RemoveEmptyEntries);
+
                     //Productinfo voor elk besteld product....
                     foreach (string orderLine in eachOrderFrom)
                     {
                         writer.WriteStartElement("Artikel");
+                        //Lijncode
+                        int lijnFrom = orderLine.IndexOf(' ') + " ".Length;
+                        int lijnTo = orderLine.IndexOf(' ');
+                        string Lijn = orderLine.Substring(0, lijnTo).Trim();
+
+                        writer.WriteStartElement("A_LIJN");
+                        writer.WriteString(Lijn);
+                        writer.WriteEndElement();
+
+                        //Referentie
+                        var referentieIndex = orderLine.Split(' ')[1];
+                        string referentie = string.Empty;
+                        string nhMateriaalId = string.Empty;
+                        string materiaalOmschrijving = string.Empty;
+                        string leverdatum = string.Empty;
+                        string aantal = string.Empty;
+                        string prijs = string.Empty;
+                        string eenheid= string.Empty;
+                        string totaalAantal= string.Empty;
+                        if (Regex.IsMatch(referentieIndex, @"\d"))
+                        {
+                            referentie = referentieIndex;
+                            nhMateriaalId = orderLine.Split(' ')[2];
+
+                            leverdatum = orderLine.Split(' ').Reverse().Take(5).Last();
+                            aantal = orderLine.Split(' ').Reverse().Take(4).Last();
+                            prijs = orderLine.Split(' ').Reverse().Take(3).Last();
+                            eenheid = orderLine.Split(' ').Reverse().Take(2).Last();
+                            totaalAantal = orderLine.Split(" ").Last().Trim();
+                            //Materiaal omschrijving tussen NH MATERIAAL ID en LEVERDATUM
+                            //Materiaal omschrijving tussen NH MATERIAAL ID en LEVERDATUM
+                            int materiaalOmschrijvingFrom = orderLine.IndexOf(nhMateriaalId) + nhMateriaalId.Length;
+                            int materiaalOmschrijvingTo = orderLine.IndexOf(leverdatum);
+                            materiaalOmschrijving = orderLine.Substring(materiaalOmschrijvingFrom, materiaalOmschrijvingTo - materiaalOmschrijvingFrom).Trim();
+                        }
+                        else
+                        {
+                            int referentieFrom = orderLine.IndexOf(" ");
+                            int referentieTo = orderLine.IndexOf(" ", referentieFrom + 1); // Zoek vanaf het karakter na het eerste spatie-teken
+                            int derdeSpaceIndex = orderLine.IndexOf(" ", referentieTo + 1); // Zoek vanaf het karakter na de tweede spatie-teken
+                            
+                            referentie = orderLine.Substring(referentieFrom + 1, derdeSpaceIndex - referentieFrom - 1).Trim();
+                            nhMateriaalId = orderLine.Split(' ')[3];
+
+                            leverdatum = orderLine.Split(' ').Reverse().Take(5).Last();
+                            aantal = orderLine.Split(' ').Reverse().Take(4).Last();
+                            prijs = orderLine.Split(' ').Reverse().Take(3).Last();
+                            eenheid = orderLine.Split(' ').Reverse().Take(2).Last();
+                            totaalAantal = orderLine.Split(" ").Last().Trim();
+                            //Materiaal omschrijving tussen NH MATERIAAL ID en LEVERDATUM
+                            int materiaalOmschrijvingFrom = orderLine.IndexOf(nhMateriaalId) + nhMateriaalId.Length;
+                            int materiaalOmschrijvingTo = orderLine.IndexOf(leverdatum);
+                            materiaalOmschrijving = orderLine.Substring(materiaalOmschrijvingFrom, materiaalOmschrijvingTo - materiaalOmschrijvingFrom).Trim();
+
+
+                        }
+                        writer.WriteStartElement("A_REFERENTIE");
+                        writer.WriteString(referentie);
+                        writer.WriteEndElement();
+
+                        writer.WriteStartElement("A_NH_MATERIAAL_ID");
+                        writer.WriteString(nhMateriaalId);
+                        writer.WriteEndElement();
+
+                        writer.WriteStartElement("A_MATERIAAL_OMSCHRIJVING");
+                        writer.WriteString(materiaalOmschrijving);
+                        writer.WriteEndElement();
+
+                        writer.WriteStartElement("A_LEVERDATUM");
+                        writer.WriteString(leverdatum);
+                        writer.WriteEndElement();
+
+                        writer.WriteStartElement("A_AANTAL");
+                        writer.WriteString(aantal);
+                        writer.WriteEndElement();
+
+                        writer.WriteStartElement("A_PRIJS");
+                        writer.WriteString(prijs);
+                        writer.WriteEndElement();
+
+                        writer.WriteStartElement("A_EENHEID");
+                        writer.WriteString(eenheid);
+                        writer.WriteEndElement();
+
+                        writer.WriteStartElement("A_TOTAAL");
+                        writer.WriteString(totaalAantal);
+                        writer.WriteEndElement();
+
+
                         writer.WriteString(orderLine.Trim());
                         writer.WriteEndElement();
                     }
                     writer.WriteEndElement();
 
-                    writer.WriteStartElement("Totaal");
+                    writer.WriteStartElement("O_TOTAAL");
                     writer.WriteString(totaal.ToString());
                     writer.WriteEndElement();
-                    writer.WriteStartElement("Orderinfo");
-                    writer.WriteStartElement("Factuur");
-                    writer.WriteStartElement("Betaalcondities");
+
+                    writer.WriteStartElement("factuur");
+
+                    writer.WriteStartElement("O_BETAALCONDITIES");
                     writer.WriteString(betaalcondities.ToString());
                     writer.WriteEndElement();
-                    writer.WriteStartElement("Factuuradres");
+                    
+                    writer.WriteStartElement("O_FACTUURADRES");
                     writer.WriteString(factuuradres.ToString());
                     writer.WriteEndElement();
-                    writer.WriteStartElement("StuurFactuurAan");
+                    
+                    writer.WriteStartElement("O_STUUR_FACTUUR_AAN");
                     writer.WriteString(stuurfactuuraan.ToString());
                     writer.WriteEndElement();
-                    writer.WriteStartElement("Levering");
+                    
+                    writer.WriteStartElement("O_LEVERING");
                     writer.WriteString(levering.ToString());
                     writer.WriteEndElement();
+
                     writer.WriteEndElement();
-                    writer.WriteEndDocument();
                 }
 
                 // Toon een berichtvenster dat het XML-bestand is gemaakt
