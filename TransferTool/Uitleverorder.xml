@@ -1,0 +1,56 @@
+<orders>
+	<order>
+		<stamgegevens>
+			<O_ALGEMEEN_OMSCHRIJVING>Externe bestelling 2-00506</O_ALGEMEEN_OMSCHRIJVING> 
+			<O_ALGEMEEN_klantnummer>529</O_ALGEMEEN_klantnummer> 'Het Prodist ERP klantnummer waaronder de order moet binnenkomen
+			<O_ALGEMEEN_REFERENTIEKLANT>2-000506</O_ALGEMEEN_REFERENTIEKLANT> 'Referntie klant extern bestelnummer
+			<O_ALGEMEEN_COMBIDRUK_MEMO/>
+			<O_ALGEMEEN_AFLEVERADRES>Carmen Coiffure
+t.a.v. S. Jansen
+Dam 4a
+2871CS Schoonhoven
+			</O_ALGEMEEN_AFLEVERADRES>
+			<o_algemeen_levering/> 'Eventueel memo levering
+			<isintern>2</isintern> 'vaste waarde
+			<Orderregistratie>%ordernummer%</Orderregistratie> 'vaste waarde
+			<Route>Standaard</Route> 'vaste waarde
+		</stamgegevens>
+		<artikelen>
+			<artikel>
+				<overwrite>1</overwrite>
+				<A_EXTERNEARTIKELCODE>STHRC250</A_EXTERNEARTIKELCODE> 'Artikelcode van het af te roepen artikel
+				<A_ALGEMEEN_aantal>1</A_ALGEMEEN_aantal> 
+				<A_ALGEMEEN_status>1</A_ALGEMEEN_status> 'vaste waarde
+				<A_ROUTE/>
+				<A_ORDERREGISTRATIE/>
+			</artikel>
+			<artikel>
+				<overwrite>1</overwrite>
+				<A_EXTERNEARTIKELCODE>STHRS250</A_EXTERNEARTIKELCODE>
+				<A_ALGEMEEN_definitief_aantal>1</A_ALGEMEEN_definitief_aantal>
+				<A_ALGEMEEN_aantal>1</A_ALGEMEEN_aantal>
+				<A_ALGEMEEN_status>1</A_ALGEMEEN_status>
+				<A_ROUTE/>
+				<A_ORDERREGISTRATIE/>
+			</artikel>
+			<artikel>
+				<overwrite>1</overwrite>
+				<A_EXTERNEARTIKELCODE>STHFE50</A_EXTERNEARTIKELCODE>
+				<A_ALGEMEEN_definitief_aantal>1</A_ALGEMEEN_definitief_aantal>
+				<A_ALGEMEEN_aantal>1</A_ALGEMEEN_aantal>
+				<A_ALGEMEEN_status>1</A_ALGEMEEN_status>
+				<A_ROUTE/>
+				<A_ORDERREGISTRATIE/>
+			</artikel>
+			<artikel>
+				<overwrite>1</overwrite>
+				<A_EXTERNEARTIKELCODE>STHMD100</A_EXTERNEARTIKELCODE>
+				<A_ALGEMEEN_definitief_aantal>1</A_ALGEMEEN_definitief_aantal>
+				<A_ALGEMEEN_aantal>1</A_ALGEMEEN_aantal>
+				<A_ALGEMEEN_status>1</A_ALGEMEEN_status>
+				<A_ROUTE/>
+				<A_ORDERREGISTRATIE/>
+			</artikel>
+		</artikelen>
+	</order>
+</orders>
