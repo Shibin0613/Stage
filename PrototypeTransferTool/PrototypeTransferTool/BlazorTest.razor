@@ -4,7 +4,6 @@
 
 <body>
     <h1>Upload jouw bestand hieronder</h1>
-    <br />
 
     <div class="uploadfile">
         <label>
@@ -15,7 +14,7 @@
                 <button @onclick="OpenDirectoryDialog">Selecteer map</button>
             </div>
 
-            <InputFile OnChange="UploadFile" accept=".pdf" multiple /><p>(Sleep je bestanden naar knop)</p>
+            <InputFile OnChange="UploadFile" accept="application/pdf" multiple /><p>(Sleep je bestanden naar knop)</p>
         </label>
     </div>
 

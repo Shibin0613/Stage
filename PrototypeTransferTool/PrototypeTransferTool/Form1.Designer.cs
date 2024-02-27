@@ -35,9 +35,8 @@
             // 
             blazorWebView1.Dock = DockStyle.Fill;
             blazorWebView1.Location = new Point(0, 0);
-            blazorWebView1.Margin = new Padding(3, 2, 3, 2);
             blazorWebView1.Name = "blazorWebView1";
-            blazorWebView1.Size = new Size(785, 533);
+            blazorWebView1.Size = new Size(897, 613);
             blazorWebView1.StartPath = "/";
             blazorWebView1.TabIndex = 0;
             blazorWebView1.Text = "blazorWebView1";
@@ -45,11 +44,10 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(785, 533);
+            ClientSize = new Size(897, 613);
             Controls.Add(blazorWebView1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
