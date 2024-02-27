@@ -28,7 +28,7 @@ namespace PrototypeTransferTool
             .Build();
         }
 
-        public static string FilePath 
+        public static string FilePath
         {
             get
             {
@@ -60,18 +60,22 @@ namespace PrototypeTransferTool
         {
             get
             { 
+                return null;
+            }
+            set 
+            {
                 StringBuilder text = new StringBuilder();
                 StringBuilder ordernummer = new StringBuilder();
                 StringBuilder hotelnaam = new StringBuilder();
                 StringBuilder aanvrager = new StringBuilder();
                 StringBuilder afleveradres = new StringBuilder();
                 StringBuilder leverancier = new StringBuilder();
-                StringBuilder orderdatum= new StringBuilder();
+                StringBuilder orderdatum = new StringBuilder();
                 StringBuilder valuta = new StringBuilder();
                 StringBuilder order = new StringBuilder();
                 StringBuilder opmerking = new StringBuilder();
                 StringBuilder totaal = new StringBuilder();
-                
+
                 StringBuilder betaalcondities = new StringBuilder();
                 StringBuilder factuuradres = new StringBuilder();
                 StringBuilder stuurfactuuraan = new StringBuilder();
@@ -141,7 +145,7 @@ namespace PrototypeTransferTool
                             leverancier.Append(Leverancier);
 
                             //Inkoopdatum op positie
-                            System.util.RectangleJ rectInkoopdatum= new System.util.RectangleJ(232.29f, 377.24f, 85.88f, 22f);
+                            System.util.RectangleJ rectInkoopdatum = new System.util.RectangleJ(232.29f, 377.24f, 85.88f, 22f);
                             RenderFilter[] filterInkoopdatum = { new RegionTextRenderFilter(rectInkoopdatum) };
                             ITextExtractionStrategy strategyInkoopdatum = new FilteredTextRenderListener(
                                 new LocationTextExtractionStrategy(), filterInkoopdatum);
@@ -161,7 +165,7 @@ namespace PrototypeTransferTool
                             //Opmerking
                             if (currentText.Contains("OPMERKING :  "))
                             {
-                                
+
                                 int opmerkingFrom = currentText.IndexOf("OPMERKING :  ") + "OPMERKING :  ".Length;
                                 int opmerkingTo = currentText.LastIndexOf("LIJN I REFERENTIE");
                                 string Opmerking = currentText.Substring(opmerkingFrom, opmerkingTo - opmerkingFrom).Replace("\n", "");
@@ -188,7 +192,7 @@ namespace PrototypeTransferTool
                                     order.Append(Order);
                                 }
                                 else
-                                { 
+                                {
                                     string[] eachOrderFrom = orderWithText.Split('\n');
                                     //Productinfo voor elk besteld product....
                                     foreach (string orderLine in eachOrderFrom)
@@ -220,7 +224,7 @@ namespace PrototypeTransferTool
                             int factuurAdresFrom = currentText.IndexOf("FACTUURADRES") + "FACTUURADRES".Length;
                             int factuurAdresTo = currentText.LastIndexOf("STUUR FACTUUR AAN");
                             string factuurAdres = currentText.Substring(factuurAdresFrom, factuurAdresTo - factuurAdresFrom).Replace("\n", "");
-                            
+
                             factuuradres.Append(factuurAdres);
 
                             //Stuur factuur aan
@@ -266,7 +270,7 @@ namespace PrototypeTransferTool
                     writer.WriteStartElement("O_AANVRAGER");
                     writer.WriteString(aanvrager.ToString());
                     writer.WriteEndElement();
-                    
+
                     writer.WriteStartElement("O_AFLEVERADRES");
                     writer.WriteString(afleveradres.ToString());
                     writer.WriteEndElement();
@@ -284,7 +288,7 @@ namespace PrototypeTransferTool
                     writer.WriteEndElement();
 
                     writer.WriteEndElement();
-                    
+
                     writer.WriteStartElement("Artikelen");
 
                     writer.WriteStartElement("A_OPMERKING");
@@ -315,8 +319,8 @@ namespace PrototypeTransferTool
                         string leverdatum = string.Empty;
                         string aantal = string.Empty;
                         string prijs = string.Empty;
-                        string eenheid= string.Empty;
-                        string totaalAantal= string.Empty;
+                        string eenheid = string.Empty;
+                        string totaalAantal = string.Empty;
                         //Check of de string na tweede spatie een cijfer bevat
                         if (Regex.IsMatch(referentieIndex, @"\d"))
                         {
@@ -341,7 +345,7 @@ namespace PrototypeTransferTool
                             int referentieFrom = orderLine.IndexOf(" ");
                             int referentieTo = orderLine.IndexOf(" ", referentieFrom + 1); // Zoek vanaf het karakter na het eerste spatie-teken
                             int derdeSpaceIndex = orderLine.IndexOf(" ", referentieTo + 1); // Zoek vanaf het karakter na de tweede spatie-teken
-                            
+
                             referentie = orderLine.Substring(referentieFrom + 1, derdeSpaceIndex - referentieFrom - 1).Trim();
                             nhMateriaalId = orderLine.Split(' ')[3];
 
@@ -402,15 +406,15 @@ namespace PrototypeTransferTool
                     writer.WriteStartElement("O_BETAALCONDITIES");
                     writer.WriteString(betaalcondities.ToString());
                     writer.WriteEndElement();
-                    
+
                     writer.WriteStartElement("O_FACTUURADRES");
                     writer.WriteString(factuuradres.ToString());
                     writer.WriteEndElement();
-                    
+
                     writer.WriteStartElement("O_STUUR_FACTUUR_AAN");
                     writer.WriteString(stuurfactuuraan.ToString());
                     writer.WriteEndElement();
-                    
+
                     writer.WriteStartElement("O_LEVERING");
                     writer.WriteString(levering.ToString());
                     writer.WriteEndElement();
@@ -420,8 +424,6 @@ namespace PrototypeTransferTool
 
                 // Toon een berichtvenster dat het XML-bestand is gemaakt
                 MessageBox.Show("XML-bestand is gemaakt op: " + xmlFilePath);
-
-                return text.ToString();
             }
         }
 
