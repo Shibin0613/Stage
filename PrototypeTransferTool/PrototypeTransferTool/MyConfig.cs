@@ -65,7 +65,9 @@ namespace PrototypeTransferTool
                 StringBuilder hotelnaam = new StringBuilder();
                 StringBuilder aanvrager = new StringBuilder();
                 StringBuilder afleveradres = new StringBuilder();
+                StringBuilder leverancier = new StringBuilder();
                 StringBuilder orderdatum= new StringBuilder();
+                StringBuilder valuta = new StringBuilder();
                 StringBuilder order = new StringBuilder();
                 StringBuilder opmerking = new StringBuilder();
                 StringBuilder totaal = new StringBuilder();
@@ -129,6 +131,15 @@ namespace PrototypeTransferTool
 
                             afleveradres.Append(Afleveradres);
 
+                            //Leverancier op positie
+                            System.util.RectangleJ rectLeverancier = new System.util.RectangleJ(622.25f, 410.88f, 158.40f, 108.71f);
+                            RenderFilter[] filterLeverancier = { new RegionTextRenderFilter(rectLeverancier) };
+                            ITextExtractionStrategy strategyLeverancier = new FilteredTextRenderListener(
+                                new LocationTextExtractionStrategy(), filterLeverancier);
+                            string Leverancier = PdfTextExtractor.GetTextFromPage(reader, i, strategyLeverancier);
+
+                            leverancier.Append(Leverancier);
+
                             //Inkoopdatum op positie
                             System.util.RectangleJ rectInkoopdatum= new System.util.RectangleJ(232.29f, 377.24f, 85.88f, 22f);
                             RenderFilter[] filterInkoopdatum = { new RegionTextRenderFilter(rectInkoopdatum) };
@@ -137,6 +148,15 @@ namespace PrototypeTransferTool
                             string Inkoopdatum = PdfTextExtractor.GetTextFromPage(reader, i, strategyInkoopdatum);
 
                             orderdatum.Append(Inkoopdatum);
+
+                            //Valuta op positie
+                            System.util.RectangleJ rectValuta = new System.util.RectangleJ(744.97f, 376.91f, 29.64f, 22f);
+                            RenderFilter[] filterValuta = { new RegionTextRenderFilter(rectValuta) };
+                            ITextExtractionStrategy strategyValuta = new FilteredTextRenderListener(
+                                new LocationTextExtractionStrategy(), filterValuta);
+                            string Valuta = PdfTextExtractor.GetTextFromPage(reader, i, strategyValuta);
+
+                            valuta.Append(Valuta);
 
                             //Opmerking
                             if (currentText.Contains("OPMERKING :  "))
@@ -192,7 +212,7 @@ namespace PrototypeTransferTool
                             //Betaalcondities
                             int betaalFrom = currentText.IndexOf("BETAALCONDITIES") + "BETAALCONDITIES".Length;
                             int betaalTo = currentText.LastIndexOf("FACTUURADRES");
-                            string betaalConditie = currentText.Substring(betaalFrom, betaalTo - betaalFrom).Replace("\n", "");
+                            string betaalConditie = currentText.Substring(betaalFrom, betaalTo - betaalFrom).Trim();
 
                             betaalcondities.Append(betaalConditie);
 
@@ -251,17 +271,25 @@ namespace PrototypeTransferTool
                     writer.WriteString(afleveradres.ToString());
                     writer.WriteEndElement();
 
+                    writer.WriteStartElement("O_LEVERANCIER");
+                    writer.WriteString(leverancier.ToString());
+                    writer.WriteEndElement();
+
                     writer.WriteStartElement("O_INKOOP_ORDER_DATUM");
                     writer.WriteString(orderdatum.ToString());
                     writer.WriteEndElement();
-                    
-                    writer.WriteStartElement("O_OPMERKING");
-                    writer.WriteString(opmerking.ToString());
+
+                    writer.WriteStartElement("O_VALUTA");
+                    writer.WriteString(valuta.ToString());
                     writer.WriteEndElement();
 
                     writer.WriteEndElement();
                     
                     writer.WriteStartElement("Artikelen");
+
+                    writer.WriteStartElement("A_OPMERKING");
+                    writer.WriteString(opmerking.ToString());
+                    writer.WriteEndElement();
 
                     //In Orders elke order een nieuwe element 'Order' creeren
                     string[] eachOrderFrom = order.ToString().Split("Order", StringSplitOptions.RemoveEmptyEntries);
@@ -289,8 +317,10 @@ namespace PrototypeTransferTool
                         string prijs = string.Empty;
                         string eenheid= string.Empty;
                         string totaalAantal= string.Empty;
+                        //Check of de string na tweede spatie een cijfer bevat
                         if (Regex.IsMatch(referentieIndex, @"\d"))
                         {
+                            //Zo ja, dan is die de referentie
                             referentie = referentieIndex;
                             nhMateriaalId = orderLine.Split(' ')[2];
 
@@ -307,6 +337,7 @@ namespace PrototypeTransferTool
                         }
                         else
                         {
+                            //zo niet, dan komt voor de cijfers nog een toevoeging
                             int referentieFrom = orderLine.IndexOf(" ");
                             int referentieTo = orderLine.IndexOf(" ", referentieFrom + 1); // Zoek vanaf het karakter na het eerste spatie-teken
                             int derdeSpaceIndex = orderLine.IndexOf(" ", referentieTo + 1); // Zoek vanaf het karakter na de tweede spatie-teken
@@ -323,8 +354,6 @@ namespace PrototypeTransferTool
                             int materiaalOmschrijvingFrom = orderLine.IndexOf(nhMateriaalId) + nhMateriaalId.Length;
                             int materiaalOmschrijvingTo = orderLine.IndexOf(leverdatum);
                             materiaalOmschrijving = orderLine.Substring(materiaalOmschrijvingFrom, materiaalOmschrijvingTo - materiaalOmschrijvingFrom).Trim();
-
-
                         }
                         writer.WriteStartElement("A_REFERENTIE");
                         writer.WriteString(referentie);
