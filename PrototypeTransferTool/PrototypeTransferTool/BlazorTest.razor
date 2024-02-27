@@ -56,15 +56,13 @@
         foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
         {
             string fileName = System.IO.Path.GetFileName(file.Name);
+            
             string destinationPath = System.IO.Path.Combine(filePath, fileName);
 
-            try
+            using (var memoryStream = new MemoryStream())
             {
-                await using (FileStream fs = new(destinationPath, FileMode.Create))
-                {
-                    await file.OpenReadStream().CopyToAsync(fs);
-                }
-
+                await file.OpenReadStream().CopyToAsync(memoryStream);
+                memoryStream.Seek(0, SeekOrigin.Begin);
 
                 //Uitlezen van de gegevens vanuit PDF
                 StringBuilder text = new StringBuilder();
@@ -84,7 +82,7 @@
                 StringBuilder stuurfactuuraan = new StringBuilder();
                 StringBuilder levering = new StringBuilder();
 
-                using (PdfReader reader = new PdfReader(destinationPath))
+                using (PdfReader reader = new PdfReader(memoryStream))
                 {
                     for (int i = 1; i <= reader.NumberOfPages; i++)
                     {
@@ -427,16 +425,9 @@
 
                     writer.WriteEndElement();
                 }
-                File.Delete(destinationPath);
-
-                // Toon een berichtvenster dat het XML-bestand is gemaakt
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error met het uploaden van de bestand '{file.Name}': {ex.Message}");
             }
         }
+        // Toon een berichtvenster dat het XML-bestand is gemaakt
         MessageBox.Show("PDF-bestand is omgezet naar XML-bestand");
 
         isLoading = false;

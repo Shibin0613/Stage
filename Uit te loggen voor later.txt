@@ -3,3 +3,5 @@ Gmail.com
 chatgpt
 outlook
 frieseportaal
+Github
+Stage map
