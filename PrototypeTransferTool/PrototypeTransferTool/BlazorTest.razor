@@ -5,7 +5,7 @@
 <body>
     <h1>Upload jouw bestand hieronder</h1>
 
-    <div class="uploadfile">
+    <div class="uploadfile" id="uploadDropzone">
         <label>
             <img src="images/uploadImage.png" class="img" />
             <div>
@@ -26,6 +26,31 @@
     {
         <p>Upload klaar!</p>
     }
+    <script>
+        window.initializeDragAndDrop = () => {
+            const dropzone = document.getElementById('uploadDropzone');
+
+            dropzone.addEventListener('dragover', (event) => {
+                event.preventDefault();
+                dropzone.classList.add('dragover');
+            });
+
+            dropzone.addEventListener('dragleave', () => {
+                dropzone.classList.remove('dragover');
+            });
+
+            dropzone.addEventListener('drop', (event) => {
+                event.preventDefault();
+                dropzone.classList.remove('dragover');
+
+                const files = event.dataTransfer.files;
+
+                const inputFiles = document.querySelector('input[type="file"]');
+                inputFiles.files = files;
+                inputFiles.dispatchEvent(new Event('change'));
+            });
+        };
+    </script>
 </body>
 
 @code {
@@ -33,6 +58,14 @@
     private bool loadingFinish;
     private int maxAllowedFiles = 10;
     private string customFilePath = MyConfig.FilePath;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initializeDragAndDrop");
+        }
+    }
 
     private async Task OpenDirectoryDialog()
     {
@@ -454,11 +487,11 @@
         //Show message
         if (fileIsAccepted.Length != 0)
         {
-            MessageBox.Show(fileIsAccepted + " is/zijn wel geaccepteerd en omgezet naar XML bestanden");
+            MessageBox.Show(fileIsAccepted.Replace(".PDF", ".PDF, ").Replace(".pdf", ".PDF, ").Remove(fileIsAccepted.Length-2, 1) + "is/zijn wel geaccepteerd en omgezet naar XML bestanden");
         }
         if(fileNotAccepted.Length != 0)
         {
-            MessageBox.Show(fileNotAccepted + " is/zijn niet geaccpteerd, upload een geldig PDF bestand!");
+            MessageBox.Show(fileNotAccepted.Replace(".PDF", ".PDF, ").Replace(".pdf", ".PDF, ") + "is/zijn niet geaccpteerd, upload een geldig PDF bestand!");
         }
 
         isLoading = false;

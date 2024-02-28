@@ -124,3 +124,5 @@ C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Deb
 C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Debug\net8.0-windows\PrototypeTransferTool.pdb
 C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Debug\net8.0-windows\PrototypeTransferTool.genruntimeconfig.cache
 C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Debug\net8.0-windows\ref\PrototypeTransferTool.dll
+C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll
+C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll
