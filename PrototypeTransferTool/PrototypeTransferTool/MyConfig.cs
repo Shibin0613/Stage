@@ -421,7 +421,6 @@ namespace PrototypeTransferTool
 
                     writer.WriteEndElement();
                 }
-
                 // Toon een berichtvenster dat het XML-bestand is gemaakt
                 MessageBox.Show("XML-bestand is gemaakt op: " + xmlFilePath);
             }
