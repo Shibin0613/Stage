@@ -71,7 +71,9 @@ namespace PrototypeTransferTool
             {
                 fileIsAccepted.Append(fileName);
 
-                using (FileStream fileStream = File.Open(destinationPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                await Task.Delay(500);
+
+                using (FileStream fileStream = new FileStream(destinationPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
                     using (var memoryStream = new MemoryStream())
                     {
@@ -447,7 +449,9 @@ namespace PrototypeTransferTool
                                 writer.WriteEndElement();
                             }
                         }
+                        memoryStream.Close();
                     }
+                    fileStream.Close();
                 }
             }
             else
