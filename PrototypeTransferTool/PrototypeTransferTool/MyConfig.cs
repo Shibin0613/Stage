@@ -21,6 +21,8 @@ namespace PrototypeTransferTool
     {
         private static IConfiguration? _configuration;
 
+        public static event EventHandler FilePathUpdated;
+
         public static void InitConfig()
         {
             _configuration = new ConfigurationBuilder()
@@ -44,9 +46,10 @@ namespace PrototypeTransferTool
                 var json = JsonSerializer.Serialize(new { FileStorage = value });
                 try
                 {
-                    File.WriteAllText("../../../appsettings.json", json);
+                    File.WriteAllText("appsettings.json", json);
                     // Update configuration after writing to appsettings.json
                     InitConfig(); // Reset configuration after updating appsettings.json
+                    OnFilePathUpdated();
                 }
                 catch (Exception ex)
                 {
@@ -54,6 +57,12 @@ namespace PrototypeTransferTool
                     Console.WriteLine($"Er is een fout opgetreden bij het bijwerken van appsettings.json: {ex.Message}");
                 }
             }
+        }
+
+        private static void OnFilePathUpdated()
+        {
+            // Raise the event to inform subscribers
+            FilePathUpdated?.Invoke(null, EventArgs.Empty);
         }
 
         public static string GetTextFromPDF

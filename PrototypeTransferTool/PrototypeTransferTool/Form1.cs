@@ -18,6 +18,7 @@ namespace PrototypeTransferTool
         FileSystemWatcher watcher;
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private bool isWatching;
+        
         public Form1()
         {
             InitializeComponent();
@@ -29,6 +30,8 @@ namespace PrototypeTransferTool
             blazorWebView1.HostPage = "wwwroot\\index.html";
             blazorWebView1.Services = services.BuildServiceProvider();
             blazorWebView1.RootComponents.Add<BlazorTest>("#app");
+            // Subscribe to FilePathUpdated event
+            MyConfig.FilePathUpdated += MyConfig_FilePathUpdated;
             startWatching();
         }
 
@@ -51,6 +54,18 @@ namespace PrototypeTransferTool
             watcher.Created += new FileSystemEventHandler(OnCreated);
 
             watcher.EnableRaisingEvents = true;
+        }
+
+        private void MyConfig_FilePathUpdated(object sender, EventArgs e)
+        {
+            RestartWatching();
+        }
+
+        private void RestartWatching()
+        {
+            watcher.EnableRaisingEvents = false;
+            watcher.Dispose();
+            startWatching();
         }
 
         private async void OnCreated(object sender, FileSystemEventArgs e)
