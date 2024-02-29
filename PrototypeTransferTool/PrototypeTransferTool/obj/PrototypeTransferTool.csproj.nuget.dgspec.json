@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\PrototypeTransferTool.csproj": {}
+    "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\PrototypeTransferTool.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\PrototypeTransferTool.csproj": {
+    "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\PrototypeTransferTool.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\PrototypeTransferTool.csproj",
+        "projectUniqueName": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\PrototypeTransferTool.csproj",
         "projectName": "PrototypeTransferTool",
-        "projectPath": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\PrototypeTransferTool.csproj",
-        "packagesPath": "C:\\Users\\Stage\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\obj\\",
+        "projectPath": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\PrototypeTransferTool.csproj",
+        "packagesPath": "C:\\Users\\pansh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Stage\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pansh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "P9W3eyPAAvIIlHU7UcFbu78StAQ1vR9o32NfuoQXgAo=",
+  "Hash": "/83x8w8Zp6agVX0TyKnWS61bu0eHuVVhOEbtYTlyp+I=",
   "Source": "PrototypeTransferTool",
   "BasePath": "/",
   "Mode": "Root",
@@ -10,17 +10,17 @@
     {
       "Name": "PrototypeTransferTool\\wwwroot",
       "Source": "PrototypeTransferTool",
-      "ContentRoot": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\",
       "BasePath": "/",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\css\\app.css",
+      "Identity": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\css\\app.css",
       "SourceId": "PrototypeTransferTool",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/app.css",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\css\\app.css"
     },
     {
-      "Identity": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\css\\BlazorTest.css",
+      "Identity": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\css\\BlazorTest.css",
       "SourceId": "PrototypeTransferTool",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/BlazorTest.css",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot\\css\\BlazorTest.css"
     },
     {
-      "Identity": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\images\\uploadImage.png",
+      "Identity": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\images\\uploadImage.png",
       "SourceId": "PrototypeTransferTool",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "images/uploadImage.png",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\images\\uploadImage.png"
     },
     {
-      "Identity": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\index.html",
+      "Identity": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\index.html",
       "SourceId": "PrototypeTransferTool",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Stage\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "index.html",
       "AssetKind": "All",
