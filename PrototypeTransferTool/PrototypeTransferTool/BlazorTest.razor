@@ -313,7 +313,7 @@
                             writer.WriteStartElement("Order");
                             //Huidige PDF text
                             // Element dat de ORDER bevat
-                            writer.WriteStartElement("Huidige_PDFtext");
+                            writer.WriteStartElement("Huidige_Texten");
                             writer.WriteString(text.ToString());
                             writer.WriteEndElement();
                             //
@@ -451,8 +451,6 @@
                                 writer.WriteString(totaalAantal);
                                 writer.WriteEndElement();
 
-
-                                writer.WriteString(orderLine.Trim());
                                 writer.WriteEndElement();
                             }
                             writer.WriteEndElement();
