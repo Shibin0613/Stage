@@ -13,7 +13,7 @@
                 <input type="text" id="customPath" @bind="customFilePath" />
                 <button @onclick="OpenDirectoryDialog">Selecteer map</button>
             </div>
-            <InputFile id="fileInput" OnChange="UploadFile" accept="application/pdf" multiple /><p>(Sleep je bestanden naar knop)</p>
+            <InputFile id="fileInput" class="inputButton" OnChange="UploadFile" accept="application/pdf" multiple />
         </label>
     </div>
 
@@ -106,7 +106,7 @@
 
             if (fileExtension == ".PDF" || fileExtension == ".pdf") 
             {
-                fileIsAccepted.Append(fileName).Append(", ");
+                fileIsAccepted.Append(fileName);
 
                 using (var memoryStream = new MemoryStream())
                 {
@@ -484,17 +484,17 @@
             }
             else
             {
-                fileNotAccepted.Append(fileName).Append(", ");
+                fileNotAccepted.Append(fileName);
             }
         }
         //Show message
         if (fileIsAccepted.Length != 0)
         {
-            MessageBox.Show(fileIsAccepted + "is/zijn wel geaccepteerd en omgezet naar XML bestanden");
+            MessageBox.Show(fileIsAccepted.Replace(".pdf", ".pdf ").Replace(".PDF", ".PDF ") + "is/zijn wel geaccepteerd en omgezet naar XML bestanden");
         }
         if(fileNotAccepted.Length != 0)
         {
-            MessageBox.Show(fileNotAccepted + "is/zijn niet geaccpteerd, upload een geldig PDF bestand!");
+            MessageBox.Show(fileNotAccepted.Replace(".pdf", ".pdf ").Replace(".PDF", ".PDF ") + " is/zijn niet geaccpteerd, upload een geldig PDF bestand!");
         }
 
         isLoading = false;
