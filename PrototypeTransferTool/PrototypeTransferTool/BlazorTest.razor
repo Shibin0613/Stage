@@ -6,15 +6,14 @@
     <h1>Upload jouw bestand hieronder</h1>
 
     <div class="uploadfile" id="uploadDropzone">
-        <label>
+        <label for="fileInput">
             <img src="images/uploadImage.png" class="img" />
             <div>
                 <label for="customPath">Vul een pad in:</label>
                 <input type="text" id="customPath" @bind="customFilePath" />
                 <button @onclick="OpenDirectoryDialog">Selecteer map</button>
             </div>
-
-            <InputFile OnChange="UploadFile" accept="application/pdf" multiple /><p>(Sleep je bestanden naar knop)</p>
+            <InputFile id="fileInput" OnChange="UploadFile" accept="application/pdf" multiple /><p>(Sleep je bestanden naar knop)</p>
         </label>
     </div>
 
@@ -50,6 +49,13 @@
                 inputFiles.dispatchEvent(new Event('change'));
             });
         };
+
+        // Click event for the image
+        const img = dropzone.querySelector('img');
+        img.addEventListener('click', () => {
+            const fileInput = document.getElementById('fileInput');
+            fileInput.click(); // Trigger click event on file input
+        });
     </script>
 </body>
 
@@ -100,7 +106,7 @@
 
             if (fileExtension == ".PDF" || fileExtension == ".pdf") 
             {
-                fileIsAccepted.Append(fileName);
+                fileIsAccepted.Append(fileName).Append(", ");
 
                 using (var memoryStream = new MemoryStream())
                 {
@@ -480,17 +486,17 @@
             }
             else
             {
-                fileNotAccepted.Append(fileName);
+                fileNotAccepted.Append(fileName).Append(", ");
             }
         }
         //Show message
         if (fileIsAccepted.Length != 0)
         {
-            MessageBox.Show(fileIsAccepted.Replace(".PDF", ".PDF, ").Replace(".pdf", ".PDF, ").Remove(fileIsAccepted.Length-2, 1) + "is/zijn wel geaccepteerd en omgezet naar XML bestanden");
+            MessageBox.Show(fileIsAccepted + "is/zijn wel geaccepteerd en omgezet naar XML bestanden");
         }
         if(fileNotAccepted.Length != 0)
         {
-            MessageBox.Show(fileNotAccepted.Replace(".PDF", ".PDF, ").Replace(".pdf", ".PDF, ") + "is/zijn niet geaccpteerd, upload een geldig PDF bestand!");
+            MessageBox.Show(fileNotAccepted + "is/zijn niet geaccpteerd, upload een geldig PDF bestand!");
         }
 
         isLoading = false;
