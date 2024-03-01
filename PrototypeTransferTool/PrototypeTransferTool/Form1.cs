@@ -19,9 +19,6 @@ namespace PrototypeTransferTool
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private bool isWatching;
 
-        string defaultPath = "C:\\Windows";
-        string desiredPath = MyConfig.FilePath;
-
         public Form1()
         {
             InitializeComponent();
@@ -51,18 +48,8 @@ namespace PrototypeTransferTool
             timer.Interval = 500;
 
             watcher = new FileSystemWatcher();  
-
-            // Controleer of de gewenste map bestaat
-            if (Directory.Exists(desiredPath))
-            {
-                // Als de map bestaat, wijs deze toe aan watcher.Path
-                watcher.Path = desiredPath;
-            }
-            else
-            {
-                // Als de map niet bestaat, wijs de standaardmap toe aan watcher.Path
-                watcher.Path = defaultPath;
-            }
+            watcher.Path = MyConfig.FilePath;
+            
             watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName;
 
             watcher.Created += new FileSystemEventHandler(OnCreated);
