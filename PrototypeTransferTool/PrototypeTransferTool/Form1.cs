@@ -10,11 +10,46 @@ using iTextSharp.text.pdf.parser;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.ComponentModel.Design;
+using System.Text.Json;
 
 namespace PrototypeTransferTool
 {
     public partial class Form1 : Form
     {
+
+        private static IConfiguration? _configuration;
+
+        public static event EventHandler FilePathUpdated;
+
+        public static void InitConfiguration()
+        {
+            _configuration = new ConfigurationBuilder()
+            .AddJsonFile("coordinaties.json", optional: false, reloadOnChange: true)
+            .Build();
+        }
+
+        public static string check
+        {
+            get
+            {
+                var check = _configuration?.GetValue<string>("Check");
+                return check;
+            }
+            set
+            {
+                try
+                {
+                    // Update configuration after writing to coordinaties.json
+                    InitConfiguration(); // Reset configuration after updating coordinaties.json
+                }
+                catch (Exception ex)
+                {
+                    // Foutafhandeling - log de uitzondering of neem andere maatregelen
+                    Console.WriteLine($"Er is een fout opgetreden bij het bijwerken van appsettings.json: {ex.Message}");
+                }
+            }
+        }
+
         FileSystemWatcher watcher;
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private bool isWatching;
@@ -498,11 +533,23 @@ namespace PrototypeTransferTool
                     }
                     fileStream.Close();
                 }
+
+
+                if (!Directory.Exists(MyConfig.FilePath + "\\Submap"))
+                {
+                    DirectoryInfo test = Directory.CreateDirectory(MyConfig.FilePath + "\\Submap");
+                }
+                string sourcePath = destinationPath + "\\" + fileName;
+                File.Move(sourcePath, destinationPath + "\\Submap\\" + fileName);
+
+
+
             }
             else
             {
                 fileNotAccepted.Append(fileName);
             }
+
         }
     }
 }

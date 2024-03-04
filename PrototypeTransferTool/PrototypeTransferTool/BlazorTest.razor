@@ -65,6 +65,7 @@
     private bool loadingFinish;
     private int maxAllowedFiles = 10;
     private string customFilePath;
+    private string coordinaties = Form1.check;
     private string defaultFilePath = "C:\\Windows";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -335,7 +336,7 @@
                             writer.WriteStartDocument();
                             writer.WriteStartElement("Order");
                             //Huidige PDF text
-                            // Element dat de ORDER bevat
+                            //Element dat de ORDER bevat
                             writer.WriteStartElement("Huidige_Texten");
                             writer.WriteString(text.ToString());
                             writer.WriteEndElement();

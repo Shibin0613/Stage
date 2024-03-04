@@ -128,3 +128,5 @@ C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Deb
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll
 C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll
 C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll
+C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\coordinaties.Development.json
+C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\coordinaties.json
