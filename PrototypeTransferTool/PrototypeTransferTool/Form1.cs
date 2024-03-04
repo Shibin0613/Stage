@@ -20,7 +20,7 @@ namespace PrototypeTransferTool
         private bool isWatching;
 
         private string defaultPath = "C:\\Windows";
-        private string filePath = MyConfig.FilePath;
+        
 
         public Form1()
         {
@@ -51,7 +51,7 @@ namespace PrototypeTransferTool
             timer.Interval = 500;
 
             watcher = new FileSystemWatcher();
-
+            string filePath = MyConfig.FilePath;
             if (Directory.Exists(filePath))
             {
                 watcher.Path = filePath;
@@ -83,7 +83,7 @@ namespace PrototypeTransferTool
 
         private async void OnCreated(object sender, FileSystemEventArgs e)
         {
-
+            string destinationPath;
             //Bestanden die niet worden geaccepteerd worden uiteindelijk laten zien
             StringBuilder fileNotAccepted = new StringBuilder();
 
@@ -92,8 +92,16 @@ namespace PrototypeTransferTool
 
             string fileName = e.Name;
             string fileExtension = System.IO.Path.GetExtension(fileName);
-            
-            string destinationPath = MyConfig.FilePath + "\\" + fileName;
+
+            if (Directory.Exists(MyConfig.FilePath))
+            {
+                destinationPath = MyConfig.FilePath + "\\" + fileName;
+            }
+            else
+            { 
+                destinationPath = defaultPath + "\\" + fileName;
+            }
+
 
             if (fileExtension == ".PDF" || fileExtension == ".pdf")
             {
@@ -299,7 +307,16 @@ namespace PrototypeTransferTool
                             //overzetten als XML-bestand
                             var xmlFileextension = System.IO.Path.ChangeExtension(fileName, ".xml");
 
-                            string xmlFilePath = MyConfig.FilePath + "\\" + xmlFileextension; // Het pad naar het XML-bestand
+                            if (Directory.Exists(MyConfig.FilePath))
+                            {
+                                destinationPath = MyConfig.FilePath;
+                            }
+                            else
+                            {
+                                destinationPath = defaultPath;
+                            }
+
+                            string xmlFilePath = destinationPath + "\\" + xmlFileextension; // Het pad naar het XML-bestand
 
                             // Schrijf de geëxtraheerde tekst naar een XML-bestand
                             using (XmlWriter writer = XmlWriter.Create(xmlFilePath))

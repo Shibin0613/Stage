@@ -64,7 +64,8 @@
     private bool isLoading;
     private bool loadingFinish;
     private int maxAllowedFiles = 10;
-    private string customFilePath = MyConfig.FilePath;
+    private string customFilePath;
+    private string defaultFilePath = "C:\\Windows";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -74,13 +75,25 @@
         }
     }
 
+    protected override void OnInitialized()
+    {
+        customFilePath = MyConfig.FilePath;
+        if (Directory.Exists(customFilePath))
+        {
+            customFilePath = MyConfig.FilePath;
+        }
+        else
+        {
+            customFilePath = defaultFilePath;
+        }
+    }
+
     private async Task OpenDirectoryDialog()
     {
         string directoryPath = MyConfig.FilePath;
         if (Directory.Exists(customFilePath))
         {
             directoryPath = MyConfig.GetDirectory(customFilePath);
-
         }
         else
         {
