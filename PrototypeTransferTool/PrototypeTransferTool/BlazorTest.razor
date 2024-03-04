@@ -76,7 +76,16 @@
 
     private async Task OpenDirectoryDialog()
     {
-        string? directoryPath = MyConfig.GetDirectory(customFilePath);
+        string directoryPath = MyConfig.FilePath;
+        if (Directory.Exists(customFilePath))
+        {
+            directoryPath = MyConfig.GetDirectory(customFilePath);
+
+        }
+        else
+        {
+            directoryPath = MyConfig.GetDirectory("C:\\Windows");
+        }
 
         if (!string.IsNullOrEmpty(directoryPath))
         {

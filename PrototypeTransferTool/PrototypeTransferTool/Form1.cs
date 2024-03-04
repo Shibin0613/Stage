@@ -19,6 +19,9 @@ namespace PrototypeTransferTool
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private bool isWatching;
 
+        private string defaultPath = "C:\\Windows";
+        private string filePath = MyConfig.FilePath;
+
         public Form1()
         {
             InitializeComponent();
@@ -47,8 +50,17 @@ namespace PrototypeTransferTool
             timer.Start();
             timer.Interval = 500;
 
-            watcher = new FileSystemWatcher();  
-            watcher.Path = MyConfig.FilePath;
+            watcher = new FileSystemWatcher();
+
+            if (Directory.Exists(filePath))
+            {
+                watcher.Path = filePath;
+            }
+            else
+            {
+                watcher.Path = defaultPath;
+            }
+            
             
             watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName;
 
