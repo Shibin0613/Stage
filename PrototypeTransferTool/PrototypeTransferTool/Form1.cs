@@ -531,7 +531,7 @@ namespace PrototypeTransferTool
 
                 if (!Directory.Exists(MyConfig.FilePath + "\\Submap"))
                 {
-                    DirectoryInfo test = Directory.CreateDirectory(MyConfig.FilePath + "\\Submap");
+                    Directory.CreateDirectory(MyConfig.FilePath + "\\Submap");
                 }
                 string sourcePath = destinationPath + "\\" + fileName;
                 File.Move(sourcePath, destinationPath + "\\Submap\\" + fileName);
