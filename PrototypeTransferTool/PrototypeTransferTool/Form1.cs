@@ -12,6 +12,7 @@ using System.Xml;
 using System.ComponentModel.Design;
 using System.Text.Json;
 using System.Globalization;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PrototypeTransferTool
 {
@@ -275,12 +276,28 @@ namespace PrototypeTransferTool
                                         }
                                         else
                                         {
-                                            string[] eachOrderFrom = orderWithText.Split('\n');
-                                            //Productinfo voor elk besteld product....
-                                            foreach (string orderLine in eachOrderFrom)
+                                            orderWithText = orderWithText.Replace(" \n", " ");
+                                            // Regex-patroon om elk artikel te matchen
+                                            string pattern = @"(\d+)\s*(.*?)(?:\n|$)";
+
+                                            // Productinfo voor elk besteld product....
+                                            foreach (Match match in Regex.Matches(orderWithText, pattern))
                                             {
-                                                order.AppendLine("Order"); // Voeg het lijnnummer toe
-                                                order.AppendLine(orderLine); // Voeg de bestellijn toe
+                                                string lineNumber = match.Groups[1].Value + " "; // Het lijnnummer
+                                                string orderLine = match.Groups[2].Value; // De bestellijn
+
+                                                if (lineNumber.StartsWith("0"))
+                                                {
+                                                    order.Append(" " + lineNumber + orderLine);
+                                                }
+                                                else if (lineNumber.StartsWith("10") || lineNumber.StartsWith("20") || lineNumber.StartsWith("30") || lineNumber.StartsWith("40") || lineNumber.StartsWith("50") || lineNumber.StartsWith("60") || lineNumber.StartsWith("70") || lineNumber.StartsWith("80") || lineNumber.StartsWith("90") || lineNumber.StartsWith("100") || lineNumber.StartsWith("110") || lineNumber.StartsWith("120") || lineNumber.StartsWith("130") || lineNumber.StartsWith("140") || lineNumber.StartsWith("150") || lineNumber.StartsWith("160") || lineNumber.StartsWith("170") || lineNumber.StartsWith("180") || lineNumber.StartsWith("190") || lineNumber.StartsWith("200"))
+                                                {
+                                                    order.Append("Order" + lineNumber + orderLine);   
+                                                }
+                                                else
+                                                {
+                                                    order.Append(lineNumber + orderLine);
+                                                }
                                             }
                                         }
                                     }
