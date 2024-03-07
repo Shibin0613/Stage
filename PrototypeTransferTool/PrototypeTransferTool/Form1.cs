@@ -190,7 +190,7 @@ namespace PrototypeTransferTool
 
                                     hotelnaam.Append(hotelNaam);
 
-                                    //Leverancier op positie
+                                    //Hotelnaam test(from logo to text)
                                     System.util.RectangleJ rectHotelTest = new System.util.RectangleJ(90.65f, 501.46f, 149.78f, 64.64f);
                                     RenderFilter[] filterHotelTest = { new RegionTextRenderFilter(rectHotelTest) };
                                     ITextExtractionStrategy strategyHotelTest = new FilteredTextRenderListener(
@@ -265,9 +265,9 @@ namespace PrototypeTransferTool
                                         opmerking.Append(Opmerking);
                                     }
 
-                                    //Order
                                 }
 
+                                //Order(foreach fro page 1 to de laatste pagina)
                                 if (currentText.Contains("AANTAL PRIJS EENHEID TOTAAL"))
                                 {
                                     int orderFrom = currentText.IndexOf("AANTAL PRIJS EENHEID TOTAAL");
