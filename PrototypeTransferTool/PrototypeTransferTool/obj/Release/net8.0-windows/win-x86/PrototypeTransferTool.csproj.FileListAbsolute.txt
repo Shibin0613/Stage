@@ -520,3 +520,5 @@ C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Rel
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Release\net8.0-windows\win-x86\PrototypeTransferTool.pdb
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Release\net8.0-windows\win-x86\PrototypeTransferTool.genruntimeconfig.cache
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Release\net8.0-windows\win-x86\ref\PrototypeTransferTool.dll
+C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Release\net8.0-windows\win-x86\coordinaties.Development.json
+C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Release\net8.0-windows\win-x86\coordinaties.json
