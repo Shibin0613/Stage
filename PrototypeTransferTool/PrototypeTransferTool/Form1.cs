@@ -18,17 +18,7 @@ namespace PrototypeTransferTool
 {
     public partial class Form1 : Form
     {
-
-        private static IConfiguration? _configuration;
-
         public static event EventHandler FilePathUpdated;
-
-        public static void InitConfiguration()
-        {
-            _configuration = new ConfigurationBuilder()
-            .AddJsonFile("coordinaties.json", optional: false, reloadOnChange: true)
-            .Build();
-        }
 
         FileSystemWatcher watcher;
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
@@ -177,12 +167,7 @@ namespace PrototypeTransferTool
                                     ordernummer.Append(orderNumber);
 
                                     //Hotelnaam op position
-                                    float hotelNaamx = float.Parse(_configuration?.GetValue<string>("Hotelnaam:x"));
-                                    float hotelNaamy = float.Parse(_configuration?.GetValue<string>("Hotelnaam:y"));
-                                    float hotelNaamxy = float.Parse(_configuration?.GetValue<string>("Hotelnaam:xy"));
-                                    float hotelNaamyx = float.Parse(_configuration?.GetValue<string>("Hotelnaam:yx"));
-
-                                    System.util.RectangleJ rectHotelnaam = new System.util.RectangleJ(hotelNaamx, hotelNaamy, hotelNaamxy, hotelNaamyx);
+                                    System.util.RectangleJ rectHotelnaam = new System.util.RectangleJ(524.16f, 538.68f, 254.88f, 6.84f);
                                     RenderFilter[] filterHotelnaam = { new RegionTextRenderFilter(rectHotelnaam) };
                                     ITextExtractionStrategy strategyHotelnaam = new FilteredTextRenderListener(
                                         new LocationTextExtractionStrategy(), filterHotelnaam);
@@ -200,12 +185,7 @@ namespace PrototypeTransferTool
                                     hotelnaam.Append(HotelTest);
 
                                     //Aanvrager op positie
-                                    float Aanvragerx = float.Parse(_configuration?.GetValue<string>("Aanvrager:x"));
-                                    float Aanvragery = float.Parse(_configuration?.GetValue<string>("Aanvrager:y"));
-                                    float Aanvragerxy = float.Parse(_configuration?.GetValue<string>("Aanvrager:xy"));
-                                    float Aanvrageryx = float.Parse(_configuration?.GetValue<string>("Aanvrager:yx"));
-
-                                    System.util.RectangleJ rectAanvrager = new System.util.RectangleJ(Aanvragerx, Aanvragery, Aanvragerxy, Aanvrageryx);
+                                    System.util.RectangleJ rectAanvrager = new System.util.RectangleJ(255f, 438f, 152f, 78f);
                                     RenderFilter[] filterAanvrager = { new RegionTextRenderFilter(rectAanvrager) };
                                     ITextExtractionStrategy strategyAanvrager = new FilteredTextRenderListener(
                                         new LocationTextExtractionStrategy(), filterAanvrager);
@@ -214,12 +194,7 @@ namespace PrototypeTransferTool
                                     aanvrager.Append(Aanvrager);
 
                                     //Afleveradres op positie
-                                    float afleverAdresx = float.Parse(_configuration?.GetValue<string>("Afleveradres:x"));
-                                    float afleverAdresy = float.Parse(_configuration?.GetValue<string>("Afleveradres:y"));
-                                    float afleverAdresxy = float.Parse(_configuration?.GetValue<string>("Afleveradres:xy"));
-                                    float afleverAdresyx = float.Parse(_configuration?.GetValue<string>("Afleveradres:yx"));
-
-                                    System.util.RectangleJ rectAfleveradres = new System.util.RectangleJ(afleverAdresx, afleverAdresy, afleverAdresxy, afleverAdresyx);
+                                    System.util.RectangleJ rectAfleveradres = new System.util.RectangleJ(454.07f, 442.34f, 156.08f, 77.25f);
                                     RenderFilter[] filterAfleveradres = { new RegionTextRenderFilter(rectAfleveradres) };
                                     ITextExtractionStrategy strategyAfleveradres = new FilteredTextRenderListener(
                                         new LocationTextExtractionStrategy(), filterAfleveradres);

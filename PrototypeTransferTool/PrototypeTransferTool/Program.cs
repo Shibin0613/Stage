@@ -12,7 +12,6 @@ namespace PrototypeTransferTool
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             MyConfig.InitConfig();
-            Form1.InitConfiguration();
             Application.Run(new Form1());
         }
     }
