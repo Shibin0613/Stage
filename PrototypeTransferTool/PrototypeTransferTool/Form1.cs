@@ -35,7 +35,8 @@ namespace PrototypeTransferTool
         private bool isWatching;
 
         private string defaultPath = "C:\\Windows";
-        
+        private string filePath = MyConfig.FilePath;
+
 
         public Form1()
         {
@@ -66,7 +67,6 @@ namespace PrototypeTransferTool
             timer.Interval = 500;
 
             watcher = new FileSystemWatcher();
-            string filePath = MyConfig.FilePath;
             if (Directory.Exists(filePath))
             {
                 watcher.Path = filePath;
@@ -417,6 +417,7 @@ namespace PrototypeTransferTool
                             // Verwijder het bestand uit de lijst van geaccepteerde bestanden
                             fileNotAccepted.Append(fileName);
                             fileIsAccepted.Replace(fileName, "");
+                            return;
                         }
                         else
                         {
