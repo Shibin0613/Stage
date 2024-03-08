@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "d3FUi1jUB2L38DugZRy1wRLmjrSYfoiFfdNLNMCmi9HTlS0cKtAcVkTQFoJRZ3bAig+lLtx3tjtgKo/gkLtQfg==",
+  "dgSpecHash": "rYQDIVI7G2apIDrINQdyeYhRTUwhqvjYq1Gw5sTS4E5SXDXGZcTdKoMNw+RyhnZ57kgqAST80Ut0vdqvvZpWkw==",
   "success": true,
   "projectFilePath": "C:\\Users\\pansh\\Desktop\\Stage\\PrototypeTransferTool\\PrototypeTransferTool\\PrototypeTransferTool.csproj",
   "expectedPackageFiles": [
@@ -33,8 +33,10 @@
     "C:\\Users\\pansh\\.nuget\\packages\\microsoft.jsinterop\\8.0.0\\microsoft.jsinterop.8.0.0.nupkg.sha512",
     "C:\\Users\\pansh\\.nuget\\packages\\microsoft.web.webview2\\1.0.2151.40\\microsoft.web.webview2.1.0.2151.40.nupkg.sha512",
     "C:\\Users\\pansh\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512",
+    "C:\\Users\\pansh\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\pansh\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512"
+    "C:\\Users\\pansh\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
+    "C:\\Users\\pansh\\.nuget\\packages\\tesseract\\5.2.0\\tesseract.5.2.0.nupkg.sha512"
   ],
   "logs": [
     {

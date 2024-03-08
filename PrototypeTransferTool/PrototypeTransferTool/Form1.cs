@@ -13,6 +13,8 @@ using System.ComponentModel.Design;
 using System.Text.Json;
 using System.Globalization;
 using static System.Net.Mime.MediaTypeNames;
+using Tesseract;
+using Org.BouncyCastle.Crypto.Engines;
 
 namespace PrototypeTransferTool
 {
@@ -113,6 +115,18 @@ namespace PrototypeTransferTool
                 fileIsAccepted.Append(fileName);
 
                 await Task.Delay(500);
+
+                using (var engine = new TesseractEngine(fileName, "eng", EngineMode.Default))
+                {
+                    using (var img = Pix.LoadFromFile(destinationPath))
+                    {
+                        Tesseract.Rect region = new Tesseract.Rect(4120, 3215, 550, 840);
+                        using (var page = engine.Process(img, region, PageSegMode.SingleBlock))
+                        {
+                            var text = page.GetText();
+                        }
+                    }
+                }
 
                 using (FileStream fileStream = new FileStream(destinationPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
