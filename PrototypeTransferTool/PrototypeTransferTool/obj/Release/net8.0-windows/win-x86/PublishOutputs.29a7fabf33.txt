@@ -1,7 +1,7 @@
 C:\Users\pansh\Desktop\TransferToolPrototype\appsettings.Development.json
 C:\Users\pansh\Desktop\TransferToolPrototype\appsettings.json
-C:\Users\pansh\Desktop\TransferToolPrototype\coordinaties.Development.json
-C:\Users\pansh\Desktop\TransferToolPrototype\coordinaties.json
+C:\Users\pansh\Desktop\TransferToolPrototype\coordinates.Development.json
+C:\Users\pansh\Desktop\TransferToolPrototype\coordinates.json
 C:\Users\pansh\Desktop\TransferToolPrototype\PrototypeTransferTool.pdb
 C:\Users\pansh\Desktop\TransferToolPrototype\D3DCompiler_47_cor3.dll
 C:\Users\pansh\Desktop\TransferToolPrototype\PenImc_cor3.dll

@@ -65,8 +65,6 @@ C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Deb
 C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\appsettings.Development.json
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\appsettings.json
-C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\coordinaties.Development.json
-C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\coordinaties.json
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\PrototypeTransferTool.staticwebassets.runtime.json
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\PrototypeTransferTool.exe
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\PrototypeTransferTool.deps.json
@@ -130,3 +128,5 @@ C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Deb
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Debug\net8.0-windows\PrototypeTransferTool.pdb
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Debug\net8.0-windows\PrototypeTransferTool.genruntimeconfig.cache
 C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\obj\Debug\net8.0-windows\ref\PrototypeTransferTool.dll
+C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\coordinates.Development.json
+C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\coordinates.json
