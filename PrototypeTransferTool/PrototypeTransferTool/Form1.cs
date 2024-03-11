@@ -13,8 +13,8 @@ using System.ComponentModel.Design;
 using System.Text.Json;
 using System.Globalization;
 using static System.Net.Mime.MediaTypeNames;
-using Tesseract;
-using Org.BouncyCastle.Crypto.Engines;
+
+using IronOcr;
 
 namespace PrototypeTransferTool
 {
@@ -116,17 +116,24 @@ namespace PrototypeTransferTool
 
                 await Task.Delay(500);
 
-                using (var engine = new TesseractEngine(fileName, "eng", EngineMode.Default))
-                {
-                    using (var img = Pix.LoadFromFile(destinationPath))
-                    {
-                        Tesseract.Rect region = new Tesseract.Rect(4120, 3215, 550, 840);
-                        using (var page = engine.Process(img, region, PageSegMode.SingleBlock))
-                        {
-                            var text = page.GetText();
-                        }
-                    }
-                }
+                var ocrTesseract = new IronTesseract();
+
+                using var ocrInput = new OcrInput();
+
+                // OCR entire document
+                ocrInput.LoadPdf(destinationPath);
+
+                int[] pages = { 1 };
+
+                // Alternatively OCR selected page numbers
+                ocrInput.LoadPdfPages(destinationPath, pages);
+
+                var ocrResult = ocrTesseract.Read(ocrInput);
+                string[] regels = ocrResult.Text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+                // Extracting the first line of OCR result
+                string eersteRegel = regels[0];
+
 
                 using (FileStream fileStream = new FileStream(destinationPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
