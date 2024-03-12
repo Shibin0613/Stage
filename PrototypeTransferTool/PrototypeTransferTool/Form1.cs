@@ -15,6 +15,7 @@ using System.Globalization;
 using static System.Net.Mime.MediaTypeNames;
 
 using IronOcr;
+using IronSoftware.Drawing;
 
 namespace PrototypeTransferTool
 {
@@ -28,6 +29,15 @@ namespace PrototypeTransferTool
 
         private string defaultPath = "C:\\Windows";
         private string filePath = MyConfig.FilePath;
+
+        private static IConfiguration? _configuration;
+
+        public static void InitConfiguration()
+        {
+            _configuration = new ConfigurationBuilder()
+            .AddJsonFile("coordinates.json", optional: false, reloadOnChange: true)
+            .Build();
+        }
 
 
         public Form1()
@@ -116,23 +126,40 @@ namespace PrototypeTransferTool
 
                 await Task.Delay(500);
 
+                /*IronOcr.License.LicenseKey = "IRONSUITE.PANSHIBIN2000.GMAIL.COM.6799-D952B7C35B-HIS2LNFKLAETZL-BSPP5ILTOXWQ-TO6GZZURKZO3-ETE3GH5RKKW7-MBITYNRGEAQU-K572IH7OX2TR-74OOZQ-TOCCISUUENGMEA-DEPLOYMENT.TRIAL-4X5BKH.TRIAL.EXPIRES.11.APR.2024";
+
+                //Hotelnaam defineren vanuit het logo gebruik gemaakt met IronOCR
                 var ocrTesseract = new IronTesseract();
 
-                using var ocrInput = new OcrInput();
+                IronSoftware.Drawing.Rectangle[] scanRegions = { new IronSoftware.Drawing.Rectangle(550, 100, 600, 300) };
 
-                // OCR entire document
-                ocrInput.LoadPdf(destinationPath);
+                using var ocrInput = new OcrPdfInput(destinationPath, ContentAreas: scanRegions);
 
-                int[] pages = { 1 };
-
-                // Alternatively OCR selected page numbers
-                ocrInput.LoadPdfPages(destinationPath, pages);
+                ocrInput.Binarize();
 
                 var ocrResult = ocrTesseract.Read(ocrInput);
                 string[] regels = ocrResult.Text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
                 // Extracting the first line of OCR result
                 string eersteRegel = regels[0];
+
+                if (eersteRegel.Contains("NH"))
+                {
+                    _configuration?.GetValue<string>("NH");
+                    //Aan het begin wordt een validatie gedaan bij welke structuur hij moet meenemen
+                    //Dan is het de bedoeling dat hij die structuur pakt. Als hij niks kan vinden, dan slaat hij het proces over
+                }
+                else
+                {
+                    if (!Directory.Exists(MyConfig.FilePath + "\\Afgewezen"))
+                    {
+                        Directory.CreateDirectory(MyConfig.FilePath + "\\Afgewezen");
+                    }
+                    string failedSourcePath = MyConfig.FilePath + "\\" + fileName;
+                    File.Move(failedSourcePath, MyConfig.FilePath + "\\Afgewezen\\" + fileName);
+
+                    return;
+                }*/
 
 
                 using (FileStream fileStream = new FileStream(destinationPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -408,12 +435,17 @@ namespace PrototypeTransferTool
                                 }
                             }
                         }
+
                         if (!hotelnaam.ToString().Contains("NH"))
                         {
-                            // Verwijder het bestand uit de lijst van geaccepteerde bestanden
-                            fileNotAccepted.Append(fileName);
-                            fileIsAccepted.Replace(fileName, "");
-                            return;
+                            memoryStream.Close();
+                            fileStream.Close();
+                            if (!Directory.Exists(MyConfig.FilePath + "\\Afgewezen"))
+                            {
+                                Directory.CreateDirectory(MyConfig.FilePath + "\\Afgewezen");
+                            }
+                            string failedSourcePath = MyConfig.FilePath + "\\" + fileName;
+                            File.Move(failedSourcePath, MyConfig.FilePath + "\\Afgewezen\\" + fileName);
                         }
                         else
                         {
@@ -606,20 +638,19 @@ namespace PrototypeTransferTool
 
                                 writer.WriteEndElement();
                             }
+
+                            memoryStream.Close();
+                            fileStream.Close();
+                            if (!Directory.Exists(MyConfig.FilePath + "\\Verwerkt"))
+                            {
+                                Directory.CreateDirectory(MyConfig.FilePath + "\\Verwerkt");
+                            }
+                            string sourcePath = MyConfig.FilePath + "\\" + fileName;
+                            File.Move(sourcePath, MyConfig.FilePath + "\\Verwerkt\\" + fileName);
+
                         }
-                        memoryStream.Close();
                     }
-                    fileStream.Close();
                 }
-
-
-                if (!Directory.Exists(MyConfig.FilePath + "\\Submap"))
-                {
-                    Directory.CreateDirectory(MyConfig.FilePath + "\\Submap");
-                }
-                string sourcePath = destinationPath + "\\" + fileName;
-                File.Move(sourcePath, destinationPath + "\\Submap\\" + fileName);
-
             }
             else
             {
