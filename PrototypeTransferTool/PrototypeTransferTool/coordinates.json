@@ -1,59 +1,59 @@
 {
-  "NH": {
-    "Hotelnaam_x": "524,16",
-    "Hotelnaam_y": "538,68",
-    "Hotelnaam_xy": "254,88",
-    "Hotelnaam_yx": "6,84",
+  {
+  "Hotelnaam_x": "524,16",
+  "Hotelnaam_y": "538,68",
+  "Hotelnaam_xy": "254,88",
+  "Hotelnaam_yx": "6,84",
 
-    "Ordernumber_From": "INKOOP ORDER NUMMER ",
-    "Ordernumber_To": "INKOOP ORDER DATUM EXCLUSIEF",
-    
-    "Aanvrager_x": "255",
-    "Aanvrager_y": "438",
-    "Aanvrager_xy": "152",
-    "Aanvrager_yx": "78",
-    
-    "Afleveradres_x": "454,07",
-    "Afleveradres_y": "442,34",
-    "Afleveradres_xy": "156,08",
-    "Afleveradres_yx": "77,25",
-    
-    "Leverancier_x": "622,25",
-    "Leverancier_y": "410,88",
-    "Leverancier_xy": "158,40",
-    "Leverancier_yx": "108,71",
-    
-    "Inkoopdatum_x": "232,29",
-    "Inkoopdatum_y": "377,24",
-    "Inkoopdatum_xy": "85,88",
-    "Inkoopdatum_yx": "22",
-    
-    "Valuta_x": "744,97",
-    "Valuta_y": "376,91",
-    "Valuta_xy": "29,64",
-    "Valuta_yx": "22",
-    
-    "Opmerking_From": "OPMERKING :  ",
-    "Opmerking_TO": "LIJN I REFERENTIE",
-    
-    "Order_From": "AANTAL PRIJS EENHEID TOTAAL",
-    "Order_TO": "TOTAAL",
-    
-    "Totaalbedrag_From": "TOTAAL ",
-    "Totaalbedrag_TO": " EUR",
-    
-    "Betaalcondities_From": "BETAALCONDITIES",
-    "Betaalcondities_TO": "FACTUURADRES",
-    
-    "FactuurAdres_From": "FACTUURADRES",
-    "FactuurAdres_TO": "STUUR FACTUUR AAN",
-    
-    "StuurFactuurAan_From": "STUUR FACTUUR AAN",
-    "StuurFactuurAan_TO": "LEVERING",
-    
-    "Levering_From": "LEVERING",
-    "Levering_TO": "TOTAAL"
-  },
+  "Ordernumber_From": "INKOOP ORDER NUMMER ",
+  "Ordernumber_To": "INKOOP ORDER DATUM EXCLUSIEF",
+
+  "Aanvrager_x": "255",
+  "Aanvrager_y": "438",
+  "Aanvrager_xy": "152",
+  "Aanvrager_yx": "78",
+
+  "Afleveradres_x": "454,07",
+  "Afleveradres_y": "442,34",
+  "Afleveradres_xy": "156,08",
+  "Afleveradres_yx": "77,25",
+
+  "Leverancier_x": "622,25",
+  "Leverancier_y": "410,88",
+  "Leverancier_xy": "158,40",
+  "Leverancier_yx": "108,71",
+
+  "Inkoopdatum_x": "232,29",
+  "Inkoopdatum_y": "377,24",
+  "Inkoopdatum_xy": "85,88",
+  "Inkoopdatum_yx": "22",
+
+  "Valuta_x": "744,97",
+  "Valuta_y": "376,91",
+  "Valuta_xy": "29,64",
+  "Valuta_yx": "22",
+
+  "Opmerking_From": "OPMERKING :  ",
+  "Opmerking_TO": "LIJN I REFERENTIE",
+
+  "Order_From": "AANTAL PRIJS EENHEID TOTAAL",
+  "Order_TO": "TOTAAL",
+
+  "Totaalbedrag_From": "TOTAAL ",
+  "Totaalbedrag_TO": " EUR",
+
+  "Betaalcondities_From": "BETAALCONDITIES",
+  "Betaalcondities_TO": "FACTUURADRES",
+
+  "FactuurAdres_From": "FACTUURADRES",
+  "FactuurAdres_TO": "STUUR FACTUUR AAN",
+
+  "StuurFactuurAan_From": "STUUR FACTUUR AAN",
+  "StuurFactuurAan_TO": "LEVERING",
+
+  "Levering_From": "LEVERING",
+  "Levering_TO": "TOTAAL"
+},
   "HotelB": {
     // Coördinaten voor Hotel B
   },
