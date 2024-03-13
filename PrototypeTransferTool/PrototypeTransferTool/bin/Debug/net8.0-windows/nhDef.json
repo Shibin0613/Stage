@@ -1,0 +1,32 @@
+{
+    "defObjects": [{
+        "Position": {
+            "X": 524.16,
+            "Y": 538.68,
+            "Z": 254.88,
+            "W": 6.84
+        },
+        "Text": {
+            "From": "",
+            "To": ""
+        },
+        "TagNaam": "KLANTNUMMER",
+        "XmlNiveau": 0,
+        "Value": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "INKOOP ORDER NUMMER ",
+            "To": "INKOOP ORDER DATUM EXCLUSIEF"
+        },
+        "TagNaam": "ORDERNUMMER",
+        "XmlNiveau": 0,
+        "Value": null
+    }],
+    "IdentifierText": ["NH", "Hotels"]
+}

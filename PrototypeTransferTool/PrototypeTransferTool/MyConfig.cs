@@ -53,7 +53,8 @@ namespace PrototypeTransferTool
 
         internal string GetValue(PdfReader reader, string currentText, int i)
         {
-            throw new NotImplementedException();
+
+            return currentText;
         }
     }
 
@@ -84,7 +85,7 @@ namespace PrototypeTransferTool
 
         public static event EventHandler FilePathUpdated;
 
-        public static List<pdfDefinition> pdfDefinitions { get; set; }  
+        public static List<pdfDefinition> pdfDefinitions { get; set; }
 
         public static void InitConfig()
         {
@@ -93,7 +94,7 @@ namespace PrototypeTransferTool
             .Build();
 
             var def = new pdfDefinition();
-            def.defObjects = new List<defObject>();
+            /*def.defObjects = new List<defObject>();
 
             var defObj = new defObject();
             defObj.TagNaam = "KLANTNUMMER";
@@ -111,18 +112,21 @@ namespace PrototypeTransferTool
 
             def.defObjects.Add(defObj);
 
-            JsonHelpers.WriteToJsonFile(def, "c:\\def1.json");
+            def.IdentifierText = new List<string>();
+            def.IdentifierText.Add("NH");
+            def.IdentifierText.Add("Hotels");
 
+            JsonHelpers.WriteToJsonFile(def, "../../../nhDef.json");*/
 
-            var def1 = JsonHelpers.ReadFromJsonFile<pdfDefinition>("c:\\def1.json");
+            var def1 = JsonHelpers.ReadFromJsonFile<pdfDefinition>("../../../nhDef.json");
 
             var s = def1.IdentifierText;
-
-
         }
-
+        
         public static pdfDefinition? GetDefinition(string text)
         {
+            ReadDefinitions();
+            WriteDefinitions();
             return pdfDefinitions?.Find(pdfDefinition => text.ContainsText(pdfDefinition.IdentifierText));
         }
 
@@ -159,16 +163,17 @@ namespace PrototypeTransferTool
         {
             pdfDefinitions = new List<pdfDefinition>();
             // loop files
-            //var def = JsonHelpers.ReadFromJsonFile<pdfDefinition>(file);
+            var def = JsonHelpers.ReadFromJsonFile<pdfDefinition>("../../../nhDef.json");
 
-            //pdfDefinitions.Add(def);
-            // einde loop
+            pdfDefinitions.Add(def);
+            //endloop
+            
         }
         private static void WriteDefinitions()
         {
             pdfDefinitions.ForEach(pdfDefinition =>
             {
-                var file = "";
+                var file = "../../../nhDef.json";
                 JsonHelpers.WriteToJsonFile(pdfDefinition, file);
             });
         }

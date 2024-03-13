@@ -198,3 +198,4 @@ C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Deb
 C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\runtimes\win-x86\native\osd.traineddata
 C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\runtimes\win-x86\native\pdf.ttf
 C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\runtimes\win-x86\native\pdf.ttx
+C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\bin\Debug\net8.0-windows\nhDef.json

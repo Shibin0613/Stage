@@ -15,19 +15,19 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PrototypeTransferTool
 build_property.RootNamespace = PrototypeTransferTool
-build_property.ProjectDir = C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\
+build_property.ProjectDir = C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Stage\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool
+build_property.MSBuildProjectDirectory = C:\Users\pansh\Desktop\Stage\PrototypeTransferTool\PrototypeTransferTool
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Stage/Desktop/Stage/PrototypeTransferTool/PrototypeTransferTool/BlazorTest.razor]
+[C:/Users/pansh/Desktop/Stage/PrototypeTransferTool/PrototypeTransferTool/BlazorTest.razor]
 build_metadata.AdditionalFiles.TargetPath = Qmxhem9yVGVzdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Stage/Desktop/Stage/PrototypeTransferTool/PrototypeTransferTool/_Imports.razor]
+[C:/Users/pansh/Desktop/Stage/PrototypeTransferTool/PrototypeTransferTool/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

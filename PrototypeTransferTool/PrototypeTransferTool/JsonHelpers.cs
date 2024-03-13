@@ -12,7 +12,6 @@ namespace PrototypeTransferTool
     public static class JsonHelpers
 
     {
-
         // voor de encrypt\decrypt
 
         static readonly string encryptionKey = "IwHt2Hc0WRPOnJpVX7cvNw==";
@@ -20,6 +19,14 @@ namespace PrototypeTransferTool
         public static bool ContainsText(this string text, List<string> toSearch)
         {
             bool result = true;
+
+            foreach (string CheckEachText in toSearch)
+            {
+                if (CheckEachText.Contains(text))
+                { 
+                    result = false;
+                }
+            }
             // afmaken 
             // loop door de array toSeach en kijk of die text in 'text'staat
             return result;

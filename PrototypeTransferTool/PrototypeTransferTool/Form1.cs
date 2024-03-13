@@ -187,7 +187,7 @@ namespace PrototypeTransferTool
                         StringBuilder stuurfactuuraan = new StringBuilder();
                         StringBuilder levering = new StringBuilder();
 
-                        pdfDefinition def =null;
+                        pdfDefinition def = null;
                         xmlOrder xmlOrder = new xmlOrder();
 
                         using (PdfReader reader = new PdfReader(memoryStream))
@@ -205,7 +205,7 @@ namespace PrototypeTransferTool
                                 ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
 
                                 string currentText = PdfTextExtractor.GetTextFromPage(reader, i, strategy);
-
+                                MyConfig.InitConfig();
                                 def = MyConfig.GetDefinition(currentText);
 
                                 if (def != null)
@@ -223,14 +223,15 @@ namespace PrototypeTransferTool
 
                                     // vul hier de xml order
                                     if (defObject.XmlNiveau == XmlNiveau.Order)
-                                    {
+                                    { 
                                         xmlOrder.Items.Add(defObject);
                                     }
                                     else
                                     {
                                         // bepaal of het een nieuw artikel moet worden of niet
                                         xmlArtikel artikel = new xmlArtikel();
-                                        artikel.Items.Add(defObject.Copy(), value);
+                                        
+                                        xmlOrder.Artikelen.Add(artikel);
                                     }
                                 }
 
@@ -467,8 +468,7 @@ namespace PrototypeTransferTool
                         }
 
                         if (def == null)
-
-                            //if (!hotelnaam.ToString().Contains("NH"))
+                        //if (!hotelnaam.ToString().Contains("NH"))
                         {
                             memoryStream.Close();
                             fileStream.Close();
