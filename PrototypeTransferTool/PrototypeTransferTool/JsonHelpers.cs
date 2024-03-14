@@ -18,12 +18,16 @@ namespace PrototypeTransferTool
 
         public static bool ContainsText(this string text, List<string> toSearch)
         {
-            bool result = true;
+            bool result = false;
 
             foreach (string CheckEachText in toSearch)
             {
-                if (CheckEachText.Contains(text))
-                { 
+                if (text.Contains(CheckEachText))
+                {
+                    result = true;
+                }
+                else
+                {
                     result = false;
                 }
             }

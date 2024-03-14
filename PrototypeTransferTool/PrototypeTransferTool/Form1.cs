@@ -78,7 +78,6 @@ namespace PrototypeTransferTool
                 watcher.Path = defaultPath;
             }
             
-            
             watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName;
 
             watcher.Created += new FileSystemEventHandler(OnCreated);
@@ -120,7 +119,7 @@ namespace PrototypeTransferTool
             }
 
 
-            if (fileExtension == ".PDF" || fileExtension == ".pdf")
+            if (fileExtension.ToLower() == ".pdf")
             {
                 fileIsAccepted.Append(fileName);
 
@@ -194,17 +193,10 @@ namespace PrototypeTransferTool
                         {
                             for (int i = 1; i <= reader.NumberOfPages; i++)
                             {
-                                //test position voor Order number(Neemt de hele string op inclusief de Inkoop order nummer .........)
-                                /*System.util.RectangleJ rect = new System.util.RectangleJ(402f, 540f, 75f, 15f);
-                                RenderFilter[] filter = { new RegionTextRenderFilter(rect) };
-                                ITextExtractionStrategy strategyForOrdernumber = new FilteredTextRenderListener(
-                                    new LocationTextExtractionStrategy(), filter);
-                                string test = PdfTextExtractor.GetTextFromPage(reader, i, strategyForOrdernumber);*/
-
                                 //Definieren alle text van PDF
-                                ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
+                                ITextExtractionStrategy strategye = new SimpleTextExtractionStrategy();
 
-                                string currentText = PdfTextExtractor.GetTextFromPage(reader, i, strategy);
+                                string currentText = PdfTextExtractor.GetTextFromPage(reader, i, strategye);
                                 MyConfig.InitConfig();
                                 def = MyConfig.GetDefinition(currentText);
 
@@ -219,11 +211,11 @@ namespace PrototypeTransferTool
 
                                 foreach (var defObject in def.defObjects)
                                 {
-                                    var value = defObject.GetValue(reader, currentText, i);
+                                    var value = defObject.GetValue(reader, currentText, i, defObject);
 
                                     // vul hier de xml order
                                     if (defObject.XmlNiveau == XmlNiveau.Order)
-                                    { 
+                                    {
                                         xmlOrder.Items.Add(defObject);
                                     }
                                     else
@@ -235,8 +227,7 @@ namespace PrototypeTransferTool
                                     }
                                 }
 
-
-                                if (currentText.Contains("INKOOP ORDER NUMMER "))
+                                /*if (currentText.Contains("INKOOP ORDER NUMMER "))
                                 {
                                     //Ordernumber
                                     int ordernummerFrom = currentText.IndexOf("INKOOP ORDER NUMMER ") + "INKOOP ORDER NUMMER ".Length;
@@ -463,7 +454,7 @@ namespace PrototypeTransferTool
                                     string Levering = currentText.Substring(leveringFrom, leveringTo - leveringFrom).Trim();
 
                                     levering.Append(Levering);
-                                }
+                                }*/
                             }
                         }
 
@@ -482,7 +473,7 @@ namespace PrototypeTransferTool
                         else
                         {
                             //overzetten als XML-bestand
-                            var xmlFileextension = System.IO.Path.ChangeExtension(fileName, ".xml");
+                            var xmlFileExtension = System.IO.Path.ChangeExtension(fileName, ".xml");
 
                             if (Directory.Exists(MyConfig.FilePath))
                             {
@@ -493,7 +484,7 @@ namespace PrototypeTransferTool
                                 destinationPath = defaultPath;
                             }
 
-                            string xmlFilePath = destinationPath + "\\" + xmlFileextension; // Het pad naar het XML-bestand
+                            string xmlFilePath = destinationPath + "\\" + xmlFileExtension; // Het pad naar het XML-bestand
 
                             // Schrijf de geëxtraheerde tekst naar een XML-bestand
                             using (XmlWriter writer = XmlWriter.Create(xmlFilePath))

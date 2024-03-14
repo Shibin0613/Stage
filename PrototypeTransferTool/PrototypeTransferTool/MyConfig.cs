@@ -14,6 +14,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Security.Cryptography.Xml;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Microsoft.Web.WebView2.Core;
+using System.Web;
 
 namespace PrototypeTransferTool
 {
@@ -51,10 +53,46 @@ namespace PrototypeTransferTool
         public XmlNiveau XmlNiveau{ get; set; }
         public string Value { get; set; }
 
-        internal string GetValue(PdfReader reader, string currentText, int i)
-        {
+        StringBuilder ordernummer = new StringBuilder();
+        StringBuilder hotelnaam= new StringBuilder();
 
-            return currentText;
+        internal string GetValue(PdfReader reader, string currentText, int i, defObject defObject)
+        {
+            string value = string.Empty;
+            if (currentText.Contains(defObject.Text.From))
+            {
+                if (!string.IsNullOrWhiteSpace(defObject.Text.From) && !string.IsNullOrWhiteSpace(defObject.Text.To))
+                { 
+                    string x = defObject.Text.From.ToString();
+                    string y = defObject.Text.To.ToString();
+
+                    int textFrom = currentText.IndexOf(x) + x.Length;
+                    int textTo = currentText.IndexOf(y);
+                    
+                    if (textTo < textFrom)
+                    {
+                        textTo = currentText.LastIndexOf(y);
+                    }
+                    value = currentText.Substring(textFrom, textTo - textFrom).Replace("\n", "").Trim();
+                }
+                else
+                {
+                    float x = (float)defObject.Position.X;
+                    float y = (float)defObject.Position.Y;
+                    float xy = (float)defObject.Position.Z;
+                    float yx = (float)defObject.Position.W;
+
+                    //Hotelnaam op position
+                    System.util.RectangleJ rect = new System.util.RectangleJ(x, y, xy, yx);
+                    RenderFilter[] filter = { new RegionTextRenderFilter(rect) };
+                    ITextExtractionStrategy strategy = new FilteredTextRenderListener(
+                        new LocationTextExtractionStrategy(), filter);
+                    value = PdfTextExtractor.GetTextFromPage(reader, i, strategy).Trim();
+                }
+                defObject.Value = value;
+            }
+
+            return string.IsNullOrEmpty(value) ? null : value;
         }
     }
 
@@ -62,6 +100,11 @@ namespace PrototypeTransferTool
     {
         public List<defObject> Items { get; set; }
         public List<xmlArtikel> Artikelen { get; set; }
+        public xmlOrder()
+        {
+            Items = new List<defObject>();
+            Artikelen = new List<xmlArtikel>();
+        }
     }
     public class xmlArtikel
     {
@@ -93,7 +136,7 @@ namespace PrototypeTransferTool
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
 
-            var def = new pdfDefinition();
+            /*var def = new pdfDefinition();*/
             /*def.defObjects = new List<defObject>();
 
             var defObj = new defObject();
@@ -117,16 +160,16 @@ namespace PrototypeTransferTool
             def.IdentifierText.Add("Hotels");
 
             JsonHelpers.WriteToJsonFile(def, "../../../nhDef.json");*/
+            ReadDefinitions();
 
-            var def1 = JsonHelpers.ReadFromJsonFile<pdfDefinition>("../../../nhDef.json");
+            var def1 = JsonHelpers.ReadFromJsonFile<pdfDefinition>("../../../def_NH hotels.json");
 
             var s = def1.IdentifierText;
         }
         
         public static pdfDefinition? GetDefinition(string text)
         {
-            ReadDefinitions();
-            WriteDefinitions();
+            
             return pdfDefinitions?.Find(pdfDefinition => text.ContainsText(pdfDefinition.IdentifierText));
         }
 
@@ -162,8 +205,8 @@ namespace PrototypeTransferTool
         private static void ReadDefinitions()
         {
             pdfDefinitions = new List<pdfDefinition>();
-            // loop files
-            var def = JsonHelpers.ReadFromJsonFile<pdfDefinition>("../../../nhDef.json");
+            //*loop files
+            var def = JsonHelpers.ReadFromJsonFile<pdfDefinition>("../../../def_NH hotels.json");
 
             pdfDefinitions.Add(def);
             //endloop
