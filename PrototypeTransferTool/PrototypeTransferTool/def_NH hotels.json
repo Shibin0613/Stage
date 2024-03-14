@@ -111,6 +111,20 @@
         "TagNaam": "OPMERKING",
         "XmlNiveau": 0,
         "Value": null
+    },{
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "AANTAL PRIJS EENHEID TOTAAL",
+            "To": ""
+        },
+        "TagNaam": "Order",
+        "XmlNiveau": 1,
+        "Value": null
     }, {
         "Position": {
             "X": 0,

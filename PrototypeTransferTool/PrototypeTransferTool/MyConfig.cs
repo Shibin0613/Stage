@@ -53,22 +53,20 @@ namespace PrototypeTransferTool
         public XmlNiveau XmlNiveau{ get; set; }
         public string Value { get; set; }
 
-        StringBuilder ordernummer = new StringBuilder();
-        StringBuilder hotelnaam= new StringBuilder();
-
         internal string GetValue(PdfReader reader, string currentText, int i, defObject defObject)
         {
             string value = string.Empty;
             if (currentText.Contains(defObject.Text.From))
             {
-                if (!string.IsNullOrWhiteSpace(defObject.Text.From) && !string.IsNullOrWhiteSpace(defObject.Text.To))
-                { 
+                if (!string.IsNullOrWhiteSpace(defObject.Text.From) || !string.IsNullOrWhiteSpace(defObject.Text.To))
+                {
+
                     string x = defObject.Text.From.ToString();
                     string y = defObject.Text.To.ToString();
 
                     int textFrom = currentText.IndexOf(x) + x.Length;
                     int textTo = currentText.IndexOf(y);
-                    
+
                     if (textTo < textFrom)
                     {
                         textTo = currentText.LastIndexOf(y);
@@ -89,10 +87,13 @@ namespace PrototypeTransferTool
                         new LocationTextExtractionStrategy(), filter);
                     value = PdfTextExtractor.GetTextFromPage(reader, i, strategy).Trim();
                 }
-                defObject.Value = value;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    defObject.Value = value;
+                }
             }
 
-            return string.IsNullOrEmpty(value) ? null : value;
+            return value;
         }
     }
 

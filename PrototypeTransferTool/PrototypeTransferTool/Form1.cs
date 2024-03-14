@@ -222,7 +222,7 @@ namespace PrototypeTransferTool
                                     {
                                         // bepaal of het een nieuw artikel moet worden of niet
                                         xmlArtikel artikel = new xmlArtikel();
-                                        
+
                                         xmlOrder.Artikelen.Add(artikel);
                                     }
                                 }
@@ -536,11 +536,11 @@ namespace PrototypeTransferTool
 
                                 writer.WriteStartElement("Artikelen");
 
-                                xmlOrder.Artikelen.ForEach(a => {
+                                /*xmlOrder.Artikelen.ForEach(a => {
                                     writer.WriteStartElement("Artikel");
                                     a.Items.ForEach(o => WriteXmlTag(writer, o));
                                     writer.WriteEndElement();
-                                });
+                                });*/
                                 writer.WriteEndElement();
 
 
