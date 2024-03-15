@@ -170,33 +170,34 @@ namespace PrototypeTransferTool
 
                         //Uitlezen van de gegevens vanuit PDF
                         StringBuilder text = new StringBuilder();
-                        StringBuilder ordernummer = new StringBuilder();
+                        /*StringBuilder ordernummer = new StringBuilder();
                         StringBuilder hotelnaam = new StringBuilder();
                         StringBuilder aanvrager = new StringBuilder();
                         StringBuilder afleveradres = new StringBuilder();
                         StringBuilder leverancier = new StringBuilder();
                         StringBuilder orderdatum = new StringBuilder();
-                        StringBuilder valuta = new StringBuilder();
+                        StringBuilder valuta = new StringBuilder();*/
                         StringBuilder order = new StringBuilder();
-                        StringBuilder opmerking = new StringBuilder();
+                        /* StringBuilder opmerking = new StringBuilder();
                         StringBuilder totaal = new StringBuilder();
 
                         StringBuilder betaalcondities = new StringBuilder();
                         StringBuilder factuuradres = new StringBuilder();
                         StringBuilder stuurfactuuraan = new StringBuilder();
-                        StringBuilder levering = new StringBuilder();
+                        StringBuilder levering = new StringBuilder();*/
 
                         pdfDefinition def = null;
                         xmlOrder xmlOrder = new xmlOrder();
+                        xmlArtikel artikel = new xmlArtikel();
 
                         using (PdfReader reader = new PdfReader(memoryStream))
                         {
                             for (int i = 1; i <= reader.NumberOfPages; i++)
                             {
                                 //Definieren alle text van PDF
-                                ITextExtractionStrategy strategye = new SimpleTextExtractionStrategy();
+                                ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
 
-                                string currentText = PdfTextExtractor.GetTextFromPage(reader, i, strategye);
+                                string currentText = PdfTextExtractor.GetTextFromPage(reader, i, strategy);
                                 MyConfig.InitConfig();
                                 def = MyConfig.GetDefinition(currentText);
 
@@ -221,12 +222,12 @@ namespace PrototypeTransferTool
                                     else
                                     {
                                         // bepaal of het een nieuw artikel moet worden of niet
-                                        xmlArtikel artikel = new xmlArtikel();
-
+                                        artikel.Artikelen.Add(defObject);
                                         xmlOrder.Artikelen.Add(artikel);
                                     }
-                                }
 
+                                }
+                                    
                                 /*if (currentText.Contains("INKOOP ORDER NUMMER "))
                                 {
                                     //Ordernumber
@@ -310,7 +311,7 @@ namespace PrototypeTransferTool
                                         opmerking.Append(Opmerking);
                                     }
 
-                                }
+                                }*/
 
                                 //Order(foreach fro page 1 to de laatste pagina)
                                 if (currentText.Contains("AANTAL PRIJS EENHEID TOTAAL"))
@@ -418,7 +419,7 @@ namespace PrototypeTransferTool
                                     }
                                 }
 
-                                if (currentText.Contains("BETAALCONDITIES"))
+                                /*if (currentText.Contains("BETAALCONDITIES"))
                                 {
                                     //Totaalbedrag
                                     int totaalFrom = currentText.IndexOf("TOTAAL ") + "TOTAAL ".Length;
@@ -500,10 +501,9 @@ namespace PrototypeTransferTool
                                 writer.WriteEndElement();
                                 //
                                 writer.WriteStartElement("stamgegevens");
-
                                 xmlOrder.Items.ForEach(o => WriteXmlTag(writer, o));
+                                writer.WriteEndElement();
                                 //def.GetObjectsFromNiveau(XmlNiveau.Order).ForEach(o => WriteXmlTag(writer, o));
-
 
                                 //if (def.GetObject(ProdistFieldType.Klantnummer) is defObject o)
                                 //{
@@ -532,15 +532,14 @@ namespace PrototypeTransferTool
                                 //writer.WriteString(valuta.ToString());
                                 //writer.WriteEndElement();
 
-                                writer.WriteEndElement();
-
                                 writer.WriteStartElement("Artikelen");
 
-                                /*xmlOrder.Artikelen.ForEach(a => {
+                                xmlOrder.Artikelen.ForEach(a =>
+                                {
                                     writer.WriteStartElement("Artikel");
-                                    a.Items.ForEach(o => WriteXmlTag(writer, o));
+                                    a.Artikelen.ForEach(o => WriteXmlTagArtikel(writer, o));
                                     writer.WriteEndElement();
-                                });*/
+                                });
                                 writer.WriteEndElement();
 
 
@@ -697,8 +696,20 @@ namespace PrototypeTransferTool
 
         private void WriteXmlTag(XmlWriter writer, defObject o)
         {
-            if (o != null)
+            if (o.Value != null)
             {
+                o.ToString().Split(" ");
+                writer.WriteStartElement(o.TagNaam);
+                writer.WriteString(o.Value); // Schrijf de geëxtraheerde tekst
+                writer.WriteEndElement();
+            }
+        }
+
+        private void WriteXmlTagArtikel (XmlWriter writer, defObject o)
+        {
+            if (o.Value != null)
+            {
+                o.Value.ToString().Split(" ");
                 writer.WriteStartElement(o.TagNaam);
                 writer.WriteString(o.Value); // Schrijf de geëxtraheerde tekst
                 writer.WriteEndElement();

@@ -16,6 +16,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.Web.WebView2.Core;
 using System.Web;
+using BitMiracle.LibTiff.Classic;
 
 namespace PrototypeTransferTool
 {
@@ -43,7 +44,12 @@ namespace PrototypeTransferTool
         public string To { get; set; }
     }
 
-    public class defObject
+    public class defOrder
+    {
+        public string TagNaam { get; set; }
+        public string Value { get; set; }
+    }
+        public class defObject
     {
         //public ProdistFieldType Type { get; set; }
         public defPosition Position { get; set; }
@@ -53,6 +59,10 @@ namespace PrototypeTransferTool
         public XmlNiveau XmlNiveau{ get; set; }
         public string Value { get; set; }
 
+        public List<defOrder> OrderTags { get; set; }
+
+
+
         internal string GetValue(PdfReader reader, string currentText, int i, defObject defObject)
         {
             string value = string.Empty;
@@ -60,7 +70,6 @@ namespace PrototypeTransferTool
             {
                 if (!string.IsNullOrWhiteSpace(defObject.Text.From) || !string.IsNullOrWhiteSpace(defObject.Text.To))
                 {
-
                     string x = defObject.Text.From.ToString();
                     string y = defObject.Text.To.ToString();
 
@@ -71,7 +80,23 @@ namespace PrototypeTransferTool
                     {
                         textTo = currentText.LastIndexOf(y);
                     }
-                    value = currentText.Substring(textFrom, textTo - textFrom).Replace("\n", "").Trim();
+
+                    if (i < 2)
+                    {
+                        value = currentText.Substring(textFrom).Trim();
+                        if (!value.Contains(y))
+                        {
+                            value = currentText.Substring(textFrom).Trim();
+                        }
+                        else 
+                        {
+                            value = currentText.Substring(textFrom, textTo - textFrom).Replace("\n", "").Trim();
+                        }
+                    }
+                    else
+                    {
+                        value = currentText.Substring(textFrom, textTo - textFrom).Replace("\n", "").Trim();
+                    }
                 }
                 else
                 {
@@ -87,6 +112,43 @@ namespace PrototypeTransferTool
                         new LocationTextExtractionStrategy(), filter);
                     value = PdfTextExtractor.GetTextFromPage(reader, i, strategy).Trim();
                 }
+                if (defObject.OrderTags != null)
+                {
+                    int z = 0;
+                    string[] items = value.Split(" ");
+
+                    var Aantal = items.Reverse().Take(4).Last();
+                    var prijsPerStuk = items.Reverse().Take(3).Last();
+                    var Iets = items.Reverse().Take(2).Last();
+                    var Totaal = items.Last();
+                    
+                    for (int j = 0; j < Math.Min(items.Length, defObject.OrderTags.Count); j++)
+                    {
+                        if (Regex.IsMatch(items[j], @"\d"))
+                        {
+                            defObject.OrderTags[z].Value = items[j];
+                            z++;
+                        }
+                        else 
+                        {
+                            //zo niet, dan komt voor de cijfers nog een toevoeging
+                            if (j < items.Length - 1) // Zorg ervoor dat er een volgend item is om samen te voegen
+                            {
+                                defObject.OrderTags[j].Value = $"{items[j]} {items[j + 1]}";
+                                z++; // Sla het volgende item over omdat het al is samengevoegd
+                                j++;
+                            }
+                            else
+                            {
+                                // Als er geen volgend item is, behoud het huidige item
+                                defObject.OrderTags[j].Value = items[j];
+                            }
+
+                        }
+                    }
+
+                }
+
                 if (!string.IsNullOrEmpty(value))
                 {
                     defObject.Value = value;
@@ -109,7 +171,12 @@ namespace PrototypeTransferTool
     }
     public class xmlArtikel
     {
-        public List<defObject> Items { get; set; }
+        public List<defObject> Artikelen { get; set; }
+
+        public xmlArtikel()
+        {
+            Artikelen = new List<defObject>();
+        }
     }
 
     public class pdfDefinition
