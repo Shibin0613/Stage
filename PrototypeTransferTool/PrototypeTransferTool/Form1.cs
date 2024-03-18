@@ -16,6 +16,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 using IronOcr;
 using IronSoftware.Drawing;
+using Org.BouncyCastle.Asn1.X509;
+using Microsoft.VisualBasic.Logging;
+using System.Security.Cryptography.Xml;
 
 namespace PrototypeTransferTool
 {
@@ -203,7 +206,7 @@ namespace PrototypeTransferTool
 
                                 if (def != null)
                                 {
-                                    
+
                                 }
 
                                 var lines = currentText.Split('\n');
@@ -225,9 +228,8 @@ namespace PrototypeTransferTool
                                         artikel.Artikelen.Add(defObject);
                                         xmlOrder.Artikelen.Add(artikel);
                                     }
-
                                 }
-                                    
+
                                 /*if (currentText.Contains("INKOOP ORDER NUMMER "))
                                 {
                                     //Ordernumber
@@ -314,7 +316,7 @@ namespace PrototypeTransferTool
                                 }*/
 
                                 //Order(foreach fro page 1 to de laatste pagina)
-                                if (currentText.Contains("AANTAL PRIJS EENHEID TOTAAL"))
+                                /*if (currentText.Contains("AANTAL PRIJS EENHEID TOTAAL"))
                                 {
                                     int orderFrom = currentText.IndexOf("AANTAL PRIJS EENHEID TOTAAL");
                                     string page2 = "Página";
@@ -417,7 +419,7 @@ namespace PrototypeTransferTool
                                             }
                                         }
                                     }
-                                }
+                                }*/
 
                                 /*if (currentText.Contains("BETAALCONDITIES"))
                                 {
@@ -676,6 +678,7 @@ namespace PrototypeTransferTool
 
                             memoryStream.Close();
                             fileStream.Close();
+
                             if (!Directory.Exists(MyConfig.FilePath + "\\Verwerkt"))
                             {
                                 Directory.CreateDirectory(MyConfig.FilePath + "\\Verwerkt");
@@ -709,10 +712,55 @@ namespace PrototypeTransferTool
         {
             if (o.Value != null)
             {
-                o.Value.ToString().Split(" ");
-                writer.WriteStartElement(o.TagNaam);
-                writer.WriteString(o.Value); // Schrijf de geëxtraheerde tekst
-                writer.WriteEndElement();
+                string[] eachOrderFrom = o.Value.ToString().Split("Order", StringSplitOptions.RemoveEmptyEntries);
+                foreach (string orderLine in eachOrderFrom)
+                {
+                    orderLine.Replace("\n", " ");
+                    int i = 0;
+
+                    var referentieIndex = orderLine.Split(' ')[1];
+
+                    string[] item = new string[o.OrderTags.Count()];
+
+                    item[0] = orderLine.Split(' ')[0];
+
+                    item[o.OrderTags.Count() - 5] = orderLine.Split(' ').Reverse().Take(5).Last();
+                    item[o.OrderTags.Count() - 4] = orderLine.Split(' ').Reverse().Take(4).Last();
+                    item[o.OrderTags.Count() - 3] = orderLine.Split(' ').Reverse().Take(3).Last();
+                    item[o.OrderTags.Count() - 2] = orderLine.Split(' ').Reverse().Take(2).Last();
+                    item[o.OrderTags.Count() - 1] = orderLine.Split(" ").Last().Trim();
+
+                    foreach (var Ordertagnaam in o.OrderTags)
+                    {
+                        string tagNaam = Ordertagnaam.TagNaam;
+                        writer.WriteStartElement(tagNaam);
+
+                        if (Regex.IsMatch(referentieIndex, @"\d"))
+                        {
+                            //Zo ja, dan is die de referentie
+                            item[1] = referentieIndex;
+                            item[2]= orderLine.Split(' ')[2];
+                        }
+                        else
+                        {
+                            int referentieFrom = orderLine.IndexOf(" ");
+                            int referentieTo = orderLine.IndexOf(" ", referentieFrom + 1); // Zoek vanaf het karakter na het eerste spatie-teken
+                            int derdeSpaceIndex = orderLine.IndexOf(" ", referentieTo + 1); // Zoek vanaf het karakter na de tweede spatie-teken
+
+                            item[1] = orderLine.Substring(referentieFrom + 1, derdeSpaceIndex - referentieFrom - 1).Trim();
+                            item[2] = orderLine.Split(' ')[3];
+                        }
+                        int materiaalOmschrijvingFrom = orderLine.IndexOf(item[2]) + item[2].Length;
+                        int materiaalOmschrijvingTo = orderLine.IndexOf(item[o.OrderTags.Count() - 5]);
+                        item[3] = orderLine.Substring(materiaalOmschrijvingFrom, materiaalOmschrijvingTo - materiaalOmschrijvingFrom).Trim();
+
+                        writer.WriteString(item[i]);
+                        writer.WriteEndElement();
+                        i++;
+
+                    }
+                }
+
             }
         }
     }

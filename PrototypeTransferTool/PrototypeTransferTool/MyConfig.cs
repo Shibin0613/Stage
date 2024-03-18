@@ -95,7 +95,14 @@ namespace PrototypeTransferTool
                     }
                     else
                     {
-                        value = currentText.Substring(textFrom, textTo - textFrom).Replace("\n", "").Trim();
+                        if (currentText.Contains(y))
+                        {
+                            value = currentText.Substring(textFrom, textTo - textFrom).Replace("\n", "").Trim();
+                        }
+                        else 
+                        {
+                            value = currentText.Substring(textFrom).Trim();
+                        }
                     }
                 }
                 else
@@ -114,39 +121,126 @@ namespace PrototypeTransferTool
                 }
                 if (defObject.OrderTags != null)
                 {
-                    int z = 0;
-                    string[] items = value.Split(" ");
-
-                    var Aantal = items.Reverse().Take(4).Last();
-                    var prijsPerStuk = items.Reverse().Take(3).Last();
-                    var Iets = items.Reverse().Take(2).Last();
-                    var Totaal = items.Last();
-                    
-                    for (int j = 0; j < Math.Min(items.Length, defObject.OrderTags.Count); j++)
-                    {
-                        if (Regex.IsMatch(items[j], @"\d"))
+                    StringBuilder order = new StringBuilder();
+                    int orderFrom = currentText.IndexOf(defObject.Text.From);
+                    if (currentText.Contains(defObject.Text.To))
                         {
-                            defObject.OrderTags[z].Value = items[j];
-                            z++;
+                        string orderWithText = currentText.Substring(orderFrom + defObject.Text.From.Length).Trim();
+                        if (orderWithText.Contains(defObject.Text.To))
+                        {
+                            int orderTo = orderWithText.IndexOf(defObject.Text.To);
+                            orderWithText = orderWithText.Substring(0, orderTo);
+
+                            orderWithText = orderWithText.Replace(" \n", " ");
+                            // Regex-patroon om elk artikel te matchen
+
+                            string pattern = @"(.+?)\s *(.*?)(?:\n|$)";
+
+                            int j = 10;
+
+                            // Productinfo voor elk besteld product....
+                            foreach (Match match in Regex.Matches(orderWithText, pattern))
+                            {
+                                string lineNumber = match.Groups[1].Value; // Het lijnnummer
+                                if (!lineNumber.EndsWith(" "))
+                                {
+                                    lineNumber = lineNumber + " ";
+                                }
+                                string orderLine = match.Groups[2].Value; // De bestellijn
+
+                                if (lineNumber.StartsWith("0"))
+                                {
+                                    order.Append(" " + lineNumber + orderLine);
+                                }
+                                else if (lineNumber.StartsWith(j.ToString()))
+                                {
+                                    j += 10;
+                                    order.Append("Order" + lineNumber + orderLine);
+                                }
+                                else
+                                {
+                                    if (char.IsLetter(lineNumber[0]) && !lineNumber.StartsWith(" "))
+                                    {
+                                        order.Append(" " + lineNumber + orderLine);
+                                    }
+                                    if (lineNumber.IndexOf('/') == 2 && !lineNumber.StartsWith(" "))
+                                    {
+                                        order.Append(" " + lineNumber + orderLine);
+                                    }
+                                    else
+                                    {
+                                        order.Append(lineNumber + orderLine);
+                                    }
+                                }
+                                
+                            }
                         }
-                        else 
+                        else
                         {
-                            //zo niet, dan komt voor de cijfers nog een toevoeging
-                            if (j < items.Length - 1) // Zorg ervoor dat er een volgend item is om samen te voegen
-                            {
-                                defObject.OrderTags[j].Value = $"{items[j]} {items[j + 1]}";
-                                z++; // Sla het volgende item over omdat het al is samengevoegd
-                                j++;
-                            }
-                            else
-                            {
-                                // Als er geen volgend item is, behoud het huidige item
-                                defObject.OrderTags[j].Value = items[j];
-                            }
-
+                            int orderTo = orderWithText.IndexOf(defObject.Text.To);
+                            string Order = orderWithText.Substring(0, orderTo - 0);
+                            order.Append(Order);
                         }
                     }
+                    else
+                    {
+                        string orderWithText = currentText.Substring(orderFrom + defObject.Text.From.Length).Trim();
+                        if (orderWithText.Contains(defObject.Text.To))
+                        {
+                            int orderTo = orderWithText.IndexOf(defObject.Text.To);
+                            string Order = orderWithText.Substring(0, orderTo - 0);
+                            order.Append(Order);
+                        }
+                        else
+                        {
+                            orderWithText = orderWithText.Replace(" \n", " ");
+                            // Regex-patroon om elk artikel te matchen
 
+                            string pattern = @"(.+?)\s *(.*?)(?:\n|$)";
+
+
+                            int j = 10;
+
+                            // Productinfo voor elk besteld product....
+                            foreach (Match match in Regex.Matches(orderWithText, pattern))
+                            {
+                                string lineNumber = match.Groups[1].Value; // Het lijnnummer
+                                if (!lineNumber.EndsWith(" "))
+                                {
+                                    lineNumber = lineNumber + " ";
+                                }
+                                string orderLine = match.Groups[2].Value; // De bestellijn
+
+                                if (lineNumber.StartsWith("0"))
+                                {
+                                    order.Append(" " + lineNumber + orderLine);
+                                }
+                                else if (lineNumber.StartsWith(j.ToString()))
+                                {
+                                    j += 10;
+                                    order.Append("Order" + lineNumber + orderLine);
+                                }
+                                else
+                                {
+                                    if (char.IsLetter(lineNumber[0]) && !lineNumber.StartsWith(" "))
+                                    {
+                                        order.Append(" " + lineNumber + orderLine);
+                                    }
+                                    else if (lineNumber.IndexOf('/') == 2 && !lineNumber.StartsWith(" "))
+                                    {
+                                        order.Append(" " + lineNumber + orderLine);
+                                    }
+                                    else
+                                    {
+                                        order.Append(lineNumber + orderLine);
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                    defObject.Value = order.ToString();
+                    return defObject.Value;
                 }
 
                 if (!string.IsNullOrEmpty(value))

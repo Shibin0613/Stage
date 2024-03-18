@@ -1,252 +1,241 @@
 {
-  "defObjects": [
-    {
-      "Position": {
-        "X": 0,
-        "Y": 0,
-        "Z": 0,
-        "W": 0
-      },
-      "Text": {
-        "From": "INKOOP ORDER NUMMER ",
-        "To": "INKOOP ORDER DATUM EXCLUSIEF"
-      },
-      "TagNaam": "ORDERNUMMER",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 524.16,
-        "Y": 538.68,
-        "Z": 254.88,
-        "W": 6.84
-      },
-      "Text": {
-        "From": "",
-        "To": ""
-      },
-      "TagNaam": "KLANTNUMMER",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 255,
-        "Y": 438,
-        "Z": 152,
-        "W": 78
-      },
-      "Text": {
-        "From": "",
-        "To": ""
-      },
-      "TagNaam": "AANVRAGER",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 454.07,
-        "Y": 442.34,
-        "Z": 156.08,
-        "W": 77.25
-      },
-      "Text": {
-        "From": "",
-        "To": ""
-      },
-      "TagNaam": "AFLEVERADRES",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 622.25,
-        "Y": 410.88,
-        "Z": 158.40,
-        "W": 108.71
-      },
-      "Text": {
-        "From": "",
-        "To": ""
-      },
-      "TagNaam": "LEVERANCIER",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 232.29,
-        "Y": 377.24,
-        "Z": 85.88,
-        "W": 22
-      },
-      "Text": {
-        "From": "",
-        "To": ""
-      },
-      "TagNaam": "ORDERDATUM",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 744.97,
-        "Y": 376.91,
-        "Z": 29.64,
-        "W": 22
-      },
-      "Text": {
-        "From": "",
-        "To": ""
-      },
-      "TagNaam": "VALUTA",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 0,
-        "Y": 0,
-        "Z": 0,
-        "W": 0
-      },
-      "Text": {
-        "From": "OPMERKING :  ",
-        "To": "LIJN I REFERENTIE"
-      },
-      "TagNaam": "OPMERKING",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 0,
-        "Y": 0,
-        "Z": 0,
-        "W": 0
-      },
-      "Text": {
-        "From": "AANTAL PRIJS EENHEID TOTAAL",
-        "To": "TOTAAL "
-      },
-      "TagNaam": "Order",
-      "XmlNiveau": 1,
-      "Value": null,
-      "OrderTags": [
-        {
-          "TagNaam": "LIJN",
-          "Value": null
+    "defObjects": [{
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
         },
-        {
-          "TagNaam": "REFERENTIE",
-          "Value": null
+        "Text": {
+            "From": "INKOOP ORDER NUMMER ",
+            "To": "INKOOP ORDER DATUM EXCLUSIEF"
         },
-        {
-          "TagNaam": "NH_MATERIAAL_ID",
-          "Value": null
+        "TagNaam": "ORDERNUMMER",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 524.16,
+            "Y": 538.68,
+            "Z": 254.88,
+            "W": 6.84
         },
-        {
-          "TagNaam": "MATERIAAL_OMSCHRIJVING",
-          "Value": null
+        "Text": {
+            "From": "",
+            "To": ""
         },
-        {
-          "TagNaam": "LEVERDATUM",
-          "Value": null
+        "TagNaam": "KLANTNUMMER",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 255,
+            "Y": 438,
+            "Z": 152,
+            "W": 78
         },
-        {
-          "TagNaam": "AANTAL",
-          "Value": null
+        "Text": {
+            "From": "",
+            "To": ""
         },
-        {
-          "TagNaam": "PRIJS",
-          "Value": null
+        "TagNaam": "AANVRAGER",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 454.07,
+            "Y": 442.34,
+            "Z": 156.08,
+            "W": 77.25
         },
-        {
-          "TagNaam": "EENHEID",
-          "Value": null
+        "Text": {
+            "From": "",
+            "To": ""
         },
-        {
-          "TagNaam": "TOTAAL",
-          "Value": null
-        }
-      ]
-    },{
-      "Position": {
-        "X": 0,
-        "Y": 0,
-        "Z": 0,
-        "W": 0
-      },
-      "Text": {
-        "From": "TOTAAL ",
-        "To": " EUR"
-      },
-      "TagNaam": "TOTAAL",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 0,
-        "Y": 0,
-        "Z": 0,
-        "W": 0
-      },
-      "Text": {
-        "From": "BETAALCONDITIES",
-        "To": "FACTUURADRES"
-      },
-      "TagNaam": "BETAALCONDITIES",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 0,
-        "Y": 0,
-        "Z": 0,
-        "W": 0
-      },
-      "Text": {
-        "From": "FACTUURADRES",
-        "To": "STUUR FACTUUR AAN"
-      },
-      "TagNaam": "FACTUURADRES",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 0,
-        "Y": 0,
-        "Z": 0,
-        "W": 0
-      },
-      "Text": {
-        "From": "STUUR FACTUUR AAN",
-        "To": "LEVERING"
-      },
-      "TagNaam": "STUUR_FACTUUR_AAN",
-      "XmlNiveau": 0,
-      "Value": null
-    },
-    {
-      "Position": {
-        "X": 0,
-        "Y": 0,
-        "Z": 0,
-        "W": 0
-      },
-      "Text": {
-        "From": "LEVERING",
-        "To": "TOTAAL "
-      },
-      "TagNaam": "LEVERING",
-      "XmlNiveau": 0,
-      "Value": null
-    }
-  ],
-  "IdentifierText": [ "NH" ]
+        "TagNaam": "AFLEVERADRES",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 622.25,
+            "Y": 410.88,
+            "Z": 158.4,
+            "W": 108.71
+        },
+        "Text": {
+            "From": "",
+            "To": ""
+        },
+        "TagNaam": "LEVERANCIER",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "servicio.",
+            "To": "INKOOP ORDER NUMMER"
+        },
+        "TagNaam": "ORDERDATUM",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 744.97,
+            "Y": 376.91,
+            "Z": 29.64,
+            "W": 22
+        },
+        "Text": {
+            "From": "",
+            "To": ""
+        },
+        "TagNaam": "VALUTA",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "OPMERKING :  ",
+            "To": "LIJN I REFERENTIE"
+        },
+        "TagNaam": "OPMERKING",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "AANTAL PRIJS EENHEID TOTAAL",
+            "To": "TOTAAL "
+        },
+        "TagNaam": "Artikel",
+        "XmlNiveau": 1,
+        "Value": null,
+        "OrderTags": [{
+            "TagNaam": "LIJN",
+            "Value": null
+        }, {
+            "TagNaam": "REFERENTIE",
+            "Value": null
+        }, {
+            "TagNaam": "NH_MATERIAAL_ID",
+            "Value": null
+        }, {
+            "TagNaam": "MATERIAAL_OMSCHRIJVING",
+            "Value": null
+        }, {
+            "TagNaam": "LEVERDATUM",
+            "Value": null
+        }, {
+            "TagNaam": "AANTAL",
+            "Value": null
+        }, {
+            "TagNaam": "PRIJS",
+            "Value": null
+        }, {
+            "TagNaam": "EENHEID",
+            "Value": null
+        }, {
+            "TagNaam": "TOTAAL",
+            "Value": null
+        }]
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "TOTAAL ",
+            "To": " EUR"
+        },
+        "TagNaam": "TOTAAL",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "BETAALCONDITIES",
+            "To": "FACTUURADRES"
+        },
+        "TagNaam": "BETAALCONDITIES",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "FACTUURADRES",
+            "To": "STUUR FACTUUR AAN"
+        },
+        "TagNaam": "FACTUURADRES",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "STUUR FACTUUR AAN",
+            "To": "LEVERING"
+        },
+        "TagNaam": "STUUR_FACTUUR_AAN",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "LEVERING",
+            "To": "TOTAAL "
+        },
+        "TagNaam": "LEVERING",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }],
+    "IdentifierText": ["NH"]
 }
