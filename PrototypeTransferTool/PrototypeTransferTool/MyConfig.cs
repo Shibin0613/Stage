@@ -49,19 +49,17 @@ namespace PrototypeTransferTool
         public string TagNaam { get; set; }
         public string Value { get; set; }
     }
-        public class defObject
+    public class defObject
     {
-        //public ProdistFieldType Type { get; set; }
-        public defPosition Position { get; set; }
-        public defText Text { get; set; }
-        public string TagNaam { get; set; }
+    //public ProdistFieldType Type { get; set; }
+    public defPosition Position { get; set; }
+    public defText Text { get; set; }
+    public string TagNaam { get; set; }
 
-        public XmlNiveau XmlNiveau{ get; set; }
-        public string Value { get; set; }
+    public XmlNiveau XmlNiveau{ get; set; }
+    public string Value { get; set; }
 
-        public List<defOrder> OrderTags { get; set; }
-
-
+    public List<defOrder> OrderTags { get; set; }
 
         internal string GetValue(PdfReader reader, string currentText, int i, defObject defObject)
         {
@@ -172,7 +170,6 @@ namespace PrototypeTransferTool
                                         order.Append(lineNumber + orderLine);
                                     }
                                 }
-                                
                             }
                         }
                         else
@@ -240,6 +237,7 @@ namespace PrototypeTransferTool
                         }
                     }
                     defObject.Value = order.ToString();
+                    
                     return defObject.Value;
                 }
 

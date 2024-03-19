@@ -166,6 +166,7 @@ namespace PrototypeTransferTool
 
                 using (FileStream fileStream = new FileStream(destinationPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
+
                     using (var memoryStream = new MemoryStream())
                     {
                         await fileStream.CopyToAsync(memoryStream);
@@ -191,10 +192,11 @@ namespace PrototypeTransferTool
 
                         pdfDefinition def = null;
                         xmlOrder xmlOrder = new xmlOrder();
-                        xmlArtikel artikel = new xmlArtikel();
 
                         using (PdfReader reader = new PdfReader(memoryStream))
                         {
+                            HashSet<string> uniqueTags = new HashSet<string>();
+
                             for (int i = 1; i <= reader.NumberOfPages; i++)
                             {
                                 //Definieren alle text van PDF
@@ -211,22 +213,36 @@ namespace PrototypeTransferTool
 
                                 var lines = currentText.Split('\n');
 
+                                
+
                                 text.Append(currentText);
 
                                 foreach (var defObject in def.defObjects)
                                 {
                                     var value = defObject.GetValue(reader, currentText, i, defObject);
 
-                                    // vul hier de xml order
-                                    if (defObject.XmlNiveau == XmlNiveau.Order)
+                                    if (!uniqueTags.Contains(defObject.TagNaam) && !string.IsNullOrEmpty(defObject.Value))
                                     {
-                                        xmlOrder.Items.Add(defObject);
-                                    }
-                                    else
-                                    {
-                                        // bepaal of het een nieuw artikel moet worden of niet
-                                        artikel.Artikelen.Add(defObject);
-                                        xmlOrder.Artikelen.Add(artikel);
+                                        uniqueTags.Add(defObject.TagNaam);
+                                        // vul hier de xml order
+                                        if (defObject.XmlNiveau == XmlNiveau.Order)
+                                        {
+                                            xmlOrder.Items.Add(defObject);
+                                        }
+                                        else
+                                        {
+                                            string[] test = defObject.Value.Split("Order", StringSplitOptions.RemoveEmptyEntries);
+                                            foreach (string test1 in test)
+                                            {
+                                                xmlArtikel artikel = new xmlArtikel();
+
+                                                defObject.Value = test1;
+                                                // bepaal of het een nieuw artikel moet worden of niet
+                                                artikel.Artikelen.Add(defObject);
+                                                xmlOrder.Artikelen.Add(artikel);
+                                            }
+                                            
+                                        }
                                     }
                                 }
 
