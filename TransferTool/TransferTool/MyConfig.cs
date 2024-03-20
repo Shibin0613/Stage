@@ -321,15 +321,10 @@ namespace TransferTool
 
             JsonHelpers.WriteToJsonFile(def, "../../../nhDef.json");*/
             ReadDefinitions();
-
-            var def1 = JsonHelpers.ReadFromJsonFile<pdfDefinition>("../../../def_NH hotels.json");
-
-            var s = def1.IdentifierText;
         }
         
         public static pdfDefinition? GetDefinition(string text)
         {
-            
             return pdfDefinitions?.Find(pdfDefinition => text.ContainsText(pdfDefinition.IdentifierText));
         }
 
@@ -349,7 +344,7 @@ namespace TransferTool
                 var json = JsonSerializer.Serialize(new { FileStorage = value });
                 try
                 {
-                    File.WriteAllText("appsettings.json", json);
+                    File.WriteAllText("../../../appsettings.json", json);
                     // Update configuration after writing to appsettings.json
                     InitConfig(); // Reset configuration after updating appsettings.json
                     OnFilePathUpdated();
@@ -365,10 +360,15 @@ namespace TransferTool
         private static void ReadDefinitions()
         {
             pdfDefinitions = new List<pdfDefinition>();
-            //*loop files
-            var def = JsonHelpers.ReadFromJsonFile<pdfDefinition>("../../../def_NH hotels.json");
+            //*loop door alle json.file
 
-            pdfDefinitions.Add(def);
+            DirectoryInfo d = new DirectoryInfo("../../../");
+            foreach (var file in d.GetFiles("*.json"))
+            { 
+                var def = JsonHelpers.ReadFromJsonFile<pdfDefinition>(file.FullName);
+
+                pdfDefinitions.Add(def);
+            }
             //endloop
             
         }

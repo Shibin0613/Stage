@@ -20,15 +20,19 @@ namespace TransferTool
         {
             bool result = false;
 
-            foreach (string CheckEachText in toSearch)
+            if (toSearch != null)
             {
-                if (text.Contains(CheckEachText))
+                foreach (string CheckEachText in toSearch)
                 {
-                    result = true;
-                }
-                else
-                {
-                    result = false;
+                    if (text.Contains(CheckEachText))
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                        return result;
+                    }
                 }
             }
             // afmaken 

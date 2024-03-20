@@ -196,6 +196,7 @@ namespace TransferTool
                         using (PdfReader reader = new PdfReader(memoryStream))
                         {
                             HashSet<string> uniqueTags = new HashSet<string>();
+                            HashSet<string> uniqueArtikel = new HashSet<string>();
 
                             for (int i = 1; i <= reader.NumberOfPages; i++)
                             {
@@ -208,40 +209,44 @@ namespace TransferTool
 
                                 if (def != null)
                                 {
+                                    var lines = currentText.Split('\n');
 
-                                }
+                                    text.Append(currentText);
 
-                                var lines = currentText.Split('\n');
-
-
-
-                                text.Append(currentText);
-
-                                foreach (var defObject in def.defObjects)
-                                {
-                                    var value = defObject.GetValue(reader, currentText, i, defObject);
-
-                                    if (!uniqueTags.Contains(defObject.TagNaam) && !string.IsNullOrEmpty(defObject.Value))
+                                    foreach (var defObject in def.defObjects)
                                     {
-                                        uniqueTags.Add(defObject.TagNaam);
-                                        // vul hier de xml order
-                                        if (defObject.XmlNiveau == XmlNiveau.Order)
+                                        var value = defObject.GetValue(reader, currentText, i, defObject);
+
+                                        if (!uniqueTags.Contains(defObject.TagNaam) && !string.IsNullOrEmpty(defObject.Value))
                                         {
-                                            xmlOrder.Items.Add(defObject);
-                                        }
-                                        else
-                                        {
-                                            string[] test = defObject.Value.Split("Order", StringSplitOptions.RemoveEmptyEntries);
-                                            foreach (string test1 in test)
+                                            uniqueTags.Add(defObject.TagNaam);
+                                            // vul hier de xml order
+                                            if (defObject.XmlNiveau == XmlNiveau.Order)
                                             {
+                                                xmlOrder.Items.Add(defObject);
+                                            }
+                                            else
+                                            {
+                                                string[] EachOrder = defObject.Value.Split("Order", StringSplitOptions.RemoveEmptyEntries);
                                                 xmlArtikel artikel = new xmlArtikel();
 
-                                                defObject.Value = test1;
-                                                // bepaal of het een nieuw artikel moet worden of niet
-                                                artikel.Artikelen.Add(defObject);
+                                                foreach (string EachOrderString in EachOrder)
+                                                {
+                                                    if (!uniqueArtikel.Contains(EachOrderString) && !string.IsNullOrEmpty(EachOrderString))
+                                                    {
+                                                        uniqueArtikel.Add(EachOrderString);
+                                                        var newDefObject = new defObject(); // Maak een nieuwe instantie van defObject
+
+                                                        newDefObject.OrderTags = defObject.OrderTags; //Voeg een tagnaam toe voor later
+
+                                                        newDefObject.Value = EachOrderString; // Wijs de waarde toe aan de nieuwe instantie
+                                                        artikel.Artikelen.Add(newDefObject);
+                                                    }
+                                                    // bepaal of het een nieuw artikel moet worden of niet
+
+                                                }
                                                 xmlOrder.Artikelen.Add(artikel);
                                             }
-
                                         }
                                     }
                                 }
@@ -554,9 +559,9 @@ namespace TransferTool
 
                                 xmlOrder.Artikelen.ForEach(a =>
                                 {
-                                    writer.WriteStartElement("Artikel");
+                                    
                                     a.Artikelen.ForEach(o => WriteXmlTagArtikel(writer, o));
-                                    writer.WriteEndElement();
+                                    
                                 });
                                 writer.WriteEndElement();
 
@@ -728,55 +733,53 @@ namespace TransferTool
         {
             if (o.Value != null)
             {
-                string[] eachOrderFrom = o.Value.ToString().Split("Order", StringSplitOptions.RemoveEmptyEntries);
-                foreach (string orderLine in eachOrderFrom)
+                writer.WriteStartElement("Artikel");
+                string orderLine = o.Value;
+                orderLine.Replace("\n", " ");
+                int i = 0;
+
+                var referentieIndex = orderLine.Split(' ')[1];
+
+                string[] item = new string[o.OrderTags.Count()];
+
+                item[0] = orderLine.Split(' ')[0];
+
+                item[o.OrderTags.Count() - 5] = orderLine.Split(' ').Reverse().Take(5).Last();
+                item[o.OrderTags.Count() - 4] = orderLine.Split(' ').Reverse().Take(4).Last();
+                item[o.OrderTags.Count() - 3] = orderLine.Split(' ').Reverse().Take(3).Last();
+                item[o.OrderTags.Count() - 2] = orderLine.Split(' ').Reverse().Take(2).Last();
+                item[o.OrderTags.Count() - 1] = orderLine.Split(" ").Last().Trim();
+
+                foreach (var Ordertagnaam in o.OrderTags)
                 {
-                    orderLine.Replace("\n", " ");
-                    int i = 0;
+                    string tagNaam = Ordertagnaam.TagNaam;
+                    writer.WriteStartElement(tagNaam);
 
-                    var referentieIndex = orderLine.Split(' ')[1];
-
-                    string[] item = new string[o.OrderTags.Count()];
-
-                    item[0] = orderLine.Split(' ')[0];
-
-                    item[o.OrderTags.Count() - 5] = orderLine.Split(' ').Reverse().Take(5).Last();
-                    item[o.OrderTags.Count() - 4] = orderLine.Split(' ').Reverse().Take(4).Last();
-                    item[o.OrderTags.Count() - 3] = orderLine.Split(' ').Reverse().Take(3).Last();
-                    item[o.OrderTags.Count() - 2] = orderLine.Split(' ').Reverse().Take(2).Last();
-                    item[o.OrderTags.Count() - 1] = orderLine.Split(" ").Last().Trim();
-
-                    foreach (var Ordertagnaam in o.OrderTags)
+                    if (Regex.IsMatch(referentieIndex, @"\d"))
                     {
-                        string tagNaam = Ordertagnaam.TagNaam;
-                        writer.WriteStartElement(tagNaam);
-
-                        if (Regex.IsMatch(referentieIndex, @"\d"))
-                        {
-                            //Zo ja, dan is die de referentie
-                            item[1] = referentieIndex;
-                            item[2] = orderLine.Split(' ')[2];
-                        }
-                        else
-                        {
-                            int referentieFrom = orderLine.IndexOf(" ");
-                            int referentieTo = orderLine.IndexOf(" ", referentieFrom + 1); // Zoek vanaf het karakter na het eerste spatie-teken
-                            int derdeSpaceIndex = orderLine.IndexOf(" ", referentieTo + 1); // Zoek vanaf het karakter na de tweede spatie-teken
-
-                            item[1] = orderLine.Substring(referentieFrom + 1, derdeSpaceIndex - referentieFrom - 1).Trim();
-                            item[2] = orderLine.Split(' ')[3];
-                        }
-                        int materiaalOmschrijvingFrom = orderLine.IndexOf(item[2]) + item[2].Length;
-                        int materiaalOmschrijvingTo = orderLine.IndexOf(item[o.OrderTags.Count() - 5]);
-                        item[3] = orderLine.Substring(materiaalOmschrijvingFrom, materiaalOmschrijvingTo - materiaalOmschrijvingFrom).Trim();
-
-                        writer.WriteString(item[i]);
-                        writer.WriteEndElement();
-                        i++;
-
+                        //Zo ja, dan is die de referentie
+                        item[1] = referentieIndex;
+                        item[2] = orderLine.Split(' ')[2];
                     }
-                }
+                    else
+                    {
+                        int referentieFrom = orderLine.IndexOf(" ");
+                        int referentieTo = orderLine.IndexOf(" ", referentieFrom + 1); // Zoek vanaf het karakter na het eerste spatie-teken
+                        int derdeSpaceIndex = orderLine.IndexOf(" ", referentieTo + 1); // Zoek vanaf het karakter na de tweede spatie-teken
 
+                        item[1] = orderLine.Substring(referentieFrom + 1, derdeSpaceIndex - referentieFrom - 1).Trim();
+                        item[2] = orderLine.Split(' ')[3];
+                    }
+                    int materiaalOmschrijvingFrom = orderLine.IndexOf(item[2]) + item[2].Length;
+                    int materiaalOmschrijvingTo = orderLine.IndexOf(item[o.OrderTags.Count() - 5]);
+                    item[3] = orderLine.Substring(materiaalOmschrijvingFrom, materiaalOmschrijvingTo - materiaalOmschrijvingFrom).Trim();
+
+                    writer.WriteString(item[i]);
+                    writer.WriteEndElement();
+                    i++;
+
+                }
+                writer.WriteEndElement();
             }
         }
     }
