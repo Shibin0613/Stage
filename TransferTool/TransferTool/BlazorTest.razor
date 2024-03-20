@@ -454,12 +454,6 @@
                         fileIsAccepted.Replace(fileName, "");
 
                         memoryStream.Close();
-                        if (!Directory.Exists(MyConfig.FilePath + "\\Afgewezen"))
-                        {
-                            Directory.CreateDirectory(MyConfig.FilePath + "\\Afgewezen");
-                        }
-                        string failedSourcePath = MyConfig.FilePath + "\\" + fileName;
-                        File.Move(failedSourcePath, MyConfig.FilePath + "\\Afgewezen\\" + fileName);
                     }
                     else
                     {

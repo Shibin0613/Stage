@@ -344,7 +344,7 @@ namespace TransferTool
                 var json = JsonSerializer.Serialize(new { FileStorage = value });
                 try
                 {
-                    File.WriteAllText("../../../appsettings.json", json);
+                    File.WriteAllText("appsettings.json", json);
                     // Update configuration after writing to appsettings.json
                     InitConfig(); // Reset configuration after updating appsettings.json
                     OnFilePathUpdated();
@@ -362,7 +362,7 @@ namespace TransferTool
             pdfDefinitions = new List<pdfDefinition>();
             //*loop door alle json.file
 
-            DirectoryInfo d = new DirectoryInfo("../../../");
+            DirectoryInfo d = new DirectoryInfo(Directory.GetCurrentDirectory());
             foreach (var file in d.GetFiles("*.json"))
             { 
                 var def = JsonHelpers.ReadFromJsonFile<pdfDefinition>(file.FullName);
@@ -372,14 +372,15 @@ namespace TransferTool
             //endloop
             
         }
-        private static void WriteDefinitions()
+
+        /*private static void WriteDefinitions()
         {
             pdfDefinitions.ForEach(pdfDefinition =>
             {
                 var file = "../../../nhDef.json";
                 JsonHelpers.WriteToJsonFile(pdfDefinition, file);
             });
-        }
+        }*/
 
         private static void OnFilePathUpdated()
         {
