@@ -1,0 +1,95 @@
+[
+  {
+    //NH Hotel
+    "Hotelname": "NH",
+    "Hotelnaam": {
+      "x": "524,16",
+      "y": "538,68",
+      "xy": "254,88",
+      "yx": "6,84"
+    },
+
+    "Ordernumber": {
+      "From": "INKOOP ORDER NUMMER ",
+      "To": "INKOOP ORDER DATUM EXCLUSIEF"
+    },
+    "Aanvrager": {
+      "x": "255",
+      "y": "438",
+      "xy": "152",
+      "yx": "78"
+    },
+    "Afleveradres": {
+      "x": "454,07",
+      "y": "442,34",
+      "xy": "156,08",
+      "yx": "77,25"
+    },
+    "Leverancier": {
+      "x": "622,25",
+      "y": "410,88",
+      "xy": "158,40",
+      "yx": "108,71"
+    },
+    "Inkoopdatum": {
+      "x": "232,29",
+      "y": "377,24",
+      "xy": "85,88",
+      "yx": "22"
+    },
+    "Valuta": {
+      "x": "744,97",
+      "y": "376,91",
+      "xy": "29,64",
+      "yx": "22"
+    },
+    "Opmerking": {
+      "From": "OPMERKING :  ",
+      "TO": "LIJN I REFERENTIE"
+    },
+    "Order": {
+      "From": "AANTAL PRIJS EENHEID TOTAAL",
+      "TO": "TOTAAL"
+    },
+    "Totaalbedrag": {
+      "From": "TOTAAL ",
+      "TO": " EUR"
+    },
+    "Betaalcondities": {
+      "From": "BETAALCONDITIES",
+      "TO": "FACTUURADRES"
+    },
+    "FactuurAdres": {
+      "From": "FACTUURADRES",
+      "TO": "STUUR FACTUUR AAN"
+    },
+    "Stuur factuur aan": {
+      "From": "STUUR FACTUUR AAN",
+      "TO": "LEVERING"
+    },
+    "Levering": {
+      "From": "LEVERING",
+      "TO": "TOTAAL "
+    }
+  },
+  //Hotel B
+  {
+    "Hotelname": "Hotel B",
+    "Hotelnaam": {
+      "x": "",
+      "y": "",
+      "xy": "",
+      "yx": ""
+    }
+  },
+  //Hotel C
+  {
+    "Hotelname": "Hotel C",
+    "Hotelnaam": {
+      "x": "",
+      "y": "",
+      "xy": "",
+      "yx": ""
+    }
+  }
+]
