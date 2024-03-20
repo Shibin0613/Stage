@@ -93,7 +93,6 @@ namespace TransferTool
                     else
 
                         writer.Write(contentsToWriteToFile);
-
                 }
 
             }

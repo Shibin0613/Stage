@@ -1,0 +1,11 @@
+C:\Users\pansh\Desktop\TransferTool\appsettings.Development.json
+C:\Users\pansh\Desktop\TransferTool\appsettings.json
+C:\Users\pansh\Desktop\TransferTool\def_NH hotels.json
+C:\Users\pansh\Desktop\TransferTool\TransferTool.pdb
+C:\Users\pansh\Desktop\TransferTool\D3DCompiler_47_cor3.dll
+C:\Users\pansh\Desktop\TransferTool\PenImc_cor3.dll
+C:\Users\pansh\Desktop\TransferTool\PresentationNative_cor3.dll
+C:\Users\pansh\Desktop\TransferTool\vcruntime140_cor3.dll
+C:\Users\pansh\Desktop\TransferTool\wpfgfx_cor3.dll
+C:\Users\pansh\Desktop\TransferTool\WebView2Loader.dll
+C:\Users\pansh\Desktop\TransferTool\TransferTool.exe

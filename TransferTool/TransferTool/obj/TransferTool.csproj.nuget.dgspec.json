@@ -40,10 +40,6 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
-            "IronOcr": {
-              "target": "Package",
-              "version": "[2024.3.4, )"
-            },
             "Microsoft.AspNetCore.Components.WebView.WindowsForms": {
               "target": "Package",
               "version": "[8.0.10, )"

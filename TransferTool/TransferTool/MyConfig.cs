@@ -16,7 +16,6 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.Web.WebView2.Core;
 using System.Web;
-using BitMiracle.LibTiff.Classic;
 
 namespace TransferTool
 {
@@ -61,7 +60,7 @@ namespace TransferTool
 
     public List<defOrder> OrderTags { get; set; }
 
-        internal string GetValue(PdfReader reader, string currentText, int i, defObject defObject)
+        internal string GetValue(PdfReader reader, string currentText, int i, defObject defObject, int j)
         {
             string value = string.Empty;
             if (currentText.Contains(defObject.Text.From))
@@ -134,8 +133,6 @@ namespace TransferTool
 
                             string pattern = @"(.+?)\s *(.*?)(?:\n|$)";
 
-                            int j = 10;
-
                             // Productinfo voor elk besteld product....
                             foreach (Match match in Regex.Matches(orderWithText, pattern))
                             {
@@ -195,8 +192,6 @@ namespace TransferTool
 
                             string pattern = @"(.+?)\s *(.*?)(?:\n|$)";
 
-
-                            int j = 10;
 
                             // Productinfo voor elk besteld product....
                             foreach (Match match in Regex.Matches(orderWithText, pattern))
@@ -346,8 +341,9 @@ namespace TransferTool
                 {
                     File.WriteAllText("appsettings.json", json);
                     // Update configuration after writing to appsettings.json
-                    InitConfig(); // Reset configuration after updating appsettings.json
                     OnFilePathUpdated();
+                    InitConfig(); // Reset configuration after updating appsettings.json
+
                 }
                 catch (Exception ex)
                 {

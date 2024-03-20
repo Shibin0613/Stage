@@ -133,6 +133,7 @@
 
                 using (var memoryStream = new MemoryStream())
                 {
+                    int j = 10;
                     await file.OpenReadStream().CopyToAsync(memoryStream);
                     memoryStream.Seek(0, SeekOrigin.Begin);
 
@@ -187,17 +188,19 @@
 
                                 foreach (var defObject in def.defObjects)
                                 {
-                                    var value = defObject.GetValue(reader, currentText, i, defObject);
+                                    var value = defObject.GetValue(reader, currentText, i, defObject, j);
 
-                                    if (!uniqueTags.Contains(defObject.TagNaam) && !string.IsNullOrEmpty(defObject.Value))
+                                    if (defObject.XmlNiveau == XmlNiveau.Order)
                                     {
-                                        uniqueTags.Add(defObject.TagNaam);
-                                        // vul hier de xml order
-                                        if (defObject.XmlNiveau == XmlNiveau.Order)
+                                        if (!uniqueTags.Contains(defObject.TagNaam) && !string.IsNullOrEmpty(defObject.Value))
                                         {
+                                            uniqueTags.Add(defObject.TagNaam);
                                             xmlOrder.Items.Add(defObject);
                                         }
-                                        else
+                                    }
+                                    else
+                                    {
+                                        if (defObject.Value != null)
                                         {
                                             string[] EachOrder = defObject.Value.Split("Order", StringSplitOptions.RemoveEmptyEntries);
                                             xmlArtikel artikel = new xmlArtikel();
@@ -213,9 +216,10 @@
 
                                                     newDefObject.Value = EachOrderString; // Wijs de waarde toe aan de nieuwe instantie
                                                     artikel.Artikelen.Add(newDefObject);
+
                                                 }
                                                 // bepaal of het een nieuw artikel moet worden of niet
-
+                                                j += 10;
                                             }
                                             xmlOrder.Artikelen.Add(artikel);
                                         }
@@ -511,9 +515,7 @@
 
                             xmlOrder.Artikelen.ForEach(a =>
                             {
-
                                 a.Artikelen.ForEach(o => WriteXmlTagArtikel(writer, o));
-
                             });
                             writer.WriteEndElement();
 
@@ -692,16 +694,16 @@
             orderLine.Replace("\n", " ");
             int i = 0;
 
-            var referentieIndex = orderLine.Split(' ')[1];
+            var referentieIndex = orderLine.Split(" ")[1];
 
             string[] item = new string[o.OrderTags.Count()];
 
-            item[0] = orderLine.Split(' ')[0];
+            item[0] = orderLine.Split(" ")[0];
 
-            item[o.OrderTags.Count() - 5] = orderLine.Split(' ').Reverse().Take(5).Last();
-            item[o.OrderTags.Count() - 4] = orderLine.Split(' ').Reverse().Take(4).Last();
-            item[o.OrderTags.Count() - 3] = orderLine.Split(' ').Reverse().Take(3).Last();
-            item[o.OrderTags.Count() - 2] = orderLine.Split(' ').Reverse().Take(2).Last();
+            item[o.OrderTags.Count() - 5] = orderLine.Split(" ").Reverse().Take(5).Last();
+            item[o.OrderTags.Count() - 4] = orderLine.Split(" ").Reverse().Take(4).Last();
+            item[o.OrderTags.Count() - 3] = orderLine.Split(" ").Reverse().Take(3).Last();
+            item[o.OrderTags.Count() - 2] = orderLine.Split(" ").Reverse().Take(2).Last();
             item[o.OrderTags.Count() - 1] = orderLine.Split(" ").Last().Trim();
 
             foreach (var Ordertagnaam in o.OrderTags)
@@ -713,7 +715,7 @@
                 {
                     //Zo ja, dan is die de referentie
                     item[1] = referentieIndex;
-                    item[2] = orderLine.Split(' ')[2];
+                    item[2] = orderLine.Split(" ")[2];
                 }
                 else
                 {
@@ -722,7 +724,7 @@
                     int derdeSpaceIndex = orderLine.IndexOf(" ", referentieTo + 1); // Zoek vanaf het karakter na de tweede spatie-teken
 
                     item[1] = orderLine.Substring(referentieFrom + 1, derdeSpaceIndex - referentieFrom - 1).Trim();
-                    item[2] = orderLine.Split(' ')[3];
+                    item[2] = orderLine.Split(" ")[3];
                 }
                 int materiaalOmschrijvingFrom = orderLine.IndexOf(item[2]) + item[2].Length;
                 int materiaalOmschrijvingTo = orderLine.IndexOf(item[o.OrderTags.Count() - 5]);

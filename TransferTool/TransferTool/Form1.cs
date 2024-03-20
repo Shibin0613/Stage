@@ -14,8 +14,6 @@ using System.Text.Json;
 using System.Globalization;
 using static System.Net.Mime.MediaTypeNames;
 
-using IronOcr;
-using IronSoftware.Drawing;
 using Org.BouncyCastle.Asn1.X509;
 using Microsoft.VisualBasic.Logging;
 using System.Security.Cryptography.Xml;
@@ -166,7 +164,7 @@ namespace TransferTool
 
                 using (FileStream fileStream = new FileStream(destinationPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
-
+                    int j = 10;
                     using (var memoryStream = new MemoryStream())
                     {
                         await fileStream.CopyToAsync(memoryStream);
@@ -192,11 +190,13 @@ namespace TransferTool
 
                         pdfDefinition def = null;
                         xmlOrder xmlOrder = new xmlOrder();
+                        
 
                         using (PdfReader reader = new PdfReader(memoryStream))
                         {
                             HashSet<string> uniqueTags = new HashSet<string>();
                             HashSet<string> uniqueArtikel = new HashSet<string>();
+                            
 
                             for (int i = 1; i <= reader.NumberOfPages; i++)
                             {
@@ -215,17 +215,20 @@ namespace TransferTool
 
                                     foreach (var defObject in def.defObjects)
                                     {
-                                        var value = defObject.GetValue(reader, currentText, i, defObject);
+                                        var value = defObject.GetValue(reader, currentText, i, defObject, j);
 
-                                        if (!uniqueTags.Contains(defObject.TagNaam) && !string.IsNullOrEmpty(defObject.Value))
+                                        // vul hier de xml order
+                                        if (defObject.XmlNiveau == XmlNiveau.Order)
                                         {
-                                            uniqueTags.Add(defObject.TagNaam);
-                                            // vul hier de xml order
-                                            if (defObject.XmlNiveau == XmlNiveau.Order)
+                                            if (!uniqueTags.Contains(defObject.TagNaam) && !string.IsNullOrEmpty(defObject.Value))
                                             {
+                                                uniqueTags.Add(defObject.TagNaam);
                                                 xmlOrder.Items.Add(defObject);
                                             }
-                                            else
+                                        }
+                                        else
+                                        {
+                                            if (defObject.Value != null)
                                             {
                                                 string[] EachOrder = defObject.Value.Split("Order", StringSplitOptions.RemoveEmptyEntries);
                                                 xmlArtikel artikel = new xmlArtikel();
@@ -241,9 +244,10 @@ namespace TransferTool
 
                                                         newDefObject.Value = EachOrderString; // Wijs de waarde toe aan de nieuwe instantie
                                                         artikel.Artikelen.Add(newDefObject);
+
                                                     }
                                                     // bepaal of het een nieuw artikel moet worden of niet
-
+                                                    j += 10;
                                                 }
                                                 xmlOrder.Artikelen.Add(artikel);
                                             }
@@ -559,9 +563,7 @@ namespace TransferTool
 
                                 xmlOrder.Artikelen.ForEach(a =>
                                 {
-                                    
-                                    a.Artikelen.ForEach(o => WriteXmlTagArtikel(writer, o));
-                                    
+                                    a.Artikelen.ForEach(o => WriteXmlTagArtikel(writer, o));   
                                 });
                                 writer.WriteEndElement();
 
@@ -705,7 +707,14 @@ namespace TransferTool
                                 Directory.CreateDirectory(MyConfig.FilePath + "\\Verwerkt");
                             }
                             string sourcePath = MyConfig.FilePath + "\\" + fileName;
-                            File.Move(sourcePath, MyConfig.FilePath + "\\Verwerkt\\" + fileName);
+                            if (!File.Exists(MyConfig.FilePath + "\\Verwerkt\\" + fileName))
+                            {
+                                File.Move(sourcePath, MyConfig.FilePath + "\\Verwerkt\\" + fileName);
+                            }
+                            else
+                            {
+                                File.Delete(MyConfig.FilePath + "\\" + fileName);
+                            }
 
                         }
                     }
@@ -729,7 +738,7 @@ namespace TransferTool
             }
         }
 
-        private void WriteXmlTagArtikel(XmlWriter writer, defObject o)
+        public void WriteXmlTagArtikel(XmlWriter writer, defObject o)
         {
             if (o.Value != null)
             {
@@ -738,16 +747,16 @@ namespace TransferTool
                 orderLine.Replace("\n", " ");
                 int i = 0;
 
-                var referentieIndex = orderLine.Split(' ')[1];
+                var referentieIndex = orderLine.Split(" ")[1];
 
                 string[] item = new string[o.OrderTags.Count()];
 
-                item[0] = orderLine.Split(' ')[0];
+                item[0] = orderLine.Split(" ")[0];
 
-                item[o.OrderTags.Count() - 5] = orderLine.Split(' ').Reverse().Take(5).Last();
-                item[o.OrderTags.Count() - 4] = orderLine.Split(' ').Reverse().Take(4).Last();
-                item[o.OrderTags.Count() - 3] = orderLine.Split(' ').Reverse().Take(3).Last();
-                item[o.OrderTags.Count() - 2] = orderLine.Split(' ').Reverse().Take(2).Last();
+                item[o.OrderTags.Count() - 5] = orderLine.Split(" ").Reverse().Take(5).Last();
+                item[o.OrderTags.Count() - 4] = orderLine.Split(" ").Reverse().Take(4).Last();
+                item[o.OrderTags.Count() - 3] = orderLine.Split(" ").Reverse().Take(3).Last();
+                item[o.OrderTags.Count() - 2] = orderLine.Split(" ").Reverse().Take(2).Last();
                 item[o.OrderTags.Count() - 1] = orderLine.Split(" ").Last().Trim();
 
                 foreach (var Ordertagnaam in o.OrderTags)
@@ -759,7 +768,7 @@ namespace TransferTool
                     {
                         //Zo ja, dan is die de referentie
                         item[1] = referentieIndex;
-                        item[2] = orderLine.Split(' ')[2];
+                        item[2] = orderLine.Split(" ")[2];
                     }
                     else
                     {
@@ -768,7 +777,7 @@ namespace TransferTool
                         int derdeSpaceIndex = orderLine.IndexOf(" ", referentieTo + 1); // Zoek vanaf het karakter na de tweede spatie-teken
 
                         item[1] = orderLine.Substring(referentieFrom + 1, derdeSpaceIndex - referentieFrom - 1).Trim();
-                        item[2] = orderLine.Split(' ')[3];
+                        item[2] = orderLine.Split(" ")[3];
                     }
                     int materiaalOmschrijvingFrom = orderLine.IndexOf(item[2]) + item[2].Length;
                     int materiaalOmschrijvingTo = orderLine.IndexOf(item[o.OrderTags.Count() - 5]);
