@@ -19,11 +19,6 @@ using System.Web;
 
 namespace TransferTool
 {
-    //public enum ProdistFieldType
-    //{
-    //    Klantnummer, Klantnaam, Ordernummer, Orderomschrijving, Artikelcode, Artikelaantal, Artikelomschrijving, Referentie
-    //}
-
     public enum XmlNiveau
     {
         Order, Artikel
@@ -63,8 +58,11 @@ namespace TransferTool
         internal string GetValue(PdfReader reader, string currentText, int i, defObject defObject, int j)
         {
             string value = string.Empty;
+            //Als de huidige text geen deObject.Text.From bevat, dan overslaan. Dat heeft te maken dat er de pdf-pagina apart wordt uirgelezen,
+            //en wat bij pagina 1 te vinden is, vind je niet per se ook in pagina2
             if (currentText.Contains(defObject.Text.From))
             {
+                //Als defobject.Text.From en To niet leeg zijn, dan pak hij de From en to
                 if (!string.IsNullOrWhiteSpace(defObject.Text.From) || !string.IsNullOrWhiteSpace(defObject.Text.To))
                 {
                     string x = defObject.Text.From.ToString();
@@ -78,6 +76,7 @@ namespace TransferTool
                         textTo = currentText.LastIndexOf(y);
                     }
 
+                    //Als de pdf pagina minder dan 2 is. Dit is voor de orders.
                     if (i < 2)
                     {
                         value = currentText.Substring(textFrom).Trim();
@@ -102,6 +101,7 @@ namespace TransferTool
                         }
                     }
                 }
+                //Anders pakt hij de coordinaten variabelen
                 else
                 {
                     float x = (float)defObject.Position.X;
@@ -116,10 +116,13 @@ namespace TransferTool
                         new LocationTextExtractionStrategy(), filter);
                     value = PdfTextExtractor.GetTextFromPage(reader, i, strategy).Trim();
                 }
+
+                //defObject.OrderTags wordt van tevoren handmatig gedefinieerd. Als de defObject.Ordertags niet bestaat, sla deze stap over.
                 if (defObject.OrderTags != null)
                 {
                     StringBuilder order = new StringBuilder();
                     int orderFrom = currentText.IndexOf(defObject.Text.From);
+                    //Dit geldt voor pagina 2, Omdat huidige text dan het Totaalbedrag bevat.
                     if (currentText.Contains(defObject.Text.To))
                         {
                         string orderWithText = currentText.Substring(orderFrom + defObject.Text.From.Length).Trim();
@@ -176,6 +179,7 @@ namespace TransferTool
                             order.Append(Order);
                         }
                     }
+                    //Anders pagina 1, van een bepaade text tot het einde.
                     else
                     {
                         string orderWithText = currentText.Substring(orderFrom + defObject.Text.From.Length).Trim();
@@ -191,7 +195,6 @@ namespace TransferTool
                             // Regex-patroon om elk artikel te matchen
 
                             string pattern = @"(.+?)\s *(.*?)(?:\n|$)";
-
 
                             // Productinfo voor elk besteld product....
                             foreach (Match match in Regex.Matches(orderWithText, pattern))
@@ -312,12 +315,15 @@ namespace TransferTool
 
             def.IdentifierText = new List<string>();
             def.IdentifierText.Add("NH");
-            def.IdentifierText.Add("Hotels");
+            def.IdentifierText.Add("Hotel");
 
             JsonHelpers.WriteToJsonFile(def, "../../../nhDef.json");*/
+
+            //Bij het opstarten wordt alle configuratiebestand opgehaald
             ReadDefinitions();
         }
         
+        //Hier wordt gekeken voor elke configuratiebestand of de geuploade bestand overeenkomt met de unieke tekst
         public static pdfDefinition? GetDefinition(string text)
         {
             return pdfDefinitions?.Find(pdfDefinition => text.ContainsText(pdfDefinition.IdentifierText));
@@ -356,27 +362,20 @@ namespace TransferTool
         private static void ReadDefinitions()
         {
             pdfDefinitions = new List<pdfDefinition>();
-            //*loop door alle json.file
 
+            //*Loop door alle json.files in huidig map
             DirectoryInfo d = new DirectoryInfo(Directory.GetCurrentDirectory());
             foreach (var file in d.GetFiles("*.json"))
             { 
                 var def = JsonHelpers.ReadFromJsonFile<pdfDefinition>(file.FullName);
 
-                pdfDefinitions.Add(def);
+                if (def != null)
+                {
+                    pdfDefinitions.Add(def);
+                }
             }
             //endloop
-            
         }
-
-        /*private static void WriteDefinitions()
-        {
-            pdfDefinitions.ForEach(pdfDefinition =>
-            {
-                var file = "../../../nhDef.json";
-                JsonHelpers.WriteToJsonFile(pdfDefinition, file);
-            });
-        }*/
 
         private static void OnFilePathUpdated()
         {
