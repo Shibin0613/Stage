@@ -1,0 +1,183 @@
+{
+    "defObjects": [{
+        "Position": {
+            "X": 400,
+            "Y": 30.96,
+            "Z": 149,
+            "W": 90.72
+        },
+        "Text": {
+            "From": "",
+            "To": ""
+        },
+        "TagNaam": "BESTELNUMMER",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "",
+            "To": ""
+        },
+        "TagNaam": "BESTELDATUM",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 255,
+            "Y": 438,
+            "Z": 152,
+            "W": 78
+        },
+        "Text": {
+            "From": "",
+            "To": ""
+        },
+        "TagNaam": "LEVERDATUM",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 454.07,
+            "Y": 442.34,
+            "Z": 156.08,
+            "W": 77.25
+        },
+        "Text": {
+            "From": "",
+            "To": ""
+        },
+        "TagNaam": "LEVERANCIER",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 622.25,
+            "Y": 410.88,
+            "Z": 158.4,
+            "W": 108.71
+        },
+        "Text": {
+            "From": "",
+            "To": ""
+        },
+        "TagNaam": "BEDRIJFSINFO",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "servicio.",
+            "To": "INKOOP ORDER NUMMER"
+        },
+        "TagNaam": "BESTEMMINGADRES",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 744.97,
+            "Y": 376.91,
+            "Z": 29.64,
+            "W": 22
+        },
+        "Text": {
+            "From": "",
+            "To": ""
+        },
+        "TagNaam": "REFERENTIE",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "OPMERKING :  ",
+            "To": "LIJN I REFERENTIE"
+        },
+        "TagNaam": "LEVERWIJZE",
+        "XmlNiveau": 0,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "AANTAL PRIJS EENHEID TOTAAL",
+            "To": "TOTAAL "
+        },
+        "TagNaam": "OPMERKING",
+        "XmlNiveau": 1,
+        "Value": null,
+        "OrderTags": null
+    }, {
+        "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 0
+        },
+        "Text": {
+            "From": "TOTAAL ",
+            "To": " EUR"
+        },
+        "TagNaam": "ARTIKEL",
+        "XmlNiveau": 0,
+        "Value": null,
+      "OrderTags": [
+        {
+          "TagNaam": "POS",
+          "Value": null
+        },
+        {
+          "TagNaam": "ITEMNUMMER",
+          "Value": null
+        },
+        {
+          "TagNaam": "OMSCHRIJVING",
+          "Value": null
+        },
+        {
+          "TagNaam": "AANTAL",
+          "Value": null
+        },
+        {
+          "TagNaam": "EENHEIDSPRIJS",
+          "Value": null
+        },
+        {
+          "TagNaam": "KORTING",
+          "Value": null
+        },
+        {
+          "TagNaam": "TOTAALBEDRAG",
+          "Value": null
+        }
+      ]
+    }],
+    "IdentifierText": ["Pallet Sorting Systems"]
+}
