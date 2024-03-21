@@ -40,7 +40,6 @@ namespace TransferTool
             //.Build();
         }
 
-
         public Form1()
         {
             InitializeComponent();
@@ -55,11 +54,6 @@ namespace TransferTool
             // Subscribe to FilePathUpdated event
             MyConfig.FilePathUpdated += MyConfig_FilePathUpdated;
             startWatching();
-        }
-
-        private void blazorWebView1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void startWatching()
@@ -97,6 +91,7 @@ namespace TransferTool
         {
             watcher.EnableRaisingEvents = false;
             watcher.Dispose();
+            filePath = MyConfig.FilePath;
             startWatching();
         }
 
@@ -268,7 +263,7 @@ namespace TransferTool
                                 writer.WriteStartElement("Order");
 
                                 //Huidige PDF text
-                                // Element dat de ORDER bevat
+                                //Element dat in het configuratiebestand te vinden is
                                 writer.WriteStartElement("Huidige_PDFtext");
                                 writer.WriteString(text.ToString());
                                 writer.WriteEndElement();
@@ -284,7 +279,11 @@ namespace TransferTool
                                 {
                                     a.Artikelen.ForEach(o => WriteXmlTagArtikel(writer, o));   
                                 });
+
                                 writer.WriteEndElement();
+
+                                writer.WriteEndElement();
+                                writer.WriteEndDocument();
                             }
 
                             memoryStream.Close();
@@ -296,7 +295,7 @@ namespace TransferTool
                     }
                 }
             }
-            else
+            else if(fileExtension.ToLower() != ".xml")
             {
                 MoveOrDeleteFailedFile(fileName);
             }
@@ -369,28 +368,41 @@ namespace TransferTool
 
         public void MoveOrDeleteFailedFile(string fileName)
         {
-            if (!Directory.Exists(MyConfig.FilePath + "\\Afgewezen"))
+            string folderNaam = "Afgewezen";
+            string filePath = MyConfig.FilePath;
+
+            if (!Directory.Exists(filePath + "\\" + folderNaam))
             {
-                Directory.CreateDirectory(MyConfig.FilePath + "\\Afgewezen");
+                Directory.CreateDirectory(filePath + "\\" + folderNaam);
             }
-            string failedSourcePath = MyConfig.FilePath + "\\" + fileName;
-            File.Move(failedSourcePath, MyConfig.FilePath + "\\Afgewezen\\" + fileName);
+            string failedSourcePath = filePath + "\\" + fileName;
+            if (!File.Exists(filePath + "\\" + folderNaam + "\\" + fileName))
+            {
+                File.Move(failedSourcePath, filePath + "\\" + folderNaam + "\\" + fileName);
+            }
+            else
+            {
+                File.Delete(filePath + "\\" + fileName);
+            }
         }
 
         public void MoveOrDeletelSucceedFile(string fileName)
         {
-            if (!Directory.Exists(MyConfig.FilePath + "\\Verwerkt"))
+            string foldernaam = "Verwerkt";
+            string filePath = MyConfig.FilePath;
+
+            if (!Directory.Exists(filePath + "\\" + foldernaam))
             {
-                Directory.CreateDirectory(MyConfig.FilePath + "\\Verwerkt");
+                Directory.CreateDirectory(filePath + "\\" + foldernaam);
             }
-            string succeedSourcePath = MyConfig.FilePath + "\\" + fileName;
-            if (!File.Exists(MyConfig.FilePath + "\\Verwerkt\\" + fileName))
+            string succeedSourcePath = filePath + "\\" + fileName;
+            if (!File.Exists(filePath + "\\" + foldernaam + "\\" + fileName))
             {
-                File.Move(succeedSourcePath, MyConfig.FilePath + "\\Verwerkt\\" + fileName);
+                File.Move(succeedSourcePath, filePath + "\\" + foldernaam + "\\" + fileName);
             }
             else
             {
-                File.Delete(MyConfig.FilePath + "\\" + fileName);
+                File.Delete(filePath + "\\" + fileName);
             }
         }
     }

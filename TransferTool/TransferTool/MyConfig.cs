@@ -347,9 +347,8 @@ namespace TransferTool
                 {
                     File.WriteAllText("appsettings.json", json);
                     // Update configuration after writing to appsettings.json
-                    OnFilePathUpdated();
                     InitConfig(); // Reset configuration after updating appsettings.json
-
+                    OnFilePathUpdated();
                 }
                 catch (Exception ex)
                 {
@@ -369,7 +368,7 @@ namespace TransferTool
             { 
                 var def = JsonHelpers.ReadFromJsonFile<pdfDefinition>(file.FullName);
 
-                if (def != null)
+                if (def.IdentifierText != null)
                 {
                     pdfDefinitions.Add(def);
                 }
