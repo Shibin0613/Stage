@@ -172,7 +172,6 @@ namespace TransferTool
                             HashSet<string> uniqueTags = new HashSet<string>();
                             HashSet<string> uniqueArtikel = new HashSet<string>();
                             
-
                             for (int i = 1; i <= reader.NumberOfPages; i++)
                             {
                                 //Definieren alle text van PDF
