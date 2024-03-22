@@ -5,3 +5,4 @@ outlook
 frieseportaal
 Github
 Stage map
+pdf reader

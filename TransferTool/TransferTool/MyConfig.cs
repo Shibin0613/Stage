@@ -104,10 +104,13 @@ namespace TransferTool
                 //Anders pakt hij de coordinaten variabelen
                 else
                 {
-                    float x = (float)defObject.Position.X;
-                    float y = (float)defObject.Position.Y;
-                    float xy = (float)defObject.Position.Z;
-                    float yx = (float)defObject.Position.W;
+                    float x = GetPostScriptPoints((float)defObject.Position.X);
+                    float xy = GetPostScriptPoints((float)defObject.Position.Z);
+                    float yx = GetPostScriptPoints((float)defObject.Position.W);
+
+                    iTextSharp.text.Rectangle mediabox = reader.GetPageSize(i);
+
+                    float y = mediabox.Height - GetPostScriptPoints((float)defObject.Position.Y);
 
                     //Hotelnaam op position
                     System.util.RectangleJ rect = new System.util.RectangleJ(x, y, xy, yx);
@@ -246,6 +249,11 @@ namespace TransferTool
             }
 
             return value;
+        }
+
+        private float GetPostScriptPoints(float inch)
+        {
+            return inch * 72;
         }
     }
 

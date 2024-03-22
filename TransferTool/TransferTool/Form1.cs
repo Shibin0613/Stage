@@ -1,22 +1,16 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.WindowsForms;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Diagnostics.Metrics;
 using System.Text;
 
-using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using System.Text.RegularExpressions;
 using System.Xml;
-using System.ComponentModel.Design;
-using System.Text.Json;
-using System.Globalization;
-using static System.Net.Mime.MediaTypeNames;
+using Spire.Pdf.Utilities;
 
-using Org.BouncyCastle.Asn1.X509;
-using Microsoft.VisualBasic.Logging;
-using System.Security.Cryptography.Xml;
+using Spire;
+using System.Web;
 
 namespace TransferTool
 {
@@ -116,42 +110,6 @@ namespace TransferTool
             {
                 await Task.Delay(500);
 
-                /*IronOcr.License.LicenseKey = "IRONSUITE.PANSHIBIN2000.GMAIL.COM.6799-D952B7C35B-HIS2LNFKLAETZL-BSPP5ILTOXWQ-TO6GZZURKZO3-ETE3GH5RKKW7-MBITYNRGEAQU-K572IH7OX2TR-74OOZQ-TOCCISUUENGMEA-DEPLOYMENT.TRIAL-4X5BKH.TRIAL.EXPIRES.11.APR.2024";
-
-                //Hotelnaam defineren vanuit het logo gebruik gemaakt met IronOCR
-                var ocrTesseract = new IronTesseract();
-
-                IronSoftware.Drawing.Rectangle[] scanRegions = { new IronSoftware.Drawing.Rectangle(550, 100, 600, 300) };
-
-                using var ocrInput = new OcrPdfInput(destinationPath, ContentAreas: scanRegions);
-
-                ocrInput.Binarize();
-
-                var ocrResult = ocrTesseract.Read(ocrInput);
-                string[] regels = ocrResult.Text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-
-                // Extracting the first line of OCR result
-                string eersteRegel = regels[0];
-
-                if (eersteRegel.Contains("NH"))
-                {
-                    _configuration?.GetValue<string>("NH");
-                    //Aan het begin wordt een validatie gedaan bij welke structuur hij moet meenemen
-                    //Dan is het de bedoeling dat hij die structuur pakt. Als hij niks kan vinden, dan slaat hij het proces over
-                }
-                else
-                {
-                    if (!Directory.Exists(MyConfig.FilePath + "\\Afgewezen"))
-                    {
-                        Directory.CreateDirectory(MyConfig.FilePath + "\\Afgewezen");
-                    }
-                    string failedSourcePath = MyConfig.FilePath + "\\" + fileName;
-                    File.Move(failedSourcePath, MyConfig.FilePath + "\\Afgewezen\\" + fileName);
-
-                    return;
-                }*/
-
-
                 using (FileStream fileStream = new FileStream(destinationPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
                     int j = 10;
@@ -171,9 +129,46 @@ namespace TransferTool
                         {
                             HashSet<string> uniqueTags = new HashSet<string>();
                             HashSet<string> uniqueArtikel = new HashSet<string>();
-                            
-                            for (int i = 1; i <= reader.NumberOfPages; i++)
+
+
+                            //Spire om de artikelen uit te halen
+
+                            /*Spire.Pdf.PdfDocument doc = new Spire.Pdf.PdfDocument();
+                            doc.LoadFromFile(destinationPath);
+                            StringBuilder builder = new StringBuilder();
+
+                            PdfTableExtractor extractor = new PdfTableExtractor(doc);
+                            PdfTable[] tableList = null;
+
+                            for (int pageIndex = 0; pageIndex < reader.NumberOfPages; pageIndex++)
                             {
+                                //Extract table(s) from each page into a PdfTable array
+                                PdfTable[] tableLists = extractor.ExtractTable(pageIndex);
+
+                                if (tableLists != null && tableLists.Length > 0)
+                                {
+                                    //Loop through tables in the PdfTable array
+                                    foreach (PdfTable table in tableLists)
+                                    {
+                                        //Loop through each table row
+                                        for (int t = 0; t < table.GetRowCount(); t++)
+                                        {
+                                            //Loop through each table column
+                                            for (int y = 0; y < table.GetColumnCount(); y++)
+                                            {
+                                                //Extract data from each table cell
+                                                string text1 = table.GetText(t, y);
+                                                //Append data to the StringBuilder instance
+                                                builder.Append(text1 + "  |  ");
+                                            }
+                                            builder.Append("\r\n");
+                                        }
+                                    }
+                                }
+                            }*/
+
+                            for (int i = 1; i <= reader.NumberOfPages; i++)
+                            { 
                                 //Definieren alle text van PDF
                                 ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
 
@@ -342,6 +337,7 @@ namespace TransferTool
                         //Zo ja, dan is die de referentie
                         item[1] = referentieIndex;
                         item[2] = orderLine.Split(" ")[2];
+
                     }
                     else
                     {
@@ -351,9 +347,11 @@ namespace TransferTool
 
                         item[1] = orderLine.Substring(referentieFrom + 1, derdeSpaceIndex - referentieFrom - 1).Trim();
                         item[2] = orderLine.Split(" ")[3];
+
                     }
                     int materiaalOmschrijvingFrom = orderLine.IndexOf(item[2]) + item[2].Length;
                     int materiaalOmschrijvingTo = orderLine.IndexOf(item[o.OrderTags.Count() - 5]);
+
                     item[3] = orderLine.Substring(materiaalOmschrijvingFrom, materiaalOmschrijvingTo - materiaalOmschrijvingFrom).Trim();
 
                     writer.WriteString(item[i]);
