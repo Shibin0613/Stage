@@ -130,7 +130,6 @@ namespace TransferTool
                             HashSet<string> uniqueTags = new HashSet<string>();
                             HashSet<string> uniqueArtikel = new HashSet<string>();
 
-
                             //Spire om de artikelen uit te halen
 
                             /*Spire.Pdf.PdfDocument doc = new Spire.Pdf.PdfDocument();
