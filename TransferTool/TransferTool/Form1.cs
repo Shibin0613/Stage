@@ -7,10 +7,6 @@ using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using System.Text.RegularExpressions;
 using System.Xml;
-using Spire.Pdf.Utilities;
-
-using Spire;
-using System.Web;
 
 namespace TransferTool
 {
@@ -105,6 +101,28 @@ namespace TransferTool
                 destinationPath = defaultPath + "\\" + fileName;
             }
 
+            var sb = new StringBuilder();
+
+            Aspose.Pdf.Document pdfDocumenttest = new Aspose.Pdf.Document(destinationPath);
+            foreach (var page in pdfDocumenttest.Pages)
+            {
+                Aspose.Pdf.Text.TableAbsorber absorber = new Aspose.Pdf.Text.TableAbsorber();
+                absorber.Visit(page);
+                foreach (Aspose.Pdf.Text.AbsorbedTable table in absorber.TableList)
+                {
+                    foreach (Aspose.Pdf.Text.AbsorbedRow row in table.RowList)
+                    {
+                        foreach (Aspose.Pdf.Text.AbsorbedCell cell in row.CellList)
+                        {
+                            foreach (Aspose.Pdf.Text.TextFragment fragment in cell.TextFragments)
+                            {               
+                                foreach (Aspose.Pdf.Text.TextSegment seg in fragment.Segments)
+                                    sb.Append(seg.Text + "|");
+                            }
+                        }
+                    }
+                }
+            }
 
             if (fileExtension.ToLower() == ".pdf")
             {
@@ -137,7 +155,7 @@ namespace TransferTool
                             StringBuilder builder = new StringBuilder();
 
                             PdfTableExtractor extractor = new PdfTableExtractor(doc);
-                            PdfTable[] tableList = null;
+                            PdfTable[] tableList;
 
                             for (int pageIndex = 0; pageIndex < reader.NumberOfPages; pageIndex++)
                             {
@@ -197,6 +215,7 @@ namespace TransferTool
                                         {
                                             if (defObject.Value != null)
                                             {
+                                                //Split elke artikel met "Order"
                                                 string[] EachOrder = defObject.Value.Split("Order", StringSplitOptions.RemoveEmptyEntries);
                                                 xmlArtikel artikel = new xmlArtikel();
 
@@ -318,13 +337,13 @@ namespace TransferTool
 
                 string[] item = new string[o.OrderTags.Count()];
 
-                item[0] = orderLine.Split(" ")[0];
+                item[0] = orderLine.Split(" ")[0]; //Lijn
 
-                item[o.OrderTags.Count() - 5] = orderLine.Split(" ").Reverse().Take(5).Last();
-                item[o.OrderTags.Count() - 4] = orderLine.Split(" ").Reverse().Take(4).Last();
-                item[o.OrderTags.Count() - 3] = orderLine.Split(" ").Reverse().Take(3).Last();
-                item[o.OrderTags.Count() - 2] = orderLine.Split(" ").Reverse().Take(2).Last();
-                item[o.OrderTags.Count() - 1] = orderLine.Split(" ").Last().Trim();
+                item[o.OrderTags.Count() - 5] = orderLine.Split(" ").Reverse().Take(5).Last(); //leverdatum voor NH
+                item[o.OrderTags.Count() - 4] = orderLine.Split(" ").Reverse().Take(4).Last(); //Aantal voor NH
+                item[o.OrderTags.Count() - 3] = orderLine.Split(" ").Reverse().Take(3).Last(); //Prijs voor NH
+                item[o.OrderTags.Count() - 2] = orderLine.Split(" ").Reverse().Take(2).Last(); //Eenheid voor NH
+                item[o.OrderTags.Count() - 1] = orderLine.Split(" ").Last().Trim(); //Totaal voor NH
 
                 foreach (var Ordertagnaam in o.OrderTags)
                 {
@@ -335,8 +354,7 @@ namespace TransferTool
                     {
                         //Zo ja, dan is die de referentie
                         item[1] = referentieIndex;
-                        item[2] = orderLine.Split(" ")[2];
-
+                        item[2] = orderLine.Split(" ")[2]; //Materiaal ID
                     }
                     else
                     {
@@ -344,12 +362,13 @@ namespace TransferTool
                         int referentieTo = orderLine.IndexOf(" ", referentieFrom + 1); // Zoek vanaf het karakter na het eerste spatie-teken
                         int derdeSpaceIndex = orderLine.IndexOf(" ", referentieTo + 1); // Zoek vanaf het karakter na de tweede spatie-teken
 
-                        item[1] = orderLine.Substring(referentieFrom + 1, derdeSpaceIndex - referentieFrom - 1).Trim();
-                        item[2] = orderLine.Split(" ")[3];
+                        item[1] = orderLine.Substring(referentieFrom + 1, derdeSpaceIndex - referentieFrom - 1).Trim(); //Referentie
+                        item[2] = orderLine.Split(" ")[3]; //Materiaal ID
 
                     }
                     int materiaalOmschrijvingFrom = orderLine.IndexOf(item[2]) + item[2].Length;
                     int materiaalOmschrijvingTo = orderLine.IndexOf(item[o.OrderTags.Count() - 5]);
+
 
                     item[3] = orderLine.Substring(materiaalOmschrijvingFrom, materiaalOmschrijvingTo - materiaalOmschrijvingFrom).Trim();
 

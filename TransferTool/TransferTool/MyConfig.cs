@@ -112,7 +112,7 @@ namespace TransferTool
 
                     float y = mediabox.Height - GetPostScriptPoints((float)defObject.Position.Y);
 
-                    //Hotelnaam op position
+                    //Value op position
                     System.util.RectangleJ rect = new System.util.RectangleJ(x, y, xy, yx);
                     RenderFilter[] filter = { new RegionTextRenderFilter(rect) };
                     ITextExtractionStrategy strategy = new FilteredTextRenderListener(
@@ -124,8 +124,12 @@ namespace TransferTool
                 if (defObject.OrderTags != null)
                 {
                     StringBuilder order = new StringBuilder();
+
                     int orderFrom = currentText.IndexOf(defObject.Text.From);
                     //Dit geldt voor pagina 2, Omdat huidige text dan het Totaalbedrag bevat.
+                    //Als orderFrom totaal bevat, dan betekent dat de artikel eindigt op pagina 1, anders gaat hij van pagina 2 ook verder
+
+
                     if (currentText.Contains(defObject.Text.To))
                         {
                         string orderWithText = currentText.Substring(orderFrom + defObject.Text.From.Length).Trim();
