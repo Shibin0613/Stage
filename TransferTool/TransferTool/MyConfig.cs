@@ -16,6 +16,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.Web.WebView2.Core;
 using System.Web;
+using Syncfusion.Pdf;
 
 namespace TransferTool
 {
@@ -251,6 +252,156 @@ namespace TransferTool
                     defObject.Value = value;
                 }
             }
+
+            return value;
+        }
+
+        internal string GetValueTest(string extractedText, PdfLoadedPage i, defObject defObject, int j)
+        {
+            string value = string.Empty;
+            //Als de huidige text geen deObject.Text.From bevat, dan overslaan. Dat heeft te maken dat er de pdf-pagina apart wordt uirgelezen,
+            //en wat bij pagina 1 te vinden is, vind je niet per se ook in pagina2
+
+            //Als defobject.Text.From en To niet leeg zijn, dan pak hij de From en to
+            if (!string.IsNullOrWhiteSpace(defObject.Text.From) || !string.IsNullOrWhiteSpace(defObject.Text.To))
+            {
+                if (extractedText.Contains(defObject.Text.From))
+                {
+                    string x = defObject.Text.From.ToString();
+                    string y = defObject.Text.To.ToString();
+
+                    int textFrom = extractedText.IndexOf(x) + x.Length;
+                    int textTo = extractedText.IndexOf(y);
+
+                    if (textTo < textFrom)
+                    {
+                        textTo = extractedText.LastIndexOf(y);
+                    }
+
+                    //Als de pdf pagina minder dan 2 is. Dit is voor de order
+                    value = extractedText.Substring(textFrom).Trim();
+                    if (!value.Contains(y))
+                    {
+                        value = extractedText.Substring(textFrom).Trim();
+                    }
+                    else
+                    {
+                        value = extractedText.Substring(textFrom, textTo - textFrom).Replace("\n", "").Trim();
+                    }
+                }
+            }
+
+            //Anders pakt hij de coordinaten variabelen
+            else
+            {
+                float x = GetPostScriptPoints((float)defObject.Position.X);
+                float xy = GetPostScriptPoints((float)defObject.Position.Z);
+                float yx = GetPostScriptPoints((float)defObject.Position.W);
+
+                float mediabox = i.Size.Height;
+                float y = mediabox - GetPostScriptPoints((float)defObject.Position.Y);
+
+                RectangleF textBounds = new RectangleF(x, y, xy, yx);
+
+                TextLines lineCollection = new TextLines();
+
+                i.ExtractText(out lineCollection);
+
+                foreach (TextLine txtLine in lineCollection)
+                {
+                    foreach (TextWord word in txtLine.WordCollection)
+                    {
+                        if (textBounds.IntersectsWith(word.Bounds))
+                        {
+                            value = word.Text;
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+            //defObject.OrderTags wordt van tevoren handmatig gedefinieerd. Als de defObject.Ordertags niet bestaat, sla deze stap over.
+            if (defObject.OrderTags != null)
+            {
+                StringBuilder order = new StringBuilder();
+
+                int orderFrom = extractedText.IndexOf(defObject.Text.From);
+                //Dit geldt voor pagina 2, Omdat huidige text dan het Totaalbedrag bevat.
+                //Als orderFrom totaal bevat, dan betekent dat de artikel eindigt op pagina 1, anders gaat hij van pagina 2 ook verder
+
+
+                if (extractedText.Contains(defObject.Text.To))
+                {
+                    string orderWithText = extractedText.Substring(orderFrom + defObject.Text.From.Length).Trim();
+                    if (orderWithText.Contains(defObject.Text.To))
+                    {
+                        int orderTo = orderWithText.IndexOf(defObject.Text.To);
+                        orderWithText = orderWithText.Substring(0, orderTo);
+
+                        orderWithText = orderWithText.Replace(" \n", " ");
+                        // Regex-patroon om elk artikel te matchen
+
+                        foreach (string eachOrder in orderWithText.Split("\r\n"))
+                        {
+                            if (eachOrder == j.ToString())
+                            {
+                                j += 10;
+                                order.Append("Order" + eachOrder + "*");
+                            }
+                            else
+                            {
+                                order.Append(eachOrder + "*");
+                            }
+                        }
+                        string test = order.ToString();
+                    }
+                    else
+                    {
+                        int orderTo = orderWithText.IndexOf(defObject.Text.To);
+                        string Order = orderWithText.Substring(0, orderTo - 0);
+                        order.Append(Order);
+                    }
+                }
+                //Anders pagina 1, van een bepaade text tot het einde.
+                else
+                {
+                    string orderWithText = extractedText.Substring(orderFrom + defObject.Text.From.Length).Trim();
+                    if (orderWithText.Contains(defObject.Text.To))
+                    {
+                        int orderTo = orderWithText.IndexOf(defObject.Text.To);
+                        string Order = orderWithText.Substring(0, orderTo - 0);
+                        order.Append(Order);
+                    }
+                    else
+                    {
+                        orderWithText = orderWithText.Replace(" \n", " ");
+                        // Regex-patroon om elk artikel te matchen
+
+                        foreach (string eachOrder in orderWithText.Split("\r\n"))
+                        {
+                            if (eachOrder == j.ToString())
+                            {
+                                j += 10;
+                                order.Append("Order" + eachOrder + "*");
+                            }
+                            else
+                            {
+                                order.Append(eachOrder + "*");
+                            }
+                        }
+                    }
+                }
+                defObject.Value = order.ToString();
+
+                return defObject.Value;
+            }
+
+            if (!string.IsNullOrEmpty(value))
+            {
+                defObject.Value = value;
+            }
+
 
             return value;
         }

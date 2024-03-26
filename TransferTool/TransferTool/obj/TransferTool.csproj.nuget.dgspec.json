@@ -40,17 +40,21 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
-            "Aspose.PDF": {
-              "target": "Package",
-              "version": "[24.3.0, )"
-            },
             "Microsoft.AspNetCore.Components.WebView.WindowsForms": {
               "target": "Package",
               "version": "[8.0.10, )"
             },
-            "Spire.PDF": {
+            "Syncfusion.DocIO.Net.Core": {
               "target": "Package",
-              "version": "[10.3.7, )"
+              "version": "[25.1.35, )"
+            },
+            "Syncfusion.Pdf.AspNet.Mvc5": {
+              "target": "Package",
+              "version": "[25.1.35, )"
+            },
+            "Syncfusion.Pdf.OCR.WinForms": {
+              "target": "Package",
+              "version": "[25.1.35, )"
             },
             "iTextSharp": {
               "target": "Package",

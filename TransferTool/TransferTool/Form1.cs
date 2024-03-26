@@ -8,6 +8,12 @@ using iTextSharp.text.pdf.parser;
 using System.Text.RegularExpressions;
 using System.Xml;
 
+using Syncfusion;
+using Syncfusion.Pdf.Parsing;
+using Syncfusion.Pdf;
+using static System.Net.Mime.MediaTypeNames;
+using Syncfusion.OCRProcessor;
+
 namespace TransferTool
 {
     public partial class Form1 : Form
@@ -101,7 +107,125 @@ namespace TransferTool
                 destinationPath = defaultPath + "\\" + fileName;
             }
 
-            var sb = new StringBuilder();
+            //Get stream from an existing PDF document
+            FileStream docStream = new FileStream(destinationPath, FileMode.Open, FileAccess.Read);
+            //Load the PDF document
+            PdfLoadedDocument loadedDocument = new PdfLoadedDocument(docStream);
+
+            pdfDefinition deftest = null;
+            xmlOrder xmlOrdertest = new xmlOrder();
+            int asd = 10;
+
+            HashSet<string> uniqueTagstest = new HashSet<string>();
+            HashSet<string> uniqueArtikeltest = new HashSet<string>();
+
+            string extractedText = string.Empty;
+
+            //Extract all the text from the PDF document pages
+            foreach (PdfLoadedPage loadedPage in loadedDocument.Pages)
+            {
+                extractedText = loadedPage.ExtractText();
+                MyConfig.InitConfig();
+                deftest = MyConfig.GetDefinition(extractedText);
+
+                if (deftest != null)
+                {
+                    foreach (var defObject in deftest.defObjects)
+                    {
+                        var value = defObject.GetValueTest(extractedText, loadedPage, defObject, asd);
+
+                        //XmlNiveau wordt van tevoren gedefinieerd. Als het een Order is, voeg toe aan gegevens. Anders is het een artikel.
+                        if (defObject.XmlNiveau == XmlNiveau.Order)
+                        {
+                            //Als de Tags al bestaat in xmlOrder, maak dan geen nieuwe, anders wel.
+                            if (!uniqueTagstest.Contains(defObject.TagNaam) && !string.IsNullOrEmpty(defObject.Value))
+                            {
+                                uniqueTagstest.Add(defObject.TagNaam);
+                                xmlOrdertest.Items.Add(defObject);
+                            }
+                        }
+                        else
+                        {
+                            if (defObject.Value != null)
+                            {
+                                //Split elke artikel met "Order"
+                                string[] EachOrder = defObject.Value.Split("Order", StringSplitOptions.RemoveEmptyEntries);
+                                xmlArtikel artikel = new xmlArtikel();
+
+                                //Voeg voor elke Order in xmlOrder.artikel
+                                foreach (string EachOrderString in EachOrder)
+                                {
+                                    if (!uniqueArtikeltest.Contains(EachOrderString) && !string.IsNullOrEmpty(EachOrderString))
+                                    {
+                                        uniqueArtikeltest.Add(EachOrderString);
+                                        var newDefObject = new defObject(); // Maak een nieuwe instantie van defObject
+
+                                        newDefObject.OrderTags = defObject.OrderTags; //Voeg een tagnaam toe voor later
+
+                                        newDefObject.Value = EachOrderString; // Wijs de waarde toe aan de nieuwe instantie
+                                        artikel.Artikelen.Add(newDefObject);
+
+                                    }
+                                    // bepaal of het een nieuw artikel moet worden of niet. j is dan de lijnnummer, hij wordt elke keer door de loop +10.
+                                    asd += 10;
+                                }
+                                xmlOrdertest.Artikelen.Add(artikel);
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            //overzetten als XML-bestand
+            var xmlFileExtensions = System.IO.Path.ChangeExtension(fileName, ".xml");
+
+            if (Directory.Exists(MyConfig.FilePath))
+            {
+                destinationPath = MyConfig.FilePath;
+            }
+            else
+            {
+                destinationPath = defaultPath;
+            }
+
+            string xmlFilePaths = destinationPath + "\\" + xmlFileExtensions; // Het pad naar het XML-bestand
+
+            // Schrijf de geëxtraheerde tekst naar een XML-bestand
+            using (XmlWriter writer = XmlWriter.Create(xmlFilePaths))
+            {
+                writer.WriteStartDocument();
+
+                writer.WriteStartElement("Order");
+
+                //Huidige PDF text
+                //Element dat in het configuratiebestand te vinden is
+                //
+                writer.WriteStartElement("stamgegevens");
+                xmlOrdertest.Items.ForEach(o => WriteXmlTag(writer, o));
+                writer.WriteEndElement();
+                //def.GetObjectsFromNiveau(XmlNiveau.Order).ForEach(o => WriteXmlTag(writer, o));
+
+                writer.WriteStartElement("Artikelen");
+
+                xmlOrdertest.Artikelen.ForEach(a =>
+                {
+                    a.Artikelen.ForEach(o => WriteXmlTagArtikeltest(writer, o));
+                });
+
+                writer.WriteEndElement();
+
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+            loadedDocument.Close(true);
+
+            MoveOrDeletelSucceedFile(fileName);
+            //Close the document
+            
+            
+            //Aspose voor het testen
+            /*var sb = new StringBuilder();
 
             Aspose.Pdf.Document pdfDocumenttest = new Aspose.Pdf.Document(destinationPath);
             foreach (var page in pdfDocumenttest.Pages)
@@ -122,7 +246,7 @@ namespace TransferTool
                         }
                     }
                 }
-            }
+            }*/
 
             if (fileExtension.ToLower() == ".pdf")
             {
@@ -147,42 +271,6 @@ namespace TransferTool
                         {
                             HashSet<string> uniqueTags = new HashSet<string>();
                             HashSet<string> uniqueArtikel = new HashSet<string>();
-
-                            //Spire om de artikelen uit te halen
-
-                            /*Spire.Pdf.PdfDocument doc = new Spire.Pdf.PdfDocument();
-                            doc.LoadFromFile(destinationPath);
-                            StringBuilder builder = new StringBuilder();
-
-                            PdfTableExtractor extractor = new PdfTableExtractor(doc);
-                            PdfTable[] tableList;
-
-                            for (int pageIndex = 0; pageIndex < reader.NumberOfPages; pageIndex++)
-                            {
-                                //Extract table(s) from each page into a PdfTable array
-                                PdfTable[] tableLists = extractor.ExtractTable(pageIndex);
-
-                                if (tableLists != null && tableLists.Length > 0)
-                                {
-                                    //Loop through tables in the PdfTable array
-                                    foreach (PdfTable table in tableLists)
-                                    {
-                                        //Loop through each table row
-                                        for (int t = 0; t < table.GetRowCount(); t++)
-                                        {
-                                            //Loop through each table column
-                                            for (int y = 0; y < table.GetColumnCount(); y++)
-                                            {
-                                                //Extract data from each table cell
-                                                string text1 = table.GetText(t, y);
-                                                //Append data to the StringBuilder instance
-                                                builder.Append(text1 + "  |  ");
-                                            }
-                                            builder.Append("\r\n");
-                                        }
-                                    }
-                                }
-                            }*/
 
                             for (int i = 1; i <= reader.NumberOfPages; i++)
                             { 
@@ -320,6 +408,31 @@ namespace TransferTool
                 o.ToString().Split(" ");
                 writer.WriteStartElement(o.TagNaam);
                 writer.WriteString(o.Value); // Schrijf de geëxtraheerde tekst
+                writer.WriteEndElement();
+            }
+        }
+
+        public void WriteXmlTagArtikeltest(XmlWriter writer, defObject o)
+        {
+            if (o.Value != null)
+            {
+                writer.WriteStartElement("Artikel");
+                string orderLine = o.Value.Replace("\n", " ");
+
+                int i = 0;
+
+                string[] item = new string[o.OrderTags.Count()];
+
+                foreach(var OrdertagNaam in o.OrderTags)
+                { 
+                    string tagNaam = OrdertagNaam.TagNaam;
+                    writer.WriteStartElement(tagNaam);
+                    item[i] = orderLine.Split("*")[i];
+                    string tet = Regex.Replace(item[i], "[^0-9,]", "");
+                    writer.WriteString(tet);
+                    i += 1;
+                    writer.WriteEndElement();
+                }
                 writer.WriteEndElement();
             }
         }
