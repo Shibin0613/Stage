@@ -17,6 +17,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Web.WebView2.Core;
 using System.Web;
 using Syncfusion.Pdf;
+using Syncfusion.Pdf.Parsing;
 
 namespace TransferTool
 {
@@ -301,9 +302,9 @@ namespace TransferTool
                 float mediabox = i.Size.Height;
                 float y = mediabox - GetPostScriptPoints((float)defObject.Position.Y);
 
-                RectangleF textBounds = new RectangleF(x, y, xy, yx);
-
                 TextLines lineCollection = new TextLines();
+
+                RectangleF textBounds = new RectangleF(148, 576, 42, 17);
 
                 i.ExtractText(out lineCollection);
 
@@ -329,7 +330,6 @@ namespace TransferTool
                 int orderFrom = extractedText.IndexOf(defObject.Text.From);
                 //Dit geldt voor pagina 2, Omdat huidige text dan het Totaalbedrag bevat.
                 //Als orderFrom totaal bevat, dan betekent dat de artikel eindigt op pagina 1, anders gaat hij van pagina 2 ook verder
-
 
                 if (extractedText.Contains(defObject.Text.To))
                 {
@@ -384,6 +384,7 @@ namespace TransferTool
                             {
                                 j += 10;
                                 order.Append("Order" + eachOrder + "*");
+                                
                             }
                             else
                             {

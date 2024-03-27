@@ -8,11 +8,8 @@ using iTextSharp.text.pdf.parser;
 using System.Text.RegularExpressions;
 using System.Xml;
 
-using Syncfusion;
 using Syncfusion.Pdf.Parsing;
 using Syncfusion.Pdf;
-using static System.Net.Mime.MediaTypeNames;
-using Syncfusion.OCRProcessor;
 
 namespace TransferTool
 {
@@ -428,8 +425,7 @@ namespace TransferTool
                     string tagNaam = OrdertagNaam.TagNaam;
                     writer.WriteStartElement(tagNaam);
                     item[i] = orderLine.Split("*")[i];
-                    string tet = Regex.Replace(item[i], "[^0-9,]", "");
-                    writer.WriteString(tet);
+                    writer.WriteString(item[i]);
                     i += 1;
                     writer.WriteEndElement();
                 }

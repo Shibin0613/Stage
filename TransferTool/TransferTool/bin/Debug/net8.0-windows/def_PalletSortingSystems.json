@@ -152,7 +152,7 @@
         "W": 0
       },
       "Text": {
-        "From": "Aantal Eenheidsprijs Korting Totaal bedrag",
+        "From": "Totaal bedrag",
         "To": "Total excl. BTW"
       },
       "TagNaam": "ARTIKEL",
