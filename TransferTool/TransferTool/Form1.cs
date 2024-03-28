@@ -113,7 +113,6 @@ namespace TransferTool
 
             doc.LoadFromFile(destinationPath);
 
-
             pdfDefinition deftest = null;
             xmlOrder xmlOrdertest = new xmlOrder();
             int asd = 10;
@@ -134,7 +133,7 @@ namespace TransferTool
                 {
                     foreach (var defObject in deftest.defObjects)
                     {
-                        var value = defObject.GetValueTest(doc, extractedText, loadedPage, defObject, asd);
+                        var value = defObject.GetValueTest(docStream, doc, extractedText, loadedPage, defObject, asd);
 
                         //XmlNiveau wordt van tevoren gedefinieerd. Als het een Order is, voeg toe aan gegevens. Anders is het een artikel.
                         if (defObject.XmlNiveau == XmlNiveau.Order)

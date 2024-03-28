@@ -260,7 +260,7 @@ namespace TransferTool
             return value;
         }
 
-        internal string GetValueTest(Spire.Pdf.PdfDocument doc, string extractedText, PdfLoadedPage loadedPage, defObject defObject, int j)
+        internal string GetValueTest(FileStream docStream, Spire.Pdf.PdfDocument doc, string extractedText, PdfLoadedPage loadedPage, defObject defObject, int j)
         {
             string value = string.Empty;
             //Als de huidige text geen deObject.Text.From bevat, dan overslaan. Dat heeft te maken dat er de pdf-pagina apart wordt uirgelezen,
@@ -358,9 +358,16 @@ namespace TransferTool
                                         float y = GetPostScriptIn(found.Y);
 
                                         int eachLine = 0;
+                                        float Width = (float)0.1;
+                                        float Height = (float)0.1;
+
                                         for (eachLine = 0;eachLine <= defObject.OrderTags.Count();eachLine++)
-                                        { 
-                                            x += eachTag.Length;
+                                        {
+                                            System.util.RectangleJ rect = new System.util.RectangleJ(x, y, Width, Height);
+                                            RenderFilter[] filter = { new RegionTextRenderFilter(rect) };
+                                            ITextExtractionStrategy strategy = new FilteredTextRenderListener(
+                                                new LocationTextExtractionStrategy(), filter);
+                                            /*value = iTextSharp.text.pdf.parser.PdfTextExtractor.GetTextFromPage(new PdfReader(new MemoryStream(docStream)), 0, strategy).Trim();*/
                                         }
                                     }
                                 
