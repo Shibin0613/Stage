@@ -224,31 +224,6 @@ namespace TransferTool
 
             MoveOrDeletelSucceedFile(fileName);
             //Close the document
-            
-            
-            //Aspose voor het testen
-            /*var sb = new StringBuilder();
-
-            Aspose.Pdf.Document pdfDocumenttest = new Aspose.Pdf.Document(destinationPath);
-            foreach (var page in pdfDocumenttest.Pages)
-            {
-                Aspose.Pdf.Text.TableAbsorber absorber = new Aspose.Pdf.Text.TableAbsorber();
-                absorber.Visit(page);
-                foreach (Aspose.Pdf.Text.AbsorbedTable table in absorber.TableList)
-                {
-                    foreach (Aspose.Pdf.Text.AbsorbedRow row in table.RowList)
-                    {
-                        foreach (Aspose.Pdf.Text.AbsorbedCell cell in row.CellList)
-                        {
-                            foreach (Aspose.Pdf.Text.TextFragment fragment in cell.TextFragments)
-                            {               
-                                foreach (Aspose.Pdf.Text.TextSegment seg in fragment.Segments)
-                                    sb.Append(seg.Text + "|");
-                            }
-                        }
-                    }
-                }
-            }*/
 
             if (fileExtension.ToLower() == ".pdf")
             {

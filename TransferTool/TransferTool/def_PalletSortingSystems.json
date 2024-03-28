@@ -152,8 +152,8 @@
         "W": 0
       },
       "Text": {
-        "From": "Totaal bedrag",
-        "To": "Total excl. BTW"
+        "From": "Pos",
+        "To": "Totaal bedrag"
       },
       "TagNaam": "ARTIKEL",
       "XmlNiveau": 1,

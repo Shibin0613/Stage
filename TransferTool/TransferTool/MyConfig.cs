@@ -260,7 +260,7 @@ namespace TransferTool
             return value;
         }
 
-        internal string GetValueTest(Spire.Pdf.PdfDocument doc, string extractedText, PdfLoadedPage i, defObject defObject, int j)
+        internal string GetValueTest(Spire.Pdf.PdfDocument doc, string extractedText, PdfLoadedPage loadedPage, defObject defObject, int j)
         {
             string value = string.Empty;
             //Als de huidige text geen deObject.Text.From bevat, dan overslaan. Dat heeft te maken dat er de pdf-pagina apart wordt uirgelezen,
@@ -349,18 +349,21 @@ namespace TransferTool
                                 List<PdfTextFragment> fragments = finder.Find(check);
 
                                 //Loop through the instances
-                                foreach (PdfTextFragment fragment in fragments)
-                                {
+                                
                                     //Get the position of a specific instance
-                                    PointF found = fragment.Positions[0];
+                                    PointF found = fragments[0].Positions[0];
                                     if (!found.IsEmpty)
                                     {
                                         float x = GetPostScriptIn(found.X);
                                         float y = GetPostScriptIn(found.Y);
 
-                                        //next line om de tekst uit te halen
+                                        int eachLine = 0;
+                                        for (eachLine = 0;eachLine <= defObject.OrderTags.Count();eachLine++)
+                                        { 
+                                            x += eachTag.Length;
+                                        }
                                     }
-                                }
+                                
                             }
                             order.Append(tagValue + "|");
                         }

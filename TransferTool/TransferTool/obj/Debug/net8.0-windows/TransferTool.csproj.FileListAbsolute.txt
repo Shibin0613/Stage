@@ -63,7 +63,7 @@ C:\Users\pansh\Desktop\Stage\TransferTool\TransferTool\obj\Debug\net8.0-windows\
 C:\Users\pansh\Desktop\Stage\TransferTool\TransferTool\obj\Debug\net8.0-windows\TransferTool.genruntimeconfig.cache
 C:\Users\pansh\Desktop\Stage\TransferTool\TransferTool\obj\Debug\net8.0-windows\ref\TransferTool.dll
 C:\Users\pansh\Desktop\Stage\TransferTool\TransferTool\bin\Debug\net8.0-windows\def_PalletSortingSystems.json
-C:\Users\pansh\Desktop\Stage\TransferTool\TransferTool\bin\Debug\net8.0-windows\Syncfusion.Compression.Portable.dll
 C:\Users\pansh\Desktop\Stage\TransferTool\TransferTool\bin\Debug\net8.0-windows\Syncfusion.Licensing.dll
-C:\Users\pansh\Desktop\Stage\TransferTool\TransferTool\bin\Debug\net8.0-windows\Syncfusion.Pdf.Portable.dll
 C:\Users\pansh\Desktop\Stage\TransferTool\TransferTool\bin\Debug\net8.0-windows\Spire.Pdf.dll
+C:\Users\pansh\Desktop\Stage\TransferTool\TransferTool\bin\Debug\net8.0-windows\Syncfusion.Compression.Portable.dll
+C:\Users\pansh\Desktop\Stage\TransferTool\TransferTool\bin\Debug\net8.0-windows\Syncfusion.Pdf.Portable.dll
