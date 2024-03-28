@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TransferTool")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+26e9d4eaa16117be74daf5901d178525fbfa9788")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+966ed13706ec8b3c4ac2380495214876b7cfb2f4")]
 [assembly: System.Reflection.AssemblyProductAttribute("TransferTool")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TransferTool")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

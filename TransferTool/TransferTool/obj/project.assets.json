@@ -485,15 +485,6 @@
           }
         }
       },
-      "Microsoft.NETCore.Platforms/2.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard1.0/_._": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/_._": {}
-        }
-      },
       "Microsoft.Web.WebView2/1.0.2151.40": {
         "type": "package",
         "compile": {
@@ -536,135 +527,111 @@
           }
         }
       },
-      "Syncfusion.Compression.Base/25.1.35": {
+      "Microsoft.Win32.SystemEvents/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0-windows7.0/Syncfusion.Compression.Base.dll": {
+          "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net6.0-windows7.0/Syncfusion.Compression.Base.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Syncfusion.Compression.Net.Core/25.1.35": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Syncfusion.Compression.Portable.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Syncfusion.Compression.Portable.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Syncfusion.DocIO.Net.Core/25.1.35": {
-        "type": "package",
-        "dependencies": {
-          "Syncfusion.Compression.Net.Core": "25.1.35",
-          "Syncfusion.Licensing": "25.1.35",
-          "Syncfusion.OfficeChart.Net.Core": "25.1.35",
-          "System.Text.Encoding.CodePages": "4.4.0"
-        },
-        "compile": {
-          "lib/net8.0/Syncfusion.DocIO.Portable.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Syncfusion.DocIO.Portable.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Syncfusion.Licensing/25.1.35": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Syncfusion.Licensing.dll": {}
-        },
-        "runtime": {
-          "lib/net8.0/Syncfusion.Licensing.dll": {}
-        }
-      },
-      "Syncfusion.OfficeChart.Net.Core/25.1.35": {
-        "type": "package",
-        "dependencies": {
-          "Syncfusion.Compression.Net.Core": "25.1.35"
-        },
-        "compile": {
-          "lib/net8.0/Syncfusion.OfficeChart.Portable.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Syncfusion.OfficeChart.Portable.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Syncfusion.Pdf.AspNet.Mvc5/25.1.35": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Syncfusion.Compression.Base.dll": {
-            "related": ".xml"
-          },
-          "lib/net45/Syncfusion.Licensing.dll": {
-            "related": ".xml"
-          },
-          "lib/net45/Syncfusion.Pdf.Base.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net45/Syncfusion.Compression.Base.dll": {
-            "related": ".xml"
-          },
-          "lib/net45/Syncfusion.Licensing.dll": {
-            "related": ".xml"
-          },
-          "lib/net45/Syncfusion.Pdf.Base.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Syncfusion.Pdf.OCR.WinForms/25.1.35": {
-        "type": "package",
-        "dependencies": {
-          "Syncfusion.Compression.Base": "25.1.35",
-          "Syncfusion.Pdf.WinForms": "25.1.35"
-        },
-        "compile": {
-          "lib/net6.0-windows7.0/Syncfusion.OCRProcessor.Base.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0-windows7.0/Syncfusion.OCRProcessor.Base.dll": {
+          "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
             "related": ".xml"
           }
         },
         "build": {
-          "build/net6.0-windows7.0/Syncfusion.Pdf.OCR.WinForms.targets": {}
+          "buildTransitive/netcoreapp3.1/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
         }
       },
-      "Syncfusion.Pdf.WinForms/25.1.35": {
+      "Spire.PDF/10.3.16": {
         "type": "package",
         "dependencies": {
-          "Syncfusion.Compression.Base": "25.1.35",
-          "Syncfusion.Licensing": "25.1.35"
+          "System.Drawing.Common": "6.0.0",
+          "System.Text.Encoding.CodePages": "6.0.0"
         },
         "compile": {
-          "lib/net6.0-windows7.0/Syncfusion.Pdf.Base.dll": {
+          "lib/net6.0/Spire.Pdf.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net6.0-windows7.0/Syncfusion.Pdf.Base.dll": {
+          "lib/net6.0/Spire.Pdf.dll": {
             "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Compression.Net.Core/25.1.37": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Syncfusion.Compression.Portable.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Syncfusion.Compression.Portable.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Licensing/25.1.37": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Syncfusion.Licensing.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Syncfusion.Licensing.dll": {}
+        }
+      },
+      "Syncfusion.Pdf.Net.Core/25.1.37": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Compression.Net.Core": "25.1.37",
+          "Syncfusion.Licensing": "25.1.37",
+          "System.Text.Encoding.CodePages": "4.4.0"
+        },
+        "compile": {
+          "lib/net8.0/Syncfusion.Pdf.Portable.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Syncfusion.Pdf.Portable.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Drawing.Common/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/net6.0/System.Drawing.Common.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
+          "runtimes/win/lib/net6.0/System.Drawing.Common.dll": {
+            "assetType": "runtime",
+            "rid": "win"
           }
         }
       },
@@ -684,21 +651,42 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "System.Text.Encoding.CodePages/4.4.0": {
+      "System.Runtime.CompilerServices.Unsafe/6.0.0": {
         "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.0.0"
-        },
         "compile": {
-          "ref/netstandard2.0/System.Text.Encoding.CodePages.dll": {
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        }
+      },
+      "System.Text.Encoding.CodePages/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/System.Text.Encoding.CodePages.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/System.Text.Encoding.CodePages.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
         },
         "runtimeTargets": {
-          "runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll": {
+          "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
@@ -1476,23 +1464,6 @@
         "microsoft.jsinterop.nuspec"
       ]
     },
-    "Microsoft.NETCore.Platforms/2.0.0": {
-      "sha512": "VdLJOCXhZaEMY7Hm2GKiULmn7IEPFE4XC5LPSfBVCUIA8YLZVh846gtfBJalsPQF2PlzdD7ecX7DZEulJ402ZQ==",
-      "type": "package",
-      "path": "microsoft.netcore.platforms/2.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/netstandard1.0/_._",
-        "microsoft.netcore.platforms.2.0.0.nupkg.sha512",
-        "microsoft.netcore.platforms.nuspec",
-        "runtime.json",
-        "useSharedDesignerContext.txt",
-        "version.txt"
-      ]
-    },
     "Microsoft.Web.WebView2/1.0.2151.40": {
       "sha512": "OPWjZVJvYhDm4Jq+7QdsQfEgv2QHrkaqUkdk4i9FahatsOJ4cIaVLfnDHGsKjcxGqCVX+Lo4mi4Lqh5hcgfsdw==",
       "type": "package",
@@ -1585,29 +1556,59 @@
         "tools/wv2winrt/zh-Hant/System.CommandLine.resources.dll"
       ]
     },
-    "Syncfusion.Compression.Base/25.1.35": {
-      "sha512": "Um4Bzy0xu9jgot4A0Oqg9xEs4kIzD3COO331hnAkOxatox5oDnOa+PFQ/ag3k0knzZ9utIxhJjrKsjSCuGgYPw==",
+    "Microsoft.Win32.SystemEvents/6.0.0": {
+      "sha512": "hqTM5628jSsQiv+HGpiq3WKBl2c8v1KZfby2J6Pr7pEPlK9waPdgEO6b8A/+/xn/yZ9ulv8HuqK71ONy2tg67A==",
       "type": "package",
-      "path": "syncfusion.compression.base/25.1.35",
+      "path": "microsoft.win32.systemevents/6.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.txt",
-        "lib/net40/Syncfusion.Compression.Base.dll",
-        "lib/net40/Syncfusion.Compression.Base.xml",
-        "lib/net462/Syncfusion.Compression.Base.dll",
-        "lib/net462/Syncfusion.Compression.Base.xml",
-        "lib/net6.0-windows7.0/Syncfusion.Compression.Base.dll",
-        "lib/net6.0-windows7.0/Syncfusion.Compression.Base.xml",
-        "syncfusion.compression.base.25.1.35.nupkg.sha512",
-        "syncfusion.compression.base.nuspec",
-        "syncfusion_logo.png"
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/Microsoft.Win32.SystemEvents.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/Microsoft.Win32.SystemEvents.dll",
+        "lib/net461/Microsoft.Win32.SystemEvents.xml",
+        "lib/net6.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net6.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.dll",
+        "lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.xml",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
+        "microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+        "microsoft.win32.systemevents.nuspec",
+        "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.xml",
+        "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.xml",
+        "useSharedDesignerContext.txt"
       ]
     },
-    "Syncfusion.Compression.Net.Core/25.1.35": {
-      "sha512": "+CoL8TDFDzEEyr/vgis4p5XsJnLUSKKb5fIRo5f3rZzBin0b8o9267hFE0/FH8Xea7VypTD2wDajMebcVojK4w==",
+    "Spire.PDF/10.3.16": {
+      "sha512": "BXEBDAJBhjTtbAyhf+761qghrkhcT1PuA1h24+0HfzgOEUMHR0cZUY4t4mAVmqdVfDXz3enYX5cTwQqWJtnWUQ==",
       "type": "package",
-      "path": "syncfusion.compression.net.core/25.1.35",
+      "path": "spire.pdf/10.3.16",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Spire.Pdf.dll",
+        "lib/net40/Spire.Pdf.xml",
+        "lib/net48/Spire.Pdf.dll",
+        "lib/net48/Spire.Pdf.xml",
+        "lib/net6.0/Spire.Pdf.dll",
+        "lib/net6.0/Spire.Pdf.xml",
+        "lib/netstandard2.0/Spire.Pdf.dll",
+        "lib/netstandard2.0/Spire.Pdf.xml",
+        "license.txt",
+        "spire.pdf.10.3.16.nupkg.sha512",
+        "spire.pdf.nuspec"
+      ]
+    },
+    "Syncfusion.Compression.Net.Core/25.1.37": {
+      "sha512": "TPB6/t7XITsfrvNFWiz8sna+Swc/CVihjF5M7we0KcZsHPmtRJtK+CEjCBSEITbUBby2Z7S2o5s3UIthxewXvg==",
+      "type": "package",
+      "path": "syncfusion.compression.net.core/25.1.37",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1620,37 +1621,15 @@
         "lib/net8.0/Syncfusion.Compression.Portable.xml",
         "lib/netstandard2.0/Syncfusion.Compression.Portable.dll",
         "lib/netstandard2.0/Syncfusion.Compression.Portable.xml",
-        "syncfusion.compression.net.core.25.1.35.nupkg.sha512",
+        "syncfusion.compression.net.core.25.1.37.nupkg.sha512",
         "syncfusion.compression.net.core.nuspec",
         "syncfusion_logo.png"
       ]
     },
-    "Syncfusion.DocIO.Net.Core/25.1.35": {
-      "sha512": "AlRD+eFJP38c/g+lw4oTZCf1oDMDbi1rsH9F5Gk9rMfA5p3D/DmAU18UrB9UrPoGWTMotmTt5RlRjFnxLhXcVg==",
+    "Syncfusion.Licensing/25.1.37": {
+      "sha512": "6Fu08NMF7nE8mw1HZ9yoZphB8ML8EBNQGxL50xTuRqfTpOHRSg+8h8NQmtDlEWh4UBZ35K+52qD5AJxnKbY2bg==",
       "type": "package",
-      "path": "syncfusion.docio.net.core/25.1.35",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "README.md",
-        "lib/net6.0/Syncfusion.DocIO.Portable.dll",
-        "lib/net6.0/Syncfusion.DocIO.Portable.xml",
-        "lib/net7.0/Syncfusion.DocIO.Portable.dll",
-        "lib/net7.0/Syncfusion.DocIO.Portable.xml",
-        "lib/net8.0/Syncfusion.DocIO.Portable.dll",
-        "lib/net8.0/Syncfusion.DocIO.Portable.xml",
-        "lib/netstandard2.0/Syncfusion.DocIO.Portable.dll",
-        "lib/netstandard2.0/Syncfusion.DocIO.Portable.xml",
-        "syncfusion.docio.net.core.25.1.35.nupkg.sha512",
-        "syncfusion.docio.net.core.nuspec",
-        "syncfusion_logo.png"
-      ]
-    },
-    "Syncfusion.Licensing/25.1.35": {
-      "sha512": "ZuMlu1xypHNxPM/UsPn1hEOOme30JgIQ9GzyF0yn/89mE6/g2ERkO+guhxnQXekEXTzVpYXkWnSshn1WV1l+rA==",
-      "type": "package",
-      "path": "syncfusion.licensing/25.1.35",
+      "path": "syncfusion.licensing/25.1.37",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1667,131 +1646,70 @@
         "lib/net8.0/Syncfusion.Licensing.dll",
         "lib/netstandard2.0/Syncfusion.Licensing.dll",
         "lib/uap10.0/Syncfusion.Licensing.dll",
-        "syncfusion.licensing.25.1.35.nupkg.sha512",
+        "syncfusion.licensing.25.1.37.nupkg.sha512",
         "syncfusion.licensing.nuspec",
         "syncfusion_logo.png"
       ]
     },
-    "Syncfusion.OfficeChart.Net.Core/25.1.35": {
-      "sha512": "2/31sTgGlPE2ggAj7527FddaVrJlrFgY4zupKhGKmh8BlSGl8sghaNn+4sdwMvpR58Cs5Au2Wa5aCyUTHgbb3Q==",
+    "Syncfusion.Pdf.Net.Core/25.1.37": {
+      "sha512": "8JNMgHaByTb2QspN8DedlBldIO8ZKkIBIwvEh9GrHdSkGGXf04GVp1YQ4Dvtu6qtdWVKOnN3y6JgjJp3Mk5o8g==",
       "type": "package",
-      "path": "syncfusion.officechart.net.core/25.1.35",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "lib/net6.0/Syncfusion.OfficeChart.Portable.dll",
-        "lib/net6.0/Syncfusion.OfficeChart.Portable.xml",
-        "lib/net7.0/Syncfusion.OfficeChart.Portable.dll",
-        "lib/net7.0/Syncfusion.OfficeChart.Portable.xml",
-        "lib/net8.0/Syncfusion.OfficeChart.Portable.dll",
-        "lib/net8.0/Syncfusion.OfficeChart.Portable.xml",
-        "lib/netstandard2.0/Syncfusion.OfficeChart.Portable.dll",
-        "lib/netstandard2.0/Syncfusion.OfficeChart.Portable.xml",
-        "syncfusion.officechart.net.core.25.1.35.nupkg.sha512",
-        "syncfusion.officechart.net.core.nuspec",
-        "syncfusion_logo.png"
-      ]
-    },
-    "Syncfusion.Pdf.AspNet.Mvc5/25.1.35": {
-      "sha512": "skzKQZFwTefFhaUvW4WCtALBWUTY77T66TVJWXH5CW1Anw4+d+ETyw8Cud8FJp6nCSUvp4HCETmMHYXghzdX4Q==",
-      "type": "package",
-      "path": "syncfusion.pdf.aspnet.mvc5/25.1.35",
+      "path": "syncfusion.pdf.net.core/25.1.37",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.txt",
         "README.md",
-        "content/net45/web.config.install.xdt",
-        "content/net45/web.config.uninstall.xdt",
-        "lib/net45/Syncfusion.Compression.Base.dll",
-        "lib/net45/Syncfusion.Compression.Base.xml",
-        "lib/net45/Syncfusion.Licensing.dll",
-        "lib/net45/Syncfusion.Licensing.xml",
-        "lib/net45/Syncfusion.Pdf.Base.dll",
-        "lib/net45/Syncfusion.Pdf.Base.xml",
-        "syncfusion.pdf.aspnet.mvc5.25.1.35.nupkg.sha512",
-        "syncfusion.pdf.aspnet.mvc5.nuspec",
+        "lib/net6.0/Syncfusion.Pdf.Portable.dll",
+        "lib/net6.0/Syncfusion.Pdf.Portable.xml",
+        "lib/net7.0/Syncfusion.Pdf.Portable.dll",
+        "lib/net7.0/Syncfusion.Pdf.Portable.xml",
+        "lib/net8.0/Syncfusion.Pdf.Portable.dll",
+        "lib/net8.0/Syncfusion.Pdf.Portable.xml",
+        "lib/netstandard2.0/Syncfusion.Pdf.Portable.dll",
+        "lib/netstandard2.0/Syncfusion.Pdf.Portable.xml",
+        "syncfusion.pdf.net.core.25.1.37.nupkg.sha512",
+        "syncfusion.pdf.net.core.nuspec",
         "syncfusion_logo.png"
       ]
     },
-    "Syncfusion.Pdf.OCR.WinForms/25.1.35": {
-      "sha512": "gngsUP3yUWg+W6WDIyRW6QP8U7zBjJaeL7A49L2QudFX170FEe5xSoWl93vv54oCL8bDXa26kPagZBt4KUxkpg==",
+    "System.Drawing.Common/6.0.0": {
+      "sha512": "NfuoKUiP2nUWwKZN6twGqXioIe1zVD0RIj2t976A+czLHr2nY454RwwXs6JU9Htc6mwqL6Dn/nEL3dpVf2jOhg==",
       "type": "package",
-      "path": "syncfusion.pdf.ocr.winforms/25.1.35",
+      "path": "system.drawing.common/6.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.txt",
-        "README.md",
-        "build/net40/Syncfusion.Pdf.OCR.WinForms.targets",
-        "build/net462/Syncfusion.Pdf.OCR.WinForms.targets",
-        "build/net6.0-windows7.0/Syncfusion.Pdf.OCR.WinForms.targets",
-        "lib/net40/Syncfusion.OCRProcessor.Base.dll",
-        "lib/net40/Syncfusion.OCRProcessor.Base.xml",
-        "lib/net462/Syncfusion.OCRProcessor.Base.dll",
-        "lib/net462/Syncfusion.OCRProcessor.Base.xml",
-        "lib/net6.0-windows7.0/Syncfusion.OCRProcessor.Base.dll",
-        "lib/net6.0-windows7.0/Syncfusion.OCRProcessor.Base.xml",
-        "runtimes/LanguagePack/chi_sim.traineddata",
-        "runtimes/LanguagePack/eng.cube.bigrams",
-        "runtimes/LanguagePack/eng.cube.fold",
-        "runtimes/LanguagePack/eng.cube.lm",
-        "runtimes/LanguagePack/eng.cube.nn",
-        "runtimes/LanguagePack/eng.cube.params",
-        "runtimes/LanguagePack/eng.cube.size",
-        "runtimes/LanguagePack/eng.cube.word-freq",
-        "runtimes/LanguagePack/eng.tesseract_cube.nn",
-        "runtimes/LanguagePack/eng.traineddata",
-        "runtimes/LanguagePack/fra.traineddata",
-        "runtimes/LanguagePack/osd.traineddata",
-        "runtimes/TesseractBinaries/3.02/SyncfusionTesseract.dll",
-        "runtimes/TesseractBinaries/3.02/liblept168.dll",
-        "runtimes/TesseractBinaries/3.05/x64/SyncfusionTesseract.dll",
-        "runtimes/TesseractBinaries/3.05/x64/pvt.cppan.demo.danbloomberg.leptonica-1.74.4.dll",
-        "runtimes/TesseractBinaries/3.05/x64/pvt.cppan.demo.jpeg-9.2.0.dll",
-        "runtimes/TesseractBinaries/3.05/x64/pvt.cppan.demo.madler.zlib-1.2.11.dll",
-        "runtimes/TesseractBinaries/3.05/x64/pvt.cppan.demo.openjpeg.openjp2-2.3.0.dll",
-        "runtimes/TesseractBinaries/3.05/x64/pvt.cppan.demo.png-1.6.34.dll",
-        "runtimes/TesseractBinaries/3.05/x64/pvt.cppan.demo.tiff-4.0.9.dll",
-        "runtimes/TesseractBinaries/3.05/x64/pvt.cppan.demo.webp-0.6.1.dll",
-        "runtimes/TesseractBinaries/3.05/x64/pvt.cppan.demo.xz_utils.lzma-5.2.3.dll",
-        "runtimes/TesseractBinaries/3.05/x86/SyncfusionTesseract.dll",
-        "runtimes/TesseractBinaries/3.05/x86/pvt.cppan.demo.danbloomberg.leptonica-1.74.4.dll",
-        "runtimes/TesseractBinaries/3.05/x86/pvt.cppan.demo.jpeg-9.2.0.dll",
-        "runtimes/TesseractBinaries/3.05/x86/pvt.cppan.demo.madler.zlib-1.2.11.dll",
-        "runtimes/TesseractBinaries/3.05/x86/pvt.cppan.demo.openjpeg.openjp2-2.3.0.dll",
-        "runtimes/TesseractBinaries/3.05/x86/pvt.cppan.demo.png-1.6.34.dll",
-        "runtimes/TesseractBinaries/3.05/x86/pvt.cppan.demo.tiff-4.0.9.dll",
-        "runtimes/TesseractBinaries/3.05/x86/pvt.cppan.demo.webp-0.6.1.dll",
-        "runtimes/TesseractBinaries/3.05/x86/pvt.cppan.demo.xz_utils.lzma-5.2.3.dll",
-        "runtimes/TesseractBinaries/4.0/x64/leptonica-1.80.0.dll",
-        "runtimes/TesseractBinaries/4.0/x64/libSyncfusionTesseract.dll",
-        "runtimes/TesseractBinaries/4.0/x86/leptonica-1.80.0.dll",
-        "runtimes/TesseractBinaries/4.0/x86/libSyncfusionTesseract.dll",
-        "syncfusion.pdf.ocr.winforms.25.1.35.nupkg.sha512",
-        "syncfusion.pdf.ocr.winforms.nuspec",
-        "syncfusion_logo.png"
-      ]
-    },
-    "Syncfusion.Pdf.WinForms/25.1.35": {
-      "sha512": "3Y/ThrKjFPpGqUhXgzSibsvwBOMMoP1ptjNaCQsKYVJgdQl/O7SpZR50+sGO7IKBa1Vc4R26v+Y+NaKmNvl8Fw==",
-      "type": "package",
-      "path": "syncfusion.pdf.winforms/25.1.35",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "README.md",
-        "lib/net40/Syncfusion.Pdf.Base.dll",
-        "lib/net40/Syncfusion.Pdf.Base.xml",
-        "lib/net462/Syncfusion.Pdf.Base.dll",
-        "lib/net462/Syncfusion.Pdf.Base.xml",
-        "lib/net6.0-windows7.0/Syncfusion.Pdf.Base.dll",
-        "lib/net6.0-windows7.0/Syncfusion.Pdf.Base.xml",
-        "syncfusion.pdf.winforms.25.1.35.nupkg.sha512",
-        "syncfusion.pdf.winforms.nuspec",
-        "syncfusion_logo.png"
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Drawing.Common.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.Drawing.Common.dll",
+        "lib/net461/System.Drawing.Common.xml",
+        "lib/net6.0/System.Drawing.Common.dll",
+        "lib/net6.0/System.Drawing.Common.xml",
+        "lib/netcoreapp3.1/System.Drawing.Common.dll",
+        "lib/netcoreapp3.1/System.Drawing.Common.xml",
+        "lib/netstandard2.0/System.Drawing.Common.dll",
+        "lib/netstandard2.0/System.Drawing.Common.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "runtimes/unix/lib/net6.0/System.Drawing.Common.dll",
+        "runtimes/unix/lib/net6.0/System.Drawing.Common.xml",
+        "runtimes/unix/lib/netcoreapp3.1/System.Drawing.Common.dll",
+        "runtimes/unix/lib/netcoreapp3.1/System.Drawing.Common.xml",
+        "runtimes/win/lib/net6.0/System.Drawing.Common.dll",
+        "runtimes/win/lib/net6.0/System.Drawing.Common.xml",
+        "runtimes/win/lib/netcoreapp3.1/System.Drawing.Common.dll",
+        "runtimes/win/lib/netcoreapp3.1/System.Drawing.Common.xml",
+        "system.drawing.common.6.0.0.nupkg.sha512",
+        "system.drawing.common.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     },
     "System.IO.Pipelines/8.0.0": {
@@ -1823,52 +1741,68 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Text.Encoding.CodePages/4.4.0": {
-      "sha512": "6JX7ZdaceBiLKLkYt8zJcp4xTJd1uYyXXEkPw6mnlUIjh1gZPIVKPtRXPmY5kLf6DwZmf5YLwR3QUrRonl7l0A==",
+    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
+      "sha512": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
       "type": "package",
-      "path": "system.text.encoding.codepages/4.4.0",
+      "path": "system.runtime.compilerservices.unsafe/6.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/net461/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/net6.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netcoreapp3.1/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netcoreapp3.1/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Text.Encoding.CodePages/6.0.0": {
+      "sha512": "ZFCILZuOvtKPauZ/j/swhvw68ZRi9ATCfvGbk1QfydmcXBkIWecWKn/250UH7rahZ5OoDBaiAudJtPvLwzw85A==",
+      "type": "package",
+      "path": "system.text.encoding.codepages/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Text.Encoding.CodePages.targets",
+        "buildTransitive/netcoreapp3.1/_._",
         "lib/MonoAndroid10/_._",
         "lib/MonoTouch10/_._",
-        "lib/net46/System.Text.Encoding.CodePages.dll",
         "lib/net461/System.Text.Encoding.CodePages.dll",
-        "lib/netstandard1.3/System.Text.Encoding.CodePages.dll",
+        "lib/net461/System.Text.Encoding.CodePages.xml",
+        "lib/net6.0/System.Text.Encoding.CodePages.dll",
+        "lib/net6.0/System.Text.Encoding.CodePages.xml",
+        "lib/netcoreapp3.1/System.Text.Encoding.CodePages.dll",
+        "lib/netcoreapp3.1/System.Text.Encoding.CodePages.xml",
         "lib/netstandard2.0/System.Text.Encoding.CodePages.dll",
+        "lib/netstandard2.0/System.Text.Encoding.CodePages.xml",
         "lib/xamarinios10/_._",
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/netstandard1.3/System.Text.Encoding.CodePages.dll",
-        "ref/netstandard1.3/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/de/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/es/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/fr/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/it/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/ja/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/ko/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/ru/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/zh-hans/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/zh-hant/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard2.0/System.Text.Encoding.CodePages.dll",
-        "ref/netstandard2.0/System.Text.Encoding.CodePages.xml",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
         "runtimes/win/lib/net461/System.Text.Encoding.CodePages.dll",
-        "runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll",
-        "runtimes/win/lib/netstandard1.3/System.Text.Encoding.CodePages.dll",
+        "runtimes/win/lib/net461/System.Text.Encoding.CodePages.xml",
+        "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.dll",
+        "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.xml",
+        "runtimes/win/lib/netcoreapp3.1/System.Text.Encoding.CodePages.dll",
+        "runtimes/win/lib/netcoreapp3.1/System.Text.Encoding.CodePages.xml",
         "runtimes/win/lib/netstandard2.0/System.Text.Encoding.CodePages.dll",
-        "system.text.encoding.codepages.4.4.0.nupkg.sha512",
+        "runtimes/win/lib/netstandard2.0/System.Text.Encoding.CodePages.xml",
+        "system.text.encoding.codepages.6.0.0.nupkg.sha512",
         "system.text.encoding.codepages.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "useSharedDesignerContext.txt"
       ]
     },
     "System.Text.Encodings.Web/8.0.0": {
@@ -1983,9 +1917,8 @@
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
       "Microsoft.AspNetCore.Components.WebView.WindowsForms >= 8.0.10",
-      "Syncfusion.DocIO.Net.Core >= 25.1.35",
-      "Syncfusion.Pdf.AspNet.Mvc5 >= 25.1.35",
-      "Syncfusion.Pdf.OCR.WinForms >= 25.1.35",
+      "Spire.PDF >= 10.3.16",
+      "Syncfusion.Pdf.Net.Core >= 25.1.37",
       "iTextSharp >= 5.5.13.3"
     ]
   },
@@ -2032,17 +1965,13 @@
             "target": "Package",
             "version": "[8.0.10, )"
           },
-          "Syncfusion.DocIO.Net.Core": {
+          "Spire.PDF": {
             "target": "Package",
-            "version": "[25.1.35, )"
+            "version": "[10.3.16, )"
           },
-          "Syncfusion.Pdf.AspNet.Mvc5": {
+          "Syncfusion.Pdf.Net.Core": {
             "target": "Package",
-            "version": "[25.1.35, )"
-          },
-          "Syncfusion.Pdf.OCR.WinForms": {
-            "target": "Package",
-            "version": "[25.1.35, )"
+            "version": "[25.1.37, )"
           },
           "iTextSharp": {
             "target": "Package",
@@ -2089,16 +2018,6 @@
       "warningLevel": 1,
       "message": "Package 'iTextSharp 5.5.13.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "iTextSharp",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Syncfusion.Pdf.AspNet.Mvc5 25.1.35' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Syncfusion.Pdf.AspNet.Mvc5",
       "targetGraphs": [
         "net8.0-windows7.0"
       ]

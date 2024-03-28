@@ -9,9 +9,8 @@
       "TransferTool/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Components.WebView.WindowsForms": "8.0.10",
-          "Syncfusion.DocIO.Net.Core": "25.1.35",
-          "Syncfusion.Pdf.AspNet.Mvc5": "25.1.35",
-          "Syncfusion.Pdf.OCR.WinForms": "25.1.35",
+          "Spire.PDF": "10.3.16",
+          "Syncfusion.Pdf.Net.Core": "25.1.37",
           "iTextSharp": "5.5.13.3"
         },
         "runtime": {
@@ -316,7 +315,6 @@
           }
         }
       },
-      "Microsoft.NETCore.Platforms/2.0.0": {},
       "Microsoft.Web.WebView2/1.0.2151.40": {
         "runtime": {
           "lib/netcoreapp3.0/Microsoft.Web.WebView2.Core.dll": {
@@ -350,73 +348,51 @@
           }
         }
       },
-      "Syncfusion.Compression.Base/25.1.35": {},
-      "Syncfusion.Compression.Net.Core/25.1.35": {
+      "Microsoft.Win32.SystemEvents/6.0.0": {},
+      "Spire.PDF/10.3.16": {
+        "dependencies": {
+          "System.Drawing.Common": "6.0.0",
+          "System.Text.Encoding.CodePages": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Spire.Pdf.dll": {
+            "assemblyVersion": "10.3.16.0",
+            "fileVersion": "10.3.16.1360"
+          }
+        }
+      },
+      "Syncfusion.Compression.Net.Core/25.1.37": {
         "runtime": {
           "lib/net8.0/Syncfusion.Compression.Portable.dll": {
-            "assemblyVersion": "25.1.35.0",
-            "fileVersion": "25.1.35.0"
+            "assemblyVersion": "25.1.37.0",
+            "fileVersion": "25.1.37.0"
           }
         }
       },
-      "Syncfusion.DocIO.Net.Core/25.1.35": {
+      "Syncfusion.Licensing/25.1.37": {
+        "runtime": {
+          "lib/net8.0/Syncfusion.Licensing.dll": {
+            "assemblyVersion": "25.1.37.0",
+            "fileVersion": "25.1.37.0"
+          }
+        }
+      },
+      "Syncfusion.Pdf.Net.Core/25.1.37": {
         "dependencies": {
-          "Syncfusion.Compression.Net.Core": "25.1.35",
-          "Syncfusion.Licensing": "25.1.35",
-          "Syncfusion.OfficeChart.Net.Core": "25.1.35",
-          "System.Text.Encoding.CodePages": "4.4.0"
+          "Syncfusion.Compression.Net.Core": "25.1.37",
+          "Syncfusion.Licensing": "25.1.37",
+          "System.Text.Encoding.CodePages": "6.0.0"
         },
         "runtime": {
-          "lib/net8.0/Syncfusion.DocIO.Portable.dll": {
-            "assemblyVersion": "25.1.35.0",
-            "fileVersion": "25.1.35.0"
+          "lib/net8.0/Syncfusion.Pdf.Portable.dll": {
+            "assemblyVersion": "25.1.37.0",
+            "fileVersion": "25.1.37.0"
           }
         }
       },
-      "Syncfusion.Licensing/25.1.35": {},
-      "Syncfusion.OfficeChart.Net.Core/25.1.35": {
+      "System.Drawing.Common/6.0.0": {
         "dependencies": {
-          "Syncfusion.Compression.Net.Core": "25.1.35"
-        },
-        "runtime": {
-          "lib/net8.0/Syncfusion.OfficeChart.Portable.dll": {
-            "assemblyVersion": "25.1.35.0",
-            "fileVersion": "25.1.35.0"
-          }
-        }
-      },
-      "Syncfusion.Pdf.AspNet.Mvc5/25.1.35": {
-        "runtime": {
-          "lib/net45/Syncfusion.Compression.Base.dll": {
-            "assemblyVersion": "25.1450.35.0",
-            "fileVersion": "25.1450.35.0"
-          },
-          "lib/net45/Syncfusion.Licensing.dll": {
-            "assemblyVersion": "25.1450.35.0",
-            "fileVersion": "25.1450.35.0"
-          },
-          "lib/net45/Syncfusion.Pdf.Base.dll": {
-            "assemblyVersion": "25.1450.35.0",
-            "fileVersion": "25.1450.35.0"
-          }
-        }
-      },
-      "Syncfusion.Pdf.OCR.WinForms/25.1.35": {
-        "dependencies": {
-          "Syncfusion.Compression.Base": "25.1.35",
-          "Syncfusion.Pdf.WinForms": "25.1.35"
-        },
-        "runtime": {
-          "lib/net6.0-windows7.0/Syncfusion.OCRProcessor.Base.dll": {
-            "assemblyVersion": "25.1.35.0",
-            "fileVersion": "25.1.35.0"
-          }
-        }
-      },
-      "Syncfusion.Pdf.WinForms/25.1.35": {
-        "dependencies": {
-          "Syncfusion.Compression.Base": "25.1.35",
-          "Syncfusion.Licensing": "25.1.35"
+          "Microsoft.Win32.SystemEvents": "6.0.0"
         }
       },
       "System.IO.Pipelines/8.0.0": {
@@ -427,9 +403,10 @@
           }
         }
       },
-      "System.Text.Encoding.CodePages/4.4.0": {
+      "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
+      "System.Text.Encoding.CodePages/6.0.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.0.0"
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
       },
       "System.Text.Encodings.Web/8.0.0": {},
@@ -635,13 +612,6 @@
       "path": "microsoft.jsinterop/8.0.0",
       "hashPath": "microsoft.jsinterop.8.0.0.nupkg.sha512"
     },
-    "Microsoft.NETCore.Platforms/2.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-VdLJOCXhZaEMY7Hm2GKiULmn7IEPFE4XC5LPSfBVCUIA8YLZVh846gtfBJalsPQF2PlzdD7ecX7DZEulJ402ZQ==",
-      "path": "microsoft.netcore.platforms/2.0.0",
-      "hashPath": "microsoft.netcore.platforms.2.0.0.nupkg.sha512"
-    },
     "Microsoft.Web.WebView2/1.0.2151.40": {
       "type": "package",
       "serviceable": true,
@@ -649,61 +619,47 @@
       "path": "microsoft.web.webview2/1.0.2151.40",
       "hashPath": "microsoft.web.webview2.1.0.2151.40.nupkg.sha512"
     },
-    "Syncfusion.Compression.Base/25.1.35": {
+    "Microsoft.Win32.SystemEvents/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Um4Bzy0xu9jgot4A0Oqg9xEs4kIzD3COO331hnAkOxatox5oDnOa+PFQ/ag3k0knzZ9utIxhJjrKsjSCuGgYPw==",
-      "path": "syncfusion.compression.base/25.1.35",
-      "hashPath": "syncfusion.compression.base.25.1.35.nupkg.sha512"
+      "sha512": "sha512-hqTM5628jSsQiv+HGpiq3WKBl2c8v1KZfby2J6Pr7pEPlK9waPdgEO6b8A/+/xn/yZ9ulv8HuqK71ONy2tg67A==",
+      "path": "microsoft.win32.systemevents/6.0.0",
+      "hashPath": "microsoft.win32.systemevents.6.0.0.nupkg.sha512"
     },
-    "Syncfusion.Compression.Net.Core/25.1.35": {
+    "Spire.PDF/10.3.16": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+CoL8TDFDzEEyr/vgis4p5XsJnLUSKKb5fIRo5f3rZzBin0b8o9267hFE0/FH8Xea7VypTD2wDajMebcVojK4w==",
-      "path": "syncfusion.compression.net.core/25.1.35",
-      "hashPath": "syncfusion.compression.net.core.25.1.35.nupkg.sha512"
+      "sha512": "sha512-BXEBDAJBhjTtbAyhf+761qghrkhcT1PuA1h24+0HfzgOEUMHR0cZUY4t4mAVmqdVfDXz3enYX5cTwQqWJtnWUQ==",
+      "path": "spire.pdf/10.3.16",
+      "hashPath": "spire.pdf.10.3.16.nupkg.sha512"
     },
-    "Syncfusion.DocIO.Net.Core/25.1.35": {
+    "Syncfusion.Compression.Net.Core/25.1.37": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-AlRD+eFJP38c/g+lw4oTZCf1oDMDbi1rsH9F5Gk9rMfA5p3D/DmAU18UrB9UrPoGWTMotmTt5RlRjFnxLhXcVg==",
-      "path": "syncfusion.docio.net.core/25.1.35",
-      "hashPath": "syncfusion.docio.net.core.25.1.35.nupkg.sha512"
+      "sha512": "sha512-TPB6/t7XITsfrvNFWiz8sna+Swc/CVihjF5M7we0KcZsHPmtRJtK+CEjCBSEITbUBby2Z7S2o5s3UIthxewXvg==",
+      "path": "syncfusion.compression.net.core/25.1.37",
+      "hashPath": "syncfusion.compression.net.core.25.1.37.nupkg.sha512"
     },
-    "Syncfusion.Licensing/25.1.35": {
+    "Syncfusion.Licensing/25.1.37": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ZuMlu1xypHNxPM/UsPn1hEOOme30JgIQ9GzyF0yn/89mE6/g2ERkO+guhxnQXekEXTzVpYXkWnSshn1WV1l+rA==",
-      "path": "syncfusion.licensing/25.1.35",
-      "hashPath": "syncfusion.licensing.25.1.35.nupkg.sha512"
+      "sha512": "sha512-6Fu08NMF7nE8mw1HZ9yoZphB8ML8EBNQGxL50xTuRqfTpOHRSg+8h8NQmtDlEWh4UBZ35K+52qD5AJxnKbY2bg==",
+      "path": "syncfusion.licensing/25.1.37",
+      "hashPath": "syncfusion.licensing.25.1.37.nupkg.sha512"
     },
-    "Syncfusion.OfficeChart.Net.Core/25.1.35": {
+    "Syncfusion.Pdf.Net.Core/25.1.37": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-2/31sTgGlPE2ggAj7527FddaVrJlrFgY4zupKhGKmh8BlSGl8sghaNn+4sdwMvpR58Cs5Au2Wa5aCyUTHgbb3Q==",
-      "path": "syncfusion.officechart.net.core/25.1.35",
-      "hashPath": "syncfusion.officechart.net.core.25.1.35.nupkg.sha512"
+      "sha512": "sha512-8JNMgHaByTb2QspN8DedlBldIO8ZKkIBIwvEh9GrHdSkGGXf04GVp1YQ4Dvtu6qtdWVKOnN3y6JgjJp3Mk5o8g==",
+      "path": "syncfusion.pdf.net.core/25.1.37",
+      "hashPath": "syncfusion.pdf.net.core.25.1.37.nupkg.sha512"
     },
-    "Syncfusion.Pdf.AspNet.Mvc5/25.1.35": {
+    "System.Drawing.Common/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-skzKQZFwTefFhaUvW4WCtALBWUTY77T66TVJWXH5CW1Anw4+d+ETyw8Cud8FJp6nCSUvp4HCETmMHYXghzdX4Q==",
-      "path": "syncfusion.pdf.aspnet.mvc5/25.1.35",
-      "hashPath": "syncfusion.pdf.aspnet.mvc5.25.1.35.nupkg.sha512"
-    },
-    "Syncfusion.Pdf.OCR.WinForms/25.1.35": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-gngsUP3yUWg+W6WDIyRW6QP8U7zBjJaeL7A49L2QudFX170FEe5xSoWl93vv54oCL8bDXa26kPagZBt4KUxkpg==",
-      "path": "syncfusion.pdf.ocr.winforms/25.1.35",
-      "hashPath": "syncfusion.pdf.ocr.winforms.25.1.35.nupkg.sha512"
-    },
-    "Syncfusion.Pdf.WinForms/25.1.35": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-3Y/ThrKjFPpGqUhXgzSibsvwBOMMoP1ptjNaCQsKYVJgdQl/O7SpZR50+sGO7IKBa1Vc4R26v+Y+NaKmNvl8Fw==",
-      "path": "syncfusion.pdf.winforms/25.1.35",
-      "hashPath": "syncfusion.pdf.winforms.25.1.35.nupkg.sha512"
+      "sha512": "sha512-NfuoKUiP2nUWwKZN6twGqXioIe1zVD0RIj2t976A+czLHr2nY454RwwXs6JU9Htc6mwqL6Dn/nEL3dpVf2jOhg==",
+      "path": "system.drawing.common/6.0.0",
+      "hashPath": "system.drawing.common.6.0.0.nupkg.sha512"
     },
     "System.IO.Pipelines/8.0.0": {
       "type": "package",
@@ -712,12 +668,19 @@
       "path": "system.io.pipelines/8.0.0",
       "hashPath": "system.io.pipelines.8.0.0.nupkg.sha512"
     },
-    "System.Text.Encoding.CodePages/4.4.0": {
+    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6JX7ZdaceBiLKLkYt8zJcp4xTJd1uYyXXEkPw6mnlUIjh1gZPIVKPtRXPmY5kLf6DwZmf5YLwR3QUrRonl7l0A==",
-      "path": "system.text.encoding.codepages/4.4.0",
-      "hashPath": "system.text.encoding.codepages.4.4.0.nupkg.sha512"
+      "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
+      "path": "system.runtime.compilerservices.unsafe/6.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    },
+    "System.Text.Encoding.CodePages/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZFCILZuOvtKPauZ/j/swhvw68ZRi9ATCfvGbk1QfydmcXBkIWecWKn/250UH7rahZ5OoDBaiAudJtPvLwzw85A==",
+      "path": "system.text.encoding.codepages/6.0.0",
+      "hashPath": "system.text.encoding.codepages.6.0.0.nupkg.sha512"
     },
     "System.Text.Encodings.Web/8.0.0": {
       "type": "package",

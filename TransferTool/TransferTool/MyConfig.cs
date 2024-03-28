@@ -19,6 +19,9 @@ using System.Web;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Parsing;
 
+using Spire;
+using Spire.Pdf.Texts;
+
 namespace TransferTool
 {
     public enum XmlNiveau
@@ -119,7 +122,7 @@ namespace TransferTool
                     RenderFilter[] filter = { new RegionTextRenderFilter(rect) };
                     ITextExtractionStrategy strategy = new FilteredTextRenderListener(
                         new LocationTextExtractionStrategy(), filter);
-                    value = PdfTextExtractor.GetTextFromPage(reader, i, strategy).Trim();
+                    value = iTextSharp.text.pdf.parser.PdfTextExtractor.GetTextFromPage(reader, i, strategy).Trim();
                 }
 
                 //defObject.OrderTags wordt van tevoren handmatig gedefinieerd. Als de defObject.Ordertags niet bestaat, sla deze stap over.
@@ -257,7 +260,7 @@ namespace TransferTool
             return value;
         }
 
-        internal string GetValueTest(string extractedText, PdfLoadedPage i, defObject defObject, int j)
+        internal string GetValueTest(Spire.Pdf.PdfDocument doc, string extractedText, PdfLoadedPage i, defObject defObject, int j)
         {
             string value = string.Empty;
             //Als de huidige text geen deObject.Text.From bevat, dan overslaan. Dat heeft te maken dat er de pdf-pagina apart wordt uirgelezen,
@@ -295,30 +298,6 @@ namespace TransferTool
             //Anders pakt hij de coordinaten variabelen
             else
             {
-                float x = GetPostScriptPoints((float)defObject.Position.X);
-                float xy = GetPostScriptPoints((float)defObject.Position.Z);
-                float yx = GetPostScriptPoints((float)defObject.Position.W);
-
-                float mediabox = i.Size.Height;
-                float y = mediabox - GetPostScriptPoints((float)defObject.Position.Y);
-
-                TextLines lineCollection = new TextLines();
-
-                RectangleF textBounds = new RectangleF(148, 576, 42, 17);
-
-                i.ExtractText(out lineCollection);
-
-                foreach (TextLine txtLine in lineCollection)
-                {
-                    foreach (TextWord word in txtLine.WordCollection)
-                    {
-                        if (textBounds.IntersectsWith(word.Bounds))
-                        {
-                            value = word.Text;
-                            break;
-                        }
-                    }
-                }
 
             }
 
@@ -331,71 +310,66 @@ namespace TransferTool
                 //Dit geldt voor pagina 2, Omdat huidige text dan het Totaalbedrag bevat.
                 //Als orderFrom totaal bevat, dan betekent dat de artikel eindigt op pagina 1, anders gaat hij van pagina 2 ook verder
 
-                if (extractedText.Contains(defObject.Text.To))
+                int test = 0;
+                orderFrom = extractedText.IndexOf(defObject.Text.From);
+                string orderWithText = extractedText.Substring(orderFrom).Trim();
+
+                foreach (var tagnaam in defObject.OrderTags)
                 {
-                    string orderWithText = extractedText.Substring(orderFrom + defObject.Text.From.Length).Trim();
+                    test++;
+                    string tagValue = string.Empty;
+
                     if (orderWithText.Contains(defObject.Text.To))
                     {
-                        int orderTo = orderWithText.IndexOf(defObject.Text.To);
-                        orderWithText = orderWithText.Substring(0, orderTo);
+                        int orderTo = orderWithText.IndexOf(defObject.OrderTags.Last().TagNaam);
+                        string lastTagnaam = defObject.OrderTags.Last().TagNaam;
 
-                        orderWithText = orderWithText.Replace(" \n", " ");
-                        // Regex-patroon om elk artikel te matchen
+                        string orderStartTag = orderWithText.Substring(0, orderTo + lastTagnaam.Length);
 
-                        foreach (string eachOrder in orderWithText.Split("\r\n"))
+                        string[] eachTag = orderStartTag.Split("\r\n");
+
+                        foreach (var eachTagNaam in eachTag)
                         {
-                            if (eachOrder == j.ToString())
+                            //zoek de position van elke tag
+                            string check = eachTagNaam;
+
+                            foreach (Spire.Pdf.PdfPageBase page in doc.Pages)
                             {
-                                j += 10;
-                                order.Append("Order" + eachOrder + "*");
+                                //Create a PdfTextFinder object
+                                PdfTextFinder finder = new PdfTextFinder(page);
+
+                                //Set the find options
+                                PdfTextFindOptions options = new PdfTextFindOptions();
+                                options.Parameter = TextFindParameter.IgnoreCase;
+                                finder.Options = options;
+
+                                check.Replace(" ", "");
+
+                                //Find all instances of a specific text
+                                List<PdfTextFragment> fragments = finder.Find(check);
+
+                                //Loop through the instances
+                                foreach (PdfTextFragment fragment in fragments)
+                                {
+                                    //Get the position of a specific instance
+                                    PointF found = fragment.Positions[0];
+                                    if (!found.IsEmpty)
+                                    {
+                                        float x = GetPostScriptIn(found.X);
+                                        float y = GetPostScriptIn(found.Y);
+
+                                        //next line om de tekst uit te halen
+                                    }
+                                }
                             }
-                            else
-                            {
-                                order.Append(eachOrder + "*");
-                            }
+                            order.Append(tagValue + "|");
                         }
-                        string test = order.ToString();
-                    }
-                    else
-                    {
-                        int orderTo = orderWithText.IndexOf(defObject.Text.To);
-                        string Order = orderWithText.Substring(0, orderTo - 0);
-                        order.Append(Order);
+                        j += 10;
+
                     }
                 }
-                //Anders pagina 1, van een bepaade text tot het einde.
-                else
-                {
-                    string orderWithText = extractedText.Substring(orderFrom + defObject.Text.From.Length).Trim();
-                    if (orderWithText.Contains(defObject.Text.To))
-                    {
-                        int orderTo = orderWithText.IndexOf(defObject.Text.To);
-                        string Order = orderWithText.Substring(0, orderTo - 0);
-                        order.Append(Order);
-                    }
-                    else
-                    {
-                        orderWithText = orderWithText.Replace(" \n", " ");
-                        // Regex-patroon om elk artikel te matchen
 
-                        foreach (string eachOrder in orderWithText.Split("\r\n"))
-                        {
-                            if (eachOrder == j.ToString())
-                            {
-                                j += 10;
-                                order.Append("Order" + eachOrder + "*");
-                                
-                            }
-                            else
-                            {
-                                order.Append(eachOrder + "*");
-                            }
-                        }
-                    }
-                }
-                defObject.Value = order.ToString();
-
-                return defObject.Value;
+                    return defObject.Value;
             }
 
             if (!string.IsNullOrEmpty(value))
@@ -410,6 +384,11 @@ namespace TransferTool
         private float GetPostScriptPoints(float inch)
         {
             return inch * 72;
+        }
+
+        private float GetPostScriptIn(float point)
+        {
+            return point / 72;
         }
     }
 

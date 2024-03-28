@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GzDl3yode4CD7dY6GY+wF1WSm+yF91kgQIph5Zw6ONI2rTKQyUyhP/GM7Kq9SpYGijMkTHXQpagYpMP4z1gqjw==",
+  "dgSpecHash": "1kG9nRoRHiA9UET+FDFdqzTXGTv2zW1cVd78pqMfoFNNL4bRsXBxfg+2M1AXw47lOYIw48FWPoNYHghoMQ4hHA==",
   "success": true,
   "projectFilePath": "C:\\Users\\pansh\\Desktop\\Stage\\TransferTool\\TransferTool\\TransferTool.csproj",
   "expectedPackageFiles": [
@@ -31,18 +31,16 @@
     "C:\\Users\\pansh\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
     "C:\\Users\\pansh\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\pansh\\.nuget\\packages\\microsoft.jsinterop\\8.0.0\\microsoft.jsinterop.8.0.0.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\pansh\\.nuget\\packages\\microsoft.web.webview2\\1.0.2151.40\\microsoft.web.webview2.1.0.2151.40.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\syncfusion.compression.base\\25.1.35\\syncfusion.compression.base.25.1.35.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\syncfusion.compression.net.core\\25.1.35\\syncfusion.compression.net.core.25.1.35.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\syncfusion.docio.net.core\\25.1.35\\syncfusion.docio.net.core.25.1.35.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\syncfusion.licensing\\25.1.35\\syncfusion.licensing.25.1.35.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\syncfusion.officechart.net.core\\25.1.35\\syncfusion.officechart.net.core.25.1.35.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\syncfusion.pdf.aspnet.mvc5\\25.1.35\\syncfusion.pdf.aspnet.mvc5.25.1.35.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\syncfusion.pdf.ocr.winforms\\25.1.35\\syncfusion.pdf.ocr.winforms.25.1.35.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\syncfusion.pdf.winforms\\25.1.35\\syncfusion.pdf.winforms.25.1.35.nupkg.sha512",
+    "C:\\Users\\pansh\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\pansh\\.nuget\\packages\\spire.pdf\\10.3.16\\spire.pdf.10.3.16.nupkg.sha512",
+    "C:\\Users\\pansh\\.nuget\\packages\\syncfusion.compression.net.core\\25.1.37\\syncfusion.compression.net.core.25.1.37.nupkg.sha512",
+    "C:\\Users\\pansh\\.nuget\\packages\\syncfusion.licensing\\25.1.37\\syncfusion.licensing.25.1.37.nupkg.sha512",
+    "C:\\Users\\pansh\\.nuget\\packages\\syncfusion.pdf.net.core\\25.1.37\\syncfusion.pdf.net.core.25.1.37.nupkg.sha512",
+    "C:\\Users\\pansh\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
     "C:\\Users\\pansh\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512",
-    "C:\\Users\\pansh\\.nuget\\packages\\system.text.encoding.codepages\\4.4.0\\system.text.encoding.codepages.4.4.0.nupkg.sha512",
+    "C:\\Users\\pansh\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\pansh\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\pansh\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\pansh\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512"
   ],
@@ -63,16 +61,6 @@
       "warningLevel": 1,
       "message": "Package 'iTextSharp 5.5.13.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "iTextSharp",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Syncfusion.Pdf.AspNet.Mvc5 25.1.35' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Syncfusion.Pdf.AspNet.Mvc5",
       "targetGraphs": [
         "net8.0-windows7.0"
       ]

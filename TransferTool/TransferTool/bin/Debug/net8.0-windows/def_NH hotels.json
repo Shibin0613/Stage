@@ -136,8 +136,8 @@
         "W": 0
       },
       "Text": {
-        "From": "AANTAL PRIJS EENHEID TOTAAL",
-        "To": "TOTAAL "
+        "From": "LIJN",
+        "To": "TOTAAL"
       },
       "TagNaam": "Artikel",
       "XmlNiveau": 1,
